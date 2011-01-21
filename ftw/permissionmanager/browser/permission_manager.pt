@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<metal:main fill-slot="main">
+
+    <div metal:define-macro="main">
+        
+        <h1 class="documentFirstHeading">Berechtigungen Verwalten</h1>
+        <a href=""
+           class="link-parent"
+           tal:attributes="href here/absolute_url">
+            Zur&uuml;ck zur Ansicht
+        </a>
+        <p class="discreet">
+            Hier finden Sie verschiedene Werkzeuge zum Verwalten von Berechtigungen.
+        </p>
+
+        <dl>
+            <dt>
+                <a href=""
+                        tal:attributes="href string:${here/absolute_url}/@@sharing">Herk&ouml;mmliche Zugriffsregelung</a>
+            </dt>
+            <dd>
+                Mit der herk&ouml;mmlichen Zugriffsregelung definieren Sie die
+                Berechtigungen f&uuml;r dieses Objekt.
+            </dd>
+
+            <dt>
+                <a href=""
+                        tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Zugriffstabelle</a>
+            </dt>
+            <dd>
+                Die Zugriffstabelle zeigt alle Berechtigungen auf diesem Objekt
+                und allen untergeordneten Objekten.
+            </dd>
+
+            <dt>
+                <a href=""
+                        tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions">Berechtigungen entfernen</a>
+            </dt>
+            <dd>
+                Sie k&ouml;nnen die Berechtigungen eines Benutzers rekursiv entfernen.
+            </dd>
+
+            <dt>
+                <a href=""
+                        tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions">Berechtigungen kopieren</a>
+            </dt>
+            <dd>
+                Berechtigungen eines Benutzers im ganzen Bereich auf einen
+                anderen Benutzer Ã¼bertragen.
+            </dd>
+
+            <dt>
+                <a href=""
+                        tal:attributes="href string:${here/absolute_url}/@@import_export_permissions">Import / Export von Berechtigungen</a>
+            </dt>
+            <dd>
+                Sie k&ouml;nnen Berechtigungen als CSV-Datei exportieren, mit Excel
+                bearbeiten und wieder ins System importieren. Dieses Werkzeug
+                arbeitet rekursiv, d.H. alle Berechtigungen aller Unterobjekte
+                k&ouml;nnen auch exportiert und importiert werden.
+            </dd>
+        </dl>
+
+    </div>
+
+
+</metal:main>
+</body>
+</html>

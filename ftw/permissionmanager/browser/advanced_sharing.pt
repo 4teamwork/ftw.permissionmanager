@@ -1,0 +1,126 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<metal:main fill-slot="main">
+
+    <div metal:define-macro="main">
+        
+        <h1 class="documentFirstHeading">Erweiterte Zugriffsregelung</h1>
+        <a href=""
+           class="link-parent"
+           tal:attributes="href string:${here/absolute_url}/@@permission_manager">
+            Zur&uuml;ck zur Berechtigungs-Verwaltung
+        </a>
+
+        <p class="discreet">
+            Die erweiterte Zugriffsregelung listet die Berechtigungen
+            rekursiv auf. Das aufbauen dieser Ansicht kann auf den oberste
+            Stufen sehr lange dauern!
+        </p>
+
+        <br />
+
+        <p tal:condition="view/user_selected" class="portalMessage error">
+            Benutzer-Filter: Nur der Benutzer <b tal:content="view/user"></b> wird
+            angezeigt.<br />
+            <a tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Alle anzeigen</a>
+        </p>
+
+        <h2>Berechtigungen</h2>
+        <p class="discreet">
+            Auflistung aller Objekte und den Benutzer, die darauf berechtigt sind.
+            Mit Klick auf ein Objekt wird man auf die entsprechende Zugriffsregelung
+            weitergeleitet.
+        </p>
+
+        <input type="button" class="standalone" value="Alles aufklappen"
+                onclick="jq('#permissionListingTable').find('tr.collapsed, tr.parent').show().expand()"/>
+        <table class="listing" id="permissionListingTable">
+            <thead>
+                <tr>
+                    <th>Objekt</th>
+                    <th tal:repeat="role view/roles"
+                            tal:content="role/title" />
+                </tr>
+            </thead>
+            <tbody>
+                <tal:repeat repeat="item view/items">
+                    <tr tal:define="odd repeat/item/odd;
+                                    oddClass python:odd and 'odd' or 'even'"
+                            tal:attributes="class string:${item/cssClass} ${oddClass};
+                                            id item/rowid">
+                        <td>
+                            <a tal:content="item/title"
+                                    tal:attributes="href string:${item/path}/@@sharing"></a>
+                        </td>
+                        <tal:roles repeat="role view/roles">
+                            <td>
+                                <tal:user tal:repeat="user python:item[role['id']]">
+                                    <span tal:content="user" /><br />
+                                </tal:user>
+                            </td>
+                        </tal:roles>
+                    </tr>
+                </tal:repeat>
+            </tbody>
+        </table>
+
+        <h2>Benutzer</h2>
+        <p class="discreet">
+            Auflistung aller Benutzer, die in der Berechtigungstabelle
+            aufgef&uuml;hrt sind.
+        </p>
+        <table class="listing">
+            <thead>
+                <tr>
+                    <th>Benutzername</th>
+                    <th>Name / Titel</th>
+                    <th>Typ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tal:repeat repeat="item view/users_and_groups">
+                    <tr>
+                        <td tal:content="item/id" />
+                        <td tal:content="item/name" />
+                        <td tal:content="item/type" />
+                        <td>
+                            <a class="context"
+                                    tal:attributes="name string:user_${item/id};
+                                                    href string:${here/absolute_url}/@@advanced-sharing?user=${item/id}">Filter</a>
+                            <a class="context"
+                                    tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user=${item/id}">Berechtigungen entziehen</a>
+                            <a class="context"
+                                    tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${item/id}">Berechtigungen kopieren</a>
+                        </td>
+                    </tr>
+                </tal:repeat>
+            </tbody>
+        </table>
+        <script>
+        jq(document).ready(function() {
+           var updateOddEven = function() {
+                jq('#permissionListingTable tr:visible').each(function(i) {
+                    var cls = (Math.floor(i/2)*2==i) ? 'even' : 'odd';
+                    jq(this).removeClass('odd').removeClass('even').addClass(cls);
+                });
+           };
+           jq("#permissionListingTable").treeTable();
+           jq('span.expander').click(updateOddEven);
+           updateOddEven();
+        });
+        </script>
+
+    </div>
+
+
+</metal:main>
+</body>
+</html>

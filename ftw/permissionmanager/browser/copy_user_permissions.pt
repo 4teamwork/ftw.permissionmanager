@@ -1,0 +1,200 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<metal:main fill-slot="main">
+
+    <div metal:define-macro="main">
+        
+        <h1 class="documentFirstHeading">Berechtigungen kopieren</h1>
+        <a href=""
+           class="link-parent"
+           tal:attributes="href string:${here/absolute_url}/@@permission_manager">
+            Zur&uuml;ck zur Berechtigungs-Verwaltung
+        </a>
+
+        <p class="discreet">
+            Berechtigungen eines Benutzers im ganzen Bereich auf einen
+            anderen Benutzer Ã¼bertragen.
+        </p>
+
+        <br />
+        <b>1. Quellbenutzer suchen</b>
+        <tal:source_user_search_form condition="not:view/source_user">
+            <p class="discreet">
+                Benutzer suchen, von welchem die Berechtigungen kopiert werden sollen
+            </p>
+
+            <form method="post" 
+                  tal:attributes="action string:${context/absolute_url}/@@copy_user_permissions">
+                  
+                <input type="hidden" name="search_source_user_submitted:boolean" value="True" />
+
+                <div class="field">
+                    <input type="text" 
+                           id="sharing-user-group-search"
+                           size="30" 
+                           name="search_source_user"
+                           title="Search for user or group" 
+                           i18n:attributes="title"
+                           class="searchField inputLabel"
+                           value="" 
+                           />
+                    <input type="submit"
+                           name="submit"
+                           value="Search"
+                           class="searchButton allowMultiSubmit" 
+                           i18n:attributes="value box_search"
+                           />
+                </div>
+            </form>
+        </tal:source_user_search_form>
+
+        <br />
+        <b>2. Quellbenutzer auswÃ¤hlen</b>
+        <tal:source_user_results tal:condition="python:request.form.get('search_source_user_submitted', False)">
+            <table class="listing">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titel</th>
+                        <th>Typ</th>
+                    </tr>
+                </thead>
+                <tal:result_list condition="view/search_source_user">
+                    <tbody>
+                        <tr tal:repeat="match view/search_source_user">
+                            <td tal:content="match/id" />
+                            <td>
+                                <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${match/id}"
+                                tal:content="match/title"></a>
+                            </td>
+                            <td tal:content="python:(match['type']=='user' and 'Benutzer') or (match['type']=='group' and 'Gruppe') or match['type']" />
+                        </tr>
+                    </tbody>
+                </tal:result_list>
+                <tal:no_source_user_results tal:condition="python:request.form.get('search_source_user_submitted', False) and not view.search_source_user()">
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><i>Keine Treffer gefunden</i></td>
+                        </tr>
+                    </tbody>
+                </tal:no_source_user_results>
+            </table>
+        </tal:source_user_results>
+        <tal:selected_source_user tal:condition="view/source_user">
+            <div>
+                <i>AusgewÃ¤hlter Benutzer:</i>
+                <tal:userid content="view/source_user_title" />
+                (<tal:userid content="view/source_user" />)
+            </div>
+        </tal:selected_source_user>
+
+
+        <br />
+        <b>3. Zielbenutzer suchen</b>
+        <tal:target_user_search_form condition="python:view.source_user and not view.target_user">
+            <p class="discreet">
+                Benutzer suchen, an welche die Berechtigungen Ã¼bertragen werden sollen
+            </p>
+
+            <form method="post" 
+                  tal:attributes="action string:${context/absolute_url}/@@copy_user_permissions">
+                  
+                <input type="hidden" name="search_target_user_submitted:boolean" value="True" />
+                <input type="hidden" name="source_user" value="" tal:attributes="value view/source_user" />
+
+                <div class="field">
+                    <input type="text" 
+                           id="sharing-user-group-search"
+                           size="30" 
+                           name="search_target_user"
+                           title="Search for user or group" 
+                           i18n:attributes="title"
+                           class="searchField inputLabel"
+                           value="" 
+                           />
+                    <input type="submit"
+                           name="submit"
+                           value="Search"
+                           class="searchButton allowMultiSubmit" 
+                           i18n:attributes="value box_search"
+                           />
+                </div>
+            </form>
+        </tal:target_user_search_form>
+
+        <br />
+        <b>4. Zielbenutzer auswälen</b>
+        <tal:target_user_results tal:condition="python:request.form.get('search_target_user_submitted', False)">
+            <table class="listing">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titel</th>
+                        <th>Typ</th>
+                    </tr>
+                </thead>
+                <tal:result_list condition="view/search_target_user">
+                    <tbody>
+                        <tr tal:repeat="match view/search_target_user">
+                            <td tal:content="match/id" />
+                            <td>
+                                <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?target_user=${match/id}&amp;source_user=${view/source_user}"
+                                tal:content="match/title"></a>
+                            </td>
+                            <td tal:content="python:(match['type']=='user' and 'Benutzer') or (match['type']=='group' and 'Gruppe') or match['type']" />
+                        </tr>
+                    </tbody>
+                </tal:result_list>
+                <tal:no_target_user_results tal:condition="python:request.form.get('search_target_user_submitted', False) and not view.search_target_user()">
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><i>Keine Treffer gefunden</i></td>
+                        </tr>
+                    </tbody>
+                </tal:no_target_user_results>
+            </table>
+        </tal:target_user_results>
+        <tal:selected_target_user tal:condition="view/target_user">
+            <div>
+                <i>AusgewÃ¤hlter Benutzer:</i>
+                <tal:userid content="view/target_user_title" />
+                (<tal:userid content="view/target_user" />)
+            </div>
+        </tal:selected_target_user>
+
+        <br />
+        <b>6. BestÃ¤tigen</b><br />
+        <tal:confirm tal:condition="python:view.source_user and view.target_user">
+            <div style="padding-left:1em;">
+                Sind Sie sicher, dass Sie vom Benutzer oder der Gruppe
+                <div style="padding-left:1em;">
+                    <i tal:content="view/source_user_title"></i> (<tal:id replace="view/source_user" />)
+                </div>
+                <b>alle Berechtigung</b> auf das Objekt &quot;<tal:replace replace="here/Title" />&quot;
+                und alle untergeordneten Objekte auf den Benutzer
+                <div style="padding-left:1em;">
+                    <i tal:content="view/target_user_title"></i> (<tal:id replace="view/target_user" />)
+                </div>
+                <b>Ã¼bertragen</b> (kopieren) wollen?
+            </div>
+            <br />
+            <p>
+                <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${view/source_user}&amp;target_user=${view/target_user}&amp;confirm=1"
+                    class="context">Ja, Ã¼bertragen</a>
+                <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions"
+                    class="standalone">Nein, abbrechen</a>
+            </p>
+        </tal:confirm>
+    </div>
+
+
+</metal:main>
+</body>
+</html>

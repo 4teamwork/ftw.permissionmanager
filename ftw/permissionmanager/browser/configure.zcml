@@ -1,0 +1,56 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="ftw.permissionmanager">
+    
+
+    <!-- Resource directory -->
+    <browser:resourceDirectory
+        name="permissionmanager.resources"
+        directory="resources"
+        /> 
+
+
+    <browser:page
+            name="permission_manager"
+            for="*"
+            class=".permissionmanager.PermissionManager"
+            permission="cmf.ManagePortal"
+            template="permission_manager.pt"
+            />
+
+    <browser:page
+            name="advanced-sharing"
+            for="*"
+            class=".advanced_sharing.AdvancedSharingView"
+            permission="cmf.ManagePortal"
+            template="advanced_sharing.pt"
+            />
+
+
+    <browser:page
+            name="import_export_permissions"
+            for="*"
+            class=".permissionmanager.ImportExportPermissionsView"
+            permission="cmf.ManagePortal"
+            template="import_export_permissions.pt"
+            />
+    
+    <browser:page
+            name="remove_user_permissions"
+            for="*"
+            class=".permissionmanager.RemoveUserPermissionsView"
+            permission="cmf.ManagePortal"
+            />
+
+    <browser:page
+            name="copy_user_permissions"
+            for="*"
+            class=".permissionmanager.CopyUserPermissionsView"
+            permission="cmf.ManagePortal"
+            template="copy_user_permissions.pt"
+            />
+
+
+</configure>
