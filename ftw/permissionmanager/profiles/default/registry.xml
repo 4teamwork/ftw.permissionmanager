@@ -1,0 +1,10 @@
+<registry>
+    <record name="ftw.permissionmanager.manage_types">
+        <field type="plone.registry.field.Tuple">
+            <title>Permissionmanager types</title>
+            <description>A list of managed content types (used for catalo query)</description>
+            <value_type type="plone.registry.field.TextLine" />
+        </field>
+        <element>Folder</element>
+    </record>
+</registry>
