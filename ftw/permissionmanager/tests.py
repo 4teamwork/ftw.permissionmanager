@@ -9,7 +9,7 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
 ptc.setupPloneSite()
 
-import ftw.usermanagement
+import ftw.permissionmanager
 
 
 class TestCase(ptc.PloneTestCase):
@@ -19,7 +19,7 @@ class TestCase(ptc.PloneTestCase):
         @classmethod
         def setUp(cls):
             fiveconfigure.debug_mode = True
-            ztc.installPackage(ftw.usermanagement)
+            ztc.installPackage(ftw.permissionmanager)
             fiveconfigure.debug_mode = False
 
         @classmethod
@@ -32,21 +32,21 @@ def test_suite():
 
         # Unit tests
         #doctestunit.DocFileSuite(
-        #    'README.txt', package='ftw.usermanagement',
+        #    'README.txt', package='ftw.permissionmanager',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
         #doctestunit.DocTestSuite(
-        #    module='ftw.usermanagement.mymodule',
+        #    module='ftw.permissionmanager.mymodule',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
 
         # Integration tests that use PloneTestCase
         #ztc.ZopeDocFileSuite(
-        #    'README.txt', package='ftw.usermanagement',
+        #    'README.txt', package='ftw.permissionmanager',
         #    test_class=TestCase),
 
         #ztc.FunctionalDocFileSuite(
-        #    'browser.txt', package='ftw.usermanagement',
+        #    'browser.txt', package='ftw.permissionmanager',
         #    test_class=TestCase),
 
         ])

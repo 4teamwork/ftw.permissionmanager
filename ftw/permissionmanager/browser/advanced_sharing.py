@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
-from zope.component import getUtilitiesFor
+from zope.component import getUtilitiesFor, getUtility
+from plone.registry.interfaces import IRegistry
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from plone.app.workflow.interfaces import ISharingPageRole
@@ -13,6 +14,8 @@ class AdvancedSharingView(BrowserView):
         form = self.request.form
         self.user_selected = form.get('user', False) and True
         self.user = form.get('user', False)
+        registry = getUtility(IRegistry)
+        self.types = registry['ftw.permissionmanager.manage_types']
         return super(AdvancedSharingView, self).__call__(*args, **kwargs)
 
     @memoize
@@ -30,6 +33,7 @@ class AdvancedSharingView(BrowserView):
         pairs = []
 
         for name, utility in getUtilitiesFor(ISharingPageRole):
+
             permission = utility.required_permission
             if permission is None or portal_membership.checkPermission(permission, context):
                 pairs.append(dict(id = name, title = utility.title))
@@ -78,13 +82,14 @@ class AdvancedSharingView(BrowserView):
                                 item[role].append(user)
             items.append(item)
             # children
-            children = self.context.portal_catalog({
-                'path': {
+            query = dict(path={
                     'query': brain.getPath(),
                     'depth': 1,
                 },
-                'sort_on': 'getObjPositionInParent',
-            })
+                sort_on = 'getObjPositionInParent',)
+            if self.types:
+                query['portal_type'] = self.types
+            children = self.context.portal_catalog(query)
             subItems, index = self.brainsToItems(children, index)
             items.extend(subItems)
         return items, index

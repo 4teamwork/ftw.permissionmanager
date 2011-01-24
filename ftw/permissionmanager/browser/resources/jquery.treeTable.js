@@ -148,7 +148,7 @@
         });
       
         if(options.expandable) {
-          cell.prepend('<span style="margin-left: -' + options.indent + 'px; padding-left: ' + options.indent + 'px" class="expander"></span>');
+          cell.prepend('<span style="color:transparent;" class="expander">sp</span>');
           jq(cell[0].firstChild).click(function() { node.toggleBranch(); });
         
           // Check for a class set explicitly by the user, otherwise set the default class

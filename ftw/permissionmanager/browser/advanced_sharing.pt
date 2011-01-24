@@ -7,6 +7,9 @@
       i18n:domain="plone">
 
 <body>
+<metal:left fill-slot="column_one_slot" />
+<metal:left fill-slot="column_two_slot" />
+
 <metal:main fill-slot="main">
 
     <div metal:define-macro="main">
@@ -31,7 +34,6 @@
             angezeigt.<br />
             <a tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Alle anzeigen</a>
         </p>
-
         <h2>Berechtigungen</h2>
         <p class="discreet">
             Auflistung aller Objekte und den Benutzer, die darauf berechtigt sind.
@@ -71,6 +73,7 @@
             </tbody>
         </table>
 
+
         <h2>Benutzer</h2>
         <p class="discreet">
             Auflistung aller Benutzer, die in der Berechtigungstabelle
@@ -104,6 +107,7 @@
                 </tal:repeat>
             </tbody>
         </table>
+
         <script>
         jq(document).ready(function() {
            var updateOddEven = function() {

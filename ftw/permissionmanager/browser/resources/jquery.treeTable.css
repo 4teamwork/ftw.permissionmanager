@@ -16,10 +16,13 @@
 
 .treeTable tr.collapsed td .expander {
   background-image: url(++resource++permissionmanager.resources/toggle-expand-dark.png);
+  margin-left:-5px;
 }
+
 
 .treeTable tr.expanded td .expander {
   background-image: url(++resource++permissionmanager.resources/toggle-collapse-dark.png);
+  margin-left:-5px;
 }
 
 /* jquery.treeTable.sortable
