@@ -27,7 +27,6 @@ setup(name='ftw.permissionmanager',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'ftw.wftools',
           'collective.monkeypatcher',
           # -*- Extra requirements: -*-
       ],
