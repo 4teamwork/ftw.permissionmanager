@@ -4,55 +4,55 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="ftw.permissionmanager">
 
 <body>
 <metal:main fill-slot="main">
 
     <div metal:define-macro="main">
         
-        <h1 class="documentFirstHeading">Berechtigungen Verwalten</h1>
+        <h1 class="documentFirstHeading" i18n:translate="label_export_import_permissions">Berechtigungen Verwalten</h1>
         <a href=""
            class="link-parent"
-           tal:attributes="href string:${here/absolute_url}/@@permission_manager">
+           tal:attributes="href string:${here/absolute_url}/@@permission_manager" i18n:translate="label_back_to_overview">
             Zur&uuml;ck zur Berechtigungs-Verwaltung
         </a>
 
-        <p>
-            Mit der Berechtigungs-Verwaltung kÃ¶nnen Berechtigungen importiert und exportiert werden.
-            Die exportierten Dateien kÃ¶nnen vor dem Importieren z.B. mit Excel abgeÃ¤ndert werden.
+        <p i18n:translate="help_export_import_part1">
+            Mit der Berechtigungs-Verwaltung koennen Berechtigungen importiert und exportiert werden.
+            Die exportierten Dateien koennen vor dem Importieren z.B. mit Excel abgeaendert werden.
         </p>
-        <p>
+        <p i18n:translate="help_export_import_part2">
             Um einem Benutzer alle Berechtigungen (bzw. Rollen) auf einem Objekt zu entziehen, muss der Benutzer in
-            der CSV-Datei erhalten bleiben, jedoch mÃ¼ssen alle &quot;X&quot; in den Spalten der Rollen entfernt werden.
+            der CSV-Datei erhalten bleiben, jedoch muessen alle &quot;X&quot; in den Spalten der Rollen entfernt werden.
         </p>
 
-        <h2>Berechtigungen Exportieren</h2>
+        <h2 i18n:translate="label_export_permission">Berechtigungen Exportieren</h2>
         <form action="" method="post">
 
             <p>
                 <input type="checkbox" name="recursive" id="recursive" tal:attributes="checked view/recursive" />
-                <label for="recursive">Berechtigungen rekursiv exportieren</label>
+                <label for="recursive" i18n:translate="label_export_recursiv">Berechtigungen rekursiv exportieren</label>
             </p>
 
             <p>
                 <input type="checkbox" name="relative_paths" id="relative_paths" tal:attributes="checked view/relative_paths" />
-                <label for="relative_paths">Mit relativen Pfad ab aktuellem Objekt (<tal:replace replace="context/Title" />) exportieren</label>
+                <label for="relative_paths" i18n:translate="label_export_relative">Mit relativen Pfad ab aktuellem exportieren</label>
             </p>
 
-            <input type="submit" name="export" value="Exportieren" />
+            <input type="submit" name="export" value="Exportieren" i18n:attributes="value" />
 
         </form>
 
-        <h2>Berechtigungen Importieren</h2>
+        <h2 i18n:translate="label_import_permissions">Berechtigungen Importieren</h2>
         <form action="" method="post" enctype="multipart/form-data">
 
             <p>
-                <label for="file">Berechtigungen (CSV-Datei)</label>
+                <label for="file" i18n:translate="label_csv_file">Berechtigungen (CSV-Datei)</label>
                 <input type="file" name="file" id="file" />
             </p>
 
-            <input type="submit" name="import" value="Importieren" />
+            <input type="submit" name="import" value="Importieren" i18n:attributes="value" />
 
         </form>
 
@@ -60,7 +60,7 @@
 
         <a href=""
                 tal:attributes="href string:${here/absolute_url}/@@permission_manager"
-                class="standalone">Abbrechen</a>
+                class="standalone" i18n:translate="">Abbrechen</a>
 
     </div>
 

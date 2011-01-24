@@ -7,11 +7,6 @@ from plone.app.workflow.browser.sharing import SharingView
 from Products.statusmessages.interfaces import IStatusMessage
 from ftw.permissionmanager import permission_manager_factory as _
 
-# extend csv library with custem dialect excel_ger
-class excel_ger(csv.excel):
-    delimiter = ';'
-csv.register_dialect('excel_ger', excel_ger)
-
 
 class PermissionManager(BrowserView):
 
@@ -223,11 +218,12 @@ class ImportExportPermissionsView(BrowserView):
             writer.writerow(row)
 
     def startImport(self):
-        file = self.request.get('file')
-        file.readline()
-        dialect = csv.Sniffer().sniff(file.readline())
-        file.seek(0)
-        reader = csv.DictReader(file, fieldnames=ImportExportPermissionsView.FIELDNAMES,
+        _file = self.request.get('file')
+        data = _file.read().replace('\r\n', '\n').replace('\r', '\n')
+        data = StringIO.StringIO(data)
+        dialect = csv.Sniffer().sniff(data.readline())
+        data.seek(0)
+        reader = csv.DictReader(data, fieldnames=ImportExportPermissionsView.FIELDNAMES,
                             dialect=dialect)
         titles = None
         rows_imported = 0
@@ -237,17 +233,23 @@ class ImportExportPermissionsView(BrowserView):
                 continue
             if self.setPermissions(row):
                 rows_imported += 1
-        info(self.context.request,
-             'Es wurden %i Berechtigungen gesetzt.' % rows_imported)
+        IStatusMessage(self.request).addStatusMessage(
+            _(
+                u'Es wurden ${rows_imported} Berechtigungen gesetzt.',
+                mapping=dict(rows_imported=rows_imported)),
+            type='info')
         self.context.restrictedTraverse('@@update_security')()
 
     def setPermissions(self, row):
         try:
             obj = self.getObjectByPath(row)
         except:
-            error(self.context.request,
-                  'Objekt konnte nicht gefunden werden: %s' % row['Path'])
-            return False
+            IStatusMessage(self.request).addStatusMessage(
+                _(
+                    u'Objekt konnte nicht gefunden werden: ${path}',
+                    mapping=dict(path=row['Path'])),
+                type='error')
+            
         user = row['Userid']
         roles = []
         for role in ImportExportPermissionsView.ROLES:
