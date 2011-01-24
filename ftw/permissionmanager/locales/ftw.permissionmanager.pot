@@ -1,0 +1,126 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-01-24 12:54+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: ftw.permissionmanager\n"
+
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:61
+msgid "Abbrechen"
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/permissionmanager.py:32
+msgid "Die Berechtigungen wurden erfolgreich entfernt."
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/permissionmanager.py:151
+msgid "Die Berechtigungen wurden kopiert"
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/permissionmanager.py:237
+msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:43
+msgid "Exportieren"
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:55
+msgid "Importieren"
+msgstr ""
+
+#: ./ftw/permissionmanager/profiles/default/actions.xml
+msgid "Manage permissions"
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/permissionmanager.py:248
+msgid "Objekt konnte nicht gefunden werden: ${path}"
+msgstr ""
+
+#. Default: "Die Zugriffstabelle zeigt alle Berechtigungen auf diesem Objekt und allen untergeordneten Objekten."
+#: ./ftw/permissionmanager/browser/permission_manager.pt:38
+msgid "help_access_table"
+msgstr ""
+
+#. Default: "Mit der Berechtigungs-Verwaltung koennen Berechtigungen importiert und exportiert werden. Die exportierten Dateien koennen vor dem Importieren z.B. mit Excel abgeaendert werden."
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:21
+msgid "help_export_import_part1"
+msgstr ""
+
+#. Default: "Um einem Benutzer alle Berechtigungen (bzw. Rollen) auf einem Objekt zu entziehen, muss der Benutzer in der CSV-Datei erhalten bleiben, jedoch muessen alle \"X\" in den Spalten der Rollen entfernt werden."
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:25
+msgid "help_export_import_part2"
+msgstr ""
+
+#. Default: "Sie k&ouml;nnen Berechtigungen als CSV-Datei exportieren, mit Excel bearbeiten und wieder ins System importieren. Dieses Werkzeug arbeitet rekursiv, d.H. alle Berechtigungen aller Unterobjekte k&ouml;nnen auch exportiert und importiert werden."
+#: ./ftw/permissionmanager/browser/permission_manager.pt:64
+msgid "help_import_export_permissions"
+msgstr ""
+
+#. Default: "Hier finden Sie verschiedene Werkzeuge zum Verwalten von Berechtigungen."
+#: ./ftw/permissionmanager/browser/permission_manager.pt:20
+msgid "help_permission_manager"
+msgstr ""
+
+#. Default: "Zugriffstabelle"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:35
+msgid "label_access_table"
+msgstr ""
+
+#. Default: "Zur&uuml;ck zur Berechtigungs-Verwaltung"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:15
+msgid "label_back_to_overview"
+msgstr ""
+
+#. Default: "Berechtigungen (CSV-Datei)"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:51
+msgid "label_csv_file"
+msgstr ""
+
+#. Default: "Berechtigungen Verwalten"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:14
+msgid "label_export_import_permissions"
+msgstr ""
+
+#. Default: "Berechtigungen Exportieren"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:30
+msgid "label_export_permission"
+msgstr ""
+
+#. Default: "Berechtigungen rekursiv exportieren"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:35
+msgid "label_export_recursiv"
+msgstr ""
+
+#. Default: "Mit relativen Pfad ab aktuellem exportieren"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:40
+msgid "label_export_relative"
+msgstr ""
+
+#. Default: "Import / Export von Berechtigungen"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:61
+msgid "label_import_export_permissions"
+msgstr ""
+
+#. Default: "Berechtigungen Importieren"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:47
+msgid "label_import_permissions"
+msgstr ""
+
+#. Default: "Berechtigungen Verwalten"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:14
+msgid "label_manage_permission"
+msgstr ""
+
