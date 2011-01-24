@@ -76,7 +76,8 @@ class RemoveUserPermissionsView(SharingView):
             if self.user in dict(brain.get_local_roles).keys():
                 obj = brain.getObject()
                 obj.manage_delLocalRoles((self.user, ))
-        self.context.restrictedTraverse('@@update_security')()
+        self.context.reindexObjectSecurity()
+        #self.context.restrictedTraverse('@@update_security')()
 
 
 
@@ -150,7 +151,8 @@ class CopyUserPermissionsView(BrowserView):
         IStatusMessage(self.request).addStatusMessage(
             _(u'Die Berechtigungen wurden kopiert'), type='info')
         
-        self.context.restrictedTraverse('@@update_security')()
+        #self.context.restrictedTraverse('@@update_security')()
+        self.context.reindexObjectSecurity()
         return self.request.RESPONSE.redirect('@@copy_user_permissions')
 
 
@@ -238,7 +240,9 @@ class ImportExportPermissionsView(BrowserView):
                 u'Es wurden ${rows_imported} Berechtigungen gesetzt.',
                 mapping=dict(rows_imported=rows_imported)),
             type='info')
-        self.context.restrictedTraverse('@@update_security')()
+
+        self.context.reindexObjectSecurity()
+        #self.context.restrictedTraverse('@@update_security')()
 
     def setPermissions(self, row):
         try:
