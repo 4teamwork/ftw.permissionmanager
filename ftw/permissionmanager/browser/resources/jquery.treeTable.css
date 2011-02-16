@@ -53,3 +53,7 @@
   color: #000;
   z-index: 1;
 }
+
+.treeTable tr.notAquired {
+    border-top: 2px solid red;
+}

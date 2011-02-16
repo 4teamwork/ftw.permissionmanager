@@ -42,6 +42,7 @@ def egov_reindexObjectSecurity(self, skip_self=False):
             # Also append our new index
             indexes = list(self._cmf_security_indexes)
             indexes.append('get_local_roles')
+            indexes.append('isLocalRoleAcquired')
             # Recatalog with the same catalog uid.
             catalog.reindexObject(ob, idxs=tuple(indexes),
                                     update_metadata=1, uid=brain_path)

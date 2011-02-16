@@ -70,6 +70,7 @@ class AdvancedSharingView(BrowserView):
                     'depth': absoluteDepth - contextDepth,
                     'cssClass': cssClass,
                     'rowid': 'node-%i' % index,
+                    'isLocalRoleAcquired':brain.isLocalRoleAcquired,
             }
             # roles
             for role in roleIds:

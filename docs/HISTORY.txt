@@ -4,7 +4,10 @@ Changelog
 
 1.2
 ---
-
+* Implemented is aquired in advanced sharing view. 
+  [16.02.2011, mathias.leimgruber]
+* Litte bit CSS
+  [16.02.2011, mathias.leimgruber]
 
 1.1
 ---

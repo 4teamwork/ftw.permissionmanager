@@ -26,7 +26,7 @@
       />
 
       <adapter name="get_local_roles" factory=".indexer.global_get_local_roles" />
-
+      <adapter name="isLocalRoleAcquired" factory=".indexer.isLocalRoleAcquired" />
 
     <!-- Patches, using monkeypatcher -->
     <monkey:patch

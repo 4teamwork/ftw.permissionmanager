@@ -41,6 +41,13 @@
             weitergeleitet.
         </p>
 
+        <h2>Vererbung von Berechtigungen</h2>
+        <p>
+            Ein roter Strich bedeutet, dass die Berechtigungen nicht vererbt werden. <br/>
+            Die Benutzer über dem roten Strich haben keinen Zugriff auf alle Inhalte unter dem Strich. 
+            
+        </p>
+
         <input type="button" class="standalone" value="Alles aufklappen"
                 onclick="jq('#permissionListingTable').find('tr.collapsed, tr.parent').show().expand()"/>
         <table class="listing" id="permissionListingTable">
@@ -54,8 +61,9 @@
             <tbody>
                 <tal:repeat repeat="item view/items">
                     <tr tal:define="odd repeat/item/odd;
-                                    oddClass python:odd and 'odd' or 'even'"
-                            tal:attributes="class string:${item/cssClass} ${oddClass};
+                                    oddClass python:odd and 'odd' or 'even';
+                                    is_aquired_class python:not item['isLocalRoleAcquired'] and 'notAquired' or ''"
+                            tal:attributes="class string:${item/cssClass} ${oddClass} ${is_aquired_class};
                                             id item/rowid">
                         <td>
                             <a tal:content="item/title"
