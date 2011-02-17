@@ -64,13 +64,14 @@ class AdvancedSharingView(BrowserView):
             index += 1
             # make item
             absoluteDepth = len(brain.getPath().split('/'))
+            aquired = getattr(brain, 'isLocalRoleAcquired', True)
             item = {
                     'title': brain.Title,
                     'path': brain.getPath(),
                     'depth': absoluteDepth - contextDepth,
                     'cssClass': cssClass,
                     'rowid': 'node-%i' % index,
-                    'isLocalRoleAcquired':brain.isLocalRoleAcquired,
+                    'isLocalRoleAcquired':aquired,
             }
             # roles
             for role in roleIds:
