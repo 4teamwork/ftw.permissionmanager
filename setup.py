@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = "1.3-dev"
+version = '1.3'
 maintainer = 'Mathias Leimgruber'
 
 setup(name='ftw.permissionmanager',

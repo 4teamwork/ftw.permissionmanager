@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3 (unreleased)
+1.3 (2012-03-19)
 ----------------
 
 - Change name of manage_permission view.
