@@ -8,6 +8,12 @@ Changelog
 - Change name of manage_permission view.
   [mathias.leimgruber]
 
+- Split up permissionmanager view.
+  [mathias.leimgruber]
+
+- Translations.
+  [mathias.leimgruber]
+
 
 1.2
 ---
