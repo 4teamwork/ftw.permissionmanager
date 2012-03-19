@@ -81,7 +81,6 @@
             </tbody>
         </table>
 
-
         <h2>Benutzer</h2>
         <p class="discreet">
             Auflistung aller Benutzer, die in der Berechtigungstabelle
@@ -106,10 +105,12 @@
                             <a class="context"
                                     tal:attributes="name string:user_${item/id};
                                                     href string:${here/absolute_url}/@@advanced-sharing?user=${item/id}">Filter</a>
-                            <a class="context"
-                                    tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user=${item/id}">Berechtigungen entziehen</a>
-                            <a class="context"
-                                    tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${item/id}">Berechtigungen kopieren</a>
+                            <tal:permission condition="view/show_advanded_links">
+                                <a class="context"
+                                        tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user=${item/id}">Berechtigungen entziehen</a>
+                                <a class="context"
+                                        tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${item/id}">Berechtigungen kopieren</a>
+                            </tal:permission>
                         </td>
                     </tr>
                 </tal:repeat>

@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 import os
 
-version = open('ftw/permissionmanager/version.txt').read().strip()
+version = "1.3-dev"
 maintainer = 'Mathias Leimgruber'
 
 setup(name='ftw.permissionmanager',
       version=version,
       description="",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -19,7 +19,7 @@ setup(name='ftw.permissionmanager',
       author='%s, 4teamwork GmbH' % maintainer,
       author_email='mailto:info@4teamwork.ch',
       maintainer=maintainer,
-      url='http://svn.plone.org/svn/collective/',
+      url='http://github.com/4teamwork/ftw.permissionmanager',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['ftw'],

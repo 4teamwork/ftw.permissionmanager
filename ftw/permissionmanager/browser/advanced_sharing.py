@@ -1,4 +1,3 @@
-from Acquisition import aq_inner
 from zope.component import getUtilitiesFor, getUtility
 from plone.registry.interfaces import IRegistry
 from Products.Five import BrowserView
@@ -27,19 +26,17 @@ class AdvancedSharingView(BrowserView):
             - id
             - title
         """
-        context = aq_inner(self.context)
-        portal_membership = getToolByName(context, 'portal_membership')
-
         pairs = []
-
         for name, utility in getUtilitiesFor(ISharingPageRole):
-
-            permission = utility.required_permission
-            if permission is None or portal_membership.checkPermission(permission, context):
-                pairs.append(dict(id = name, title = utility.title))
+            pairs.append(dict(id = name, title = utility.title))
 
         pairs.sort(lambda x, y: cmp(x['id'], y['id']))
         return pairs
+
+    def show_advanded_links(self):
+        portal_membership = getToolByName(self.context, 'portal_membership')
+        return portal_membership.checkPermission(
+            'Sharing page: Delegate roles', self.context)
 
     @memoize
     def items(self):
@@ -71,7 +68,7 @@ class AdvancedSharingView(BrowserView):
                     'depth': absoluteDepth - contextDepth,
                     'cssClass': cssClass,
                     'rowid': 'node-%i' % index,
-                    'isLocalRoleAcquired':aquired,
+                    'isLocalRoleAcquired': aquired,
             }
             # roles
             for role in roleIds:
@@ -80,7 +77,7 @@ class AdvancedSharingView(BrowserView):
                 for user, roles in brain.get_local_roles:
                     if not self.user_selected or user==self.user:
                         for role in roles:
-                            if item.has_key(role):
+                            if role in item:
                                 item[role].append(user)
             items.append(item)
             # children
@@ -88,7 +85,7 @@ class AdvancedSharingView(BrowserView):
                     'query': brain.getPath(),
                     'depth': 1,
                 },
-                sort_on = 'getObjPositionInParent',)
+                sort_on = 'getObjPositionInParent', )
             if self.types:
                 query['portal_type'] = self.types
             children = self.context.portal_catalog(query)
@@ -104,7 +101,7 @@ class AdvancedSharingView(BrowserView):
         for item in objectItems:
             for role in roleIds:
                 for user in item[role]:
-                    if not userGroupMap.has_key(user):
+                    if user not in userGroupMap:
                         userItem = self._getUserOrGroupItem(user)
                         if userItem:
                             userGroupMap[user] = userItem
@@ -150,4 +147,3 @@ class AdvancedSharingView(BrowserView):
                 'type': 'Gruppe',
         }
         return item
-

@@ -38,7 +38,7 @@ msgstr "Importieren"
 
 #: ./ftw/permissionmanager/profiles/default/actions.xml
 msgid "Manage permissions"
-msgstr "Berechtigungen verwalten"
+msgstr "Sicherheit"
 
 #: ./ftw/permissionmanager/browser/permissionmanager.py:248
 msgid "Objekt konnte nicht gefunden werden: ${path}"

@@ -2,21 +2,21 @@ Changelog
 =========
 
 
-1.3
----
+1.3 (unreleased)
+----------------
+
+- Change name of manage_permission view.
+  [mathias.leimgruber]
 
 
 1.2
 ---
-* Implemented is aquired in advanced sharing view. 
+- Implemented is aquired in advanced sharing view.
   [16.02.2011, mathias.leimgruber]
-* Litte bit CSS
+- Litte bit CSS
   [16.02.2011, mathias.leimgruber]
-
-1.1
----
 
 1.0-dev (unreleased)
------------------------
+--------------------
 
 - Initial release
