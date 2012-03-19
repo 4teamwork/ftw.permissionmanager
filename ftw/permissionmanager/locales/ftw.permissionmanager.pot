@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-01-24 12:54+0000\n"
+"POT-Creation-Date: 2012-03-19 12:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,15 +21,15 @@ msgstr ""
 msgid "Abbrechen"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/permissionmanager.py:32
+#: ./ftw/permissionmanager/browser/remove_permissions.py:22
 msgid "Die Berechtigungen wurden erfolgreich entfernt."
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/permissionmanager.py:151
+#: ./ftw/permissionmanager/browser/copy_permissions.py:75
 msgid "Die Berechtigungen wurden kopiert"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/permissionmanager.py:237
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:88
 msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgstr ""
 
@@ -45,13 +45,42 @@ msgstr ""
 msgid "Manage permissions"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/permissionmanager.py:248
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:101
 msgid "Objekt konnte nicht gefunden werden: ${path}"
 msgstr ""
 
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:114
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:37
+msgid "Search for user or group"
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:17
+msgid "Security"
+msgstr ""
+
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:177
+msgid "Sind Sie sicher, dass Sie vom Benutzer oder der Gruppe"
+msgstr ""
+
+#. Default: "Search"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:49
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:46
+msgid "box_search"
+msgstr ""
+
+#. Default: "Search for user or group"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:40
+msgid "form_search_user_group"
+msgstr ""
+
 #. Default: "Die Zugriffstabelle zeigt alle Berechtigungen auf diesem Objekt und allen untergeordneten Objekten."
-#: ./ftw/permissionmanager/browser/permission_manager.pt:38
+#: ./ftw/permissionmanager/browser/permission_manager.pt:28
 msgid "help_access_table"
+msgstr ""
+
+#. Default: "Die erweiterte Zugriffsregelung listet die Berechtigungen rekursiv auf. Das aufbauen dieser Ansicht kann auf den oberste Stufen sehr lange dauern!"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:24
+msgid "help_advanced_sharing"
 msgstr ""
 
 #. Default: "Mit der Berechtigungs-Verwaltung koennen Berechtigungen importiert und exportiert werden. Die exportierten Dateien koennen vor dem Importieren z.B. mit Excel abgeaendert werden."
@@ -65,23 +94,75 @@ msgid "help_export_import_part2"
 msgstr ""
 
 #. Default: "Sie k&ouml;nnen Berechtigungen als CSV-Datei exportieren, mit Excel bearbeiten und wieder ins System importieren. Dieses Werkzeug arbeitet rekursiv, d.H. alle Berechtigungen aller Unterobjekte k&ouml;nnen auch exportiert und importiert werden."
-#: ./ftw/permissionmanager/browser/permission_manager.pt:64
+#: ./ftw/permissionmanager/browser/permission_manager.pt:54
 msgid "help_import_export_permissions"
 msgstr ""
 
 #. Default: "Hier finden Sie verschiedene Werkzeuge zum Verwalten von Berechtigungen."
-#: ./ftw/permissionmanager/browser/permission_manager.pt:20
+#: ./ftw/permissionmanager/browser/permission_manager.pt:19
 msgid "help_permission_manager"
 msgstr ""
 
+#. Default: "Sie k&ouml;nnen die Berechtigungen eines Benutzers rekursiv entfernen."
+#: ./ftw/permissionmanager/browser/permission_manager.pt:37
+msgid "help_remove_permissions"
+msgstr ""
+
+#. Default: "Benutzer suchen, an welche die Berechtigungen &Uuml;bertragen werden sollen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:103
+msgid "help_search_destination"
+msgstr ""
+
+#. Default: "Benutzer suchen, von welchem die Berechtigungen kopiert werden sollen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:30
+msgid "help_search_user"
+msgstr ""
+
 #. Default: "Zugriffstabelle"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:35
+#: ./ftw/permissionmanager/browser/permission_manager.pt:25
 msgid "label_access_table"
 msgstr ""
 
 #. Default: "Zur&uuml;ck zur Berechtigungs-Verwaltung"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:18
 #: ./ftw/permissionmanager/browser/import_export_permissions.pt:15
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:15
 msgid "label_back_to_overview"
+msgstr ""
+
+#. Default: "2. Quellbenutzer ausw&auml;hlen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:60
+msgid "label_choose_source"
+msgstr ""
+
+#. Default: "2. Benutzer ausw&auml;len"
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:56
+msgid "label_choose_user"
+msgstr ""
+
+#. Default: "Ausgew&auml;hlter Benutzer:"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:93
+msgid "label_choosen_user"
+msgstr ""
+
+#. Default: "4. Zielbenutzer ausw&auml;len"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:134
+msgid "label_chopse_destiantion"
+msgstr ""
+
+#. Default: "5. Best&auml;igen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:174
+msgid "label_confirm"
+msgstr ""
+
+#. Default: "3. Best&auml;tigen"
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:81
+msgid "label_confirmation"
+msgstr ""
+
+#. Default: "Berechtigungen kopieren"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:42
+msgid "label_copy_permissions"
 msgstr ""
 
 #. Default: "Berechtigungen (CSV-Datei)"
@@ -109,8 +190,18 @@ msgstr ""
 msgid "label_export_relative"
 msgstr ""
 
+#. Default: "Benutzer-Filter"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:31
+msgid "label_filter"
+msgstr ""
+
+#. Default: "ID"
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:62
+msgid "label_id"
+msgstr ""
+
 #. Default: "Import / Export von Berechtigungen"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:61
+#: ./ftw/permissionmanager/browser/permission_manager.pt:51
 msgid "label_import_export_permissions"
 msgstr ""
 
@@ -119,8 +210,115 @@ msgstr ""
 msgid "label_import_permissions"
 msgstr ""
 
+#. Default: "Vererbung von Berechtigungen"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:38
+msgid "label_inheritance"
+msgstr ""
+
 #. Default: "Berechtigungen Verwalten"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:14
+#: ./ftw/permissionmanager/browser/permission_manager.pt:13
 msgid "label_manage_permission"
+msgstr ""
+
+#. Default: "Name / Titel"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:89
+msgid "label_name_title"
+msgstr ""
+
+#. Default: "Nein, abbrechen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:192
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:95
+msgid "label_no"
+msgstr ""
+
+#. Default: "Keine Treffer gefunden."
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:85
+msgid "label_not_record_found"
+msgstr ""
+
+#. Default: "Objekt"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:52
+msgid "label_object"
+msgstr ""
+
+#. Default: "Berechtigungen entfernen"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:34
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:14
+msgid "label_remove_permissions"
+msgstr ""
+
+#. Default: "3. Zielbenutzer suchen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:101
+msgid "label_search_destination"
+msgstr ""
+
+#. Default: "1. Quellbenutzer suchen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:28
+msgid "label_search_user"
+msgstr ""
+
+#. Default: "Struktur aufklappen"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:45
+msgid "label_show_structure"
+msgstr ""
+
+#. Default: "Titel"
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:63
+msgid "label_title"
+msgstr ""
+
+#. Default: "Typ"
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:64
+msgid "label_typ"
+msgstr ""
+
+#. Default: "Typ"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:90
+msgid "label_type"
+msgstr ""
+
+#. Default: "Benutzer"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:80
+msgid "label_user"
+msgstr ""
+
+#. Default: "Benutzername"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:88
+msgid "label_username"
+msgstr ""
+
+#. Default: "Ja, &Uuml;bertragen"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:190
+msgid "label_yes"
+msgstr ""
+
+#. Default: "Ja, Berechtigungen l&ouml;schen"
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:93
+msgid "label_yes_delete"
+msgstr ""
+
+#. Default: "1. Benutzer suchen"
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:27
+msgid "lable_search_user"
+msgstr ""
+
+#. Default: "Ein roter Strich bedeutet, dass die Berechtigungen nicht vererbt werden. <br /> Die Benutzer über dem roten Strich haben keinen Zugriff auf alle Inhalte unter dem Strich."
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:39
+msgid "text_inheritance"
+msgstr ""
+
+#. Default: "Sie k&ouml;nnen die Berechtigungen eines Benutzers rekursiv entfernen."
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:21
+msgid "text_remove_permissions"
+msgstr ""
+
+#. Default: "Auflistung aller Benutzer, die in der Berechtigungstabelle aufgef&uuml;hrt sind."
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:81
+msgid "text_user"
+msgstr ""
+
+#. Default: "Berechtigungen kopieren"
+#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:14
+msgid "title_copy_permissions"
 msgstr ""
 

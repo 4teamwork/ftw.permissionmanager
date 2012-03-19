@@ -10,7 +10,6 @@
 <metal:main fill-slot="main">
 
     <div metal:define-macro="main">
-        
         <h1 class="documentFirstHeading" i18n:translate="label_manage_permission">Berechtigungen Verwalten</h1>
         <a href=""
            class="link-parent"
@@ -31,22 +30,22 @@
                 und allen untergeordneten Objekten.
             </dd>
 
-            <!-- <dt>
-                <a href=""
+            <dt>
+                <a href="" i18n:translate="label_remove_permissions"
                         tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions">Berechtigungen entfernen</a>
             </dt>
-            <dd>
+            <dd i18n:translate="help_remove_permissions">
                 Sie k&ouml;nnen die Berechtigungen eines Benutzers rekursiv entfernen.
             </dd>
 
             <dt>
-                <a href=""
+                <a href="" i18n:translate="label_copy_permissions"
                         tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions">Berechtigungen kopieren</a>
             </dt>
             <dd>
                 Berechtigungen eines Benutzers im ganzen Bereich auf einen
                 anderen Benutzer Ã¼bertragen.
-            </dd> -->
+            </dd>
 
             <dt>
                 <a href="" i18n:translate="label_import_export_permissions"

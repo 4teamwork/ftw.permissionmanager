@@ -4,64 +4,64 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="ftw.permissionmanager">
 
 <body>
 <metal:main fill-slot="main">
 
     <div metal:define-macro="main">
-        
-        <h1 class="documentFirstHeading">Berechtigungen eines Benutzers entfernen</h1>
+
+        <h1 class="documentFirstHeading" i18n:translate="label_remove_permissions">Berechtigungen eines Benutzers entfernen</h1>
         <a href=""
-           class="link-parent"
+           class="link-parent" i18n:translate="label_back_to_overview"
            tal:attributes="href string:${here/absolute_url}/@@permission_manager">
             Zur&uuml;ck zur Berechtigungs-Verwaltung
         </a>
 
-        <p class="discreet">
+        <p class="documentDescription" i18n:translate="text_remove_permissions">
             Sie k&ouml;nnen die Berechtigungen eines Benutzers rekursiv entfernen.
         </p>
 
         <br />
 
-        <p class="discreet">
+        <p i18n:translate="lable_search_user">
             1. Benutzer suchen
         </p>
 
-        <form method="post" 
+        <form method="post"
               tal:attributes="action string:${context/absolute_url}/@@remove_user_permissions">
-              
+
             <input type="hidden" name="search_user:boolean" value="True" />
 
             <div class="field">
-                <input type="text" 
+                <input type="text"
                        id="sharing-user-group-search"
-                       size="30" 
+                       size="30"
                        name="search_term"
-                       title="Search for user or group" 
+                       title="Search for user or group"
                        i18n:attributes="title"
                        class="searchField inputLabel"
-                       value="" 
+                       value=""
                        />
                 <input type="submit"
                        name="form.button.Search"
                        value="Search"
-                       class="searchButton allowMultiSubmit" 
+                       class="searchButton allowMultiSubmit"
                        i18n:attributes="value box_search"
                        />
             </div>
         </form>
 
         <tal:search_results tal:condition="view/search">
-            <div class="discreet">
-                2. Benutzer auswÃ¤hlen
+            <div i18n:translate="label_choose_user">
+                2. Benutzer ausw&auml;len
             </div>
             <table class="listing" tal:condition="view/search">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Titel</th>
-                        <th>Typ</th>
+                        <th i18n:translate="label_id">ID</th>
+                        <th i18n:translate="label_title">Titel</th>
+                        <th i18n:translate="label_typ">Typ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,7 +78,7 @@
         </tal:search_results>
 
         <tal:user_selected tal:condition="python:view.user_selected and not view.confirmed">
-            <div class="discreet">
+            <div i18n:translate="label_confirmation">
                 3. Best&auml;tigen
             </div>
 
@@ -91,9 +91,9 @@
             </p>
             <p>
                 <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user=${view/user}&amp;confirmed=1"
-                    class="context">Ja, Berechtigungen l&ouml;schen</a>
+                    class="context" i18n:translate="label_yes_delete">Ja, Berechtigungen l&ouml;schen</a>
                 <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions"
-                    class="standalone">Nein, abbrechen</a>
+                    class="standalone" i18n:translate="label_no">Nein, abbrechen</a>
             </p>
         </tal:user_selected>
 

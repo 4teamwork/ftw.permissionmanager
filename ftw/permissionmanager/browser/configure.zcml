@@ -32,7 +32,7 @@
     <browser:page
             name="import_export_permissions"
             for="*"
-            class=".permissionmanager.ImportExportPermissionsView"
+            class=".import_export_permissions.ImportExportPermissionsView"
             permission="plone.DelegateRoles"
             template="import_export_permissions.pt"
             />
@@ -40,14 +40,14 @@
     <browser:page
             name="remove_user_permissions"
             for="*"
-            class=".permissionmanager.RemoveUserPermissionsView"
+            class=".remove_permissions.RemoveUserPermissionsView"
             permission="plone.DelegateRoles"
             />
 
     <browser:page
             name="copy_user_permissions"
             for="*"
-            class=".permissionmanager.CopyUserPermissionsView"
+            class=".copy_permissions.CopyUserPermissionsView"
             permission="plone.DelegateRoles"
             template="copy_user_permissions.pt"
             />
