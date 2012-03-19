@@ -15,7 +15,7 @@
     <div metal:define-macro="main">
 
         <h1 class="documentFirstHeading" i18n:translate="">Security</h1>
-        <a href=""
+        <a href="" tal:condition="view/show_advanded_links"
            class="link-parent"
            tal:attributes="href string:${here/absolute_url}/@@permission_manager" i18n:translate="label_back_to_overview">
             Zur&uuml;ck zur Berechtigungs-Verwaltung
@@ -32,7 +32,7 @@
             <p class="">
                 Nur der Benutzer <b tal:content="view/user"></b> wird
                 angezeigt.<br />
-                <a tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Alle anzeigen</a>
+                <a class="context" tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Alle anzeigen</a>
             </p>
         </tal:if>
         <h3 i18n:translate="label_inheritance">Vererbung von Berechtigungen</h3>

@@ -33,7 +33,7 @@
             name="import_export_permissions"
             for="*"
             class=".permissionmanager.ImportExportPermissionsView"
-            permission="cmf.ManagePortal"
+            permission="plone.DelegateRoles"
             template="import_export_permissions.pt"
             />
 
@@ -41,14 +41,14 @@
             name="remove_user_permissions"
             for="*"
             class=".permissionmanager.RemoveUserPermissionsView"
-            permission="cmf.ManagePortal"
+            permission="plone.DelegateRoles"
             />
 
     <browser:page
             name="copy_user_permissions"
             for="*"
             class=".permissionmanager.CopyUserPermissionsView"
-            permission="cmf.ManagePortal"
+            permission="plone.DelegateRoles"
             template="copy_user_permissions.pt"
             />
 
