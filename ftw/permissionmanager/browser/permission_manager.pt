@@ -22,15 +22,6 @@
         </p>
 
         <dl>
-            <!-- <dt>
-                <a href=""
-                        tal:attributes="href string:${here/absolute_url}/@@sharing">Herk&ouml;mmliche Zugriffsregelung</a>
-            </dt>
-            <dd>
-                Mit der herk&ouml;mmlichen Zugriffsregelung definieren Sie die
-                Berechtigungen f&uuml;r dieses Objekt.
-            </dd> -->
-
             <dt>
                 <a href="" i18n:translate="label_access_table"
                         tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Zugriffstabelle</a>

@@ -4,7 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="ftw.permissionmanager">
 
 <body>
 <metal:left fill-slot="column_one_slot" />
@@ -13,47 +13,43 @@
 <metal:main fill-slot="main">
 
     <div metal:define-macro="main">
-        
-        <h1 class="documentFirstHeading">Erweiterte Zugriffsregelung</h1>
+
+        <h1 class="documentFirstHeading" i18n:translate="">Security</h1>
         <a href=""
            class="link-parent"
            tal:attributes="href string:${here/absolute_url}/@@permission_manager" i18n:translate="label_back_to_overview">
             Zur&uuml;ck zur Berechtigungs-Verwaltung
         </a>
 
-        <p class="discreet">
+        <p class="documentDescription" i18n:translate="help_advanced_sharing">
             Die erweiterte Zugriffsregelung listet die Berechtigungen
             rekursiv auf. Das aufbauen dieser Ansicht kann auf den oberste
             Stufen sehr lange dauern!
         </p>
 
-        <br />
-
-        <p tal:condition="view/user_selected" class="portalMessage error">
-            Benutzer-Filter: Nur der Benutzer <b tal:content="view/user"></b> wird
-            angezeigt.<br />
-            <a tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Alle anzeigen</a>
-        </p>
-        <h2>Berechtigungen</h2>
-        <p class="discreet">
-            Auflistung aller Objekte und den Benutzer, die darauf berechtigt sind.
-            Mit Klick auf ein Objekt wird man auf die entsprechende Zugriffsregelung
-            weitergeleitet.
-        </p>
-
-        <h2>Vererbung von Berechtigungen</h2>
-        <p>
+        <tal:if tal:condition="view/user_selected">
+            <h2 i18n:translate="label_filter">Benutzer-Filter</h2>
+            <p class="">
+                Nur der Benutzer <b tal:content="view/user"></b> wird
+                angezeigt.<br />
+                <a tal:attributes="href string:${here/absolute_url}/@@advanced-sharing">Alle anzeigen</a>
+            </p>
+        </tal:if>
+        <h3 i18n:translate="label_inheritance">Vererbung von Berechtigungen</h3>
+        <p i18n:translate="text_inheritance">
             Ein roter Strich bedeutet, dass die Berechtigungen nicht vererbt werden. <br/>
-            Die Benutzer über dem roten Strich haben keinen Zugriff auf alle Inhalte unter dem Strich. 
-            
+            Die Benutzer über dem roten Strich haben keinen Zugriff auf alle Inhalte unter dem Strich.
+
         </p>
 
-        <input type="button" class="standalone" value="Alles aufklappen"
+        <input type="button" class="standalone" value="Struktur aufklappen" i18n:attributes="value label_show_structure"
                 onclick="jq('#permissionListingTable').find('tr.collapsed, tr.parent').show().expand()"/>
+        <br/>
+        <br/>
         <table class="listing" id="permissionListingTable">
             <thead>
                 <tr>
-                    <th>Objekt</th>
+                    <th i18n:translate="label_object">Objekt</th>
                     <th tal:repeat="role view/roles"
                             tal:content="role/title" />
                 </tr>
@@ -81,17 +77,17 @@
             </tbody>
         </table>
 
-        <h2>Benutzer</h2>
-        <p class="discreet">
+        <h2 i18n:translate="label_user">Benutzer</h2>
+        <p i18n:translate="text_user">
             Auflistung aller Benutzer, die in der Berechtigungstabelle
             aufgef&uuml;hrt sind.
         </p>
         <table class="listing">
             <thead>
                 <tr>
-                    <th>Benutzername</th>
-                    <th>Name / Titel</th>
-                    <th>Typ</th>
+                    <th i18n:translate="label_username">Benutzername</th>
+                    <th i18n:translate="label_name_title">Name / Titel</th>
+                    <th i18n:translate="label_type">Typ</th>
                     <th></th>
                 </tr>
             </thead>
