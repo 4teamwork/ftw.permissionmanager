@@ -1,0 +1,159 @@
+from Acquisition import aq_inner
+from plone.app.workflow.browser.sharing import SharingView as base
+from plone.app.workflow.interfaces import ISharingPageRole
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode, getSiteEncoding
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.component import getUtilitiesFor
+
+
+class SharingView(base):
+    """This sharing view works a bit diffrent than the one from plone
+       The search result is displayed in his own table.
+       If a role is selected in search result table, the entry will be added
+       to current_settings, this (kind of) saves the result for the user
+    """
+
+    template = ViewPageTemplateFile('sharing.pt')
+
+    def has_manage_portal(self):
+        return self.context.portal_membership.checkPermission(
+            'ManagePortal',
+            self.context)
+
+    def has_local_role(self, role=''):
+        local_roles = self.context.aq_explicit.get_local_roles()
+        authenticated_member = \
+            self.context.portal_membership.getAuthenticatedMember().id
+        for userid, roles in local_roles:
+            if (authenticated_member == userid and role in roles) \
+                or self.has_manage_portal():
+                return True
+        return False
+
+    def role_settings(self):
+        """Only return current settings"""
+        results = self.existing_role_settings()
+        encoding = getSiteEncoding(aq_inner(self.context))
+        if not self.has_manage_portal():
+            results = [r for r in results if r['type']!='group']
+        static = {}
+        index = None
+        for item in results:
+            if item['id'] == 'AuthenticatedUsers':
+                index = results.index(item)
+                break
+        if index != -1 and index is not None:
+            static = results.pop(index)
+        results.sort(
+            lambda x, y: cmp(
+                safe_unicode(x["title"], encoding).lower(),
+                safe_unicode(y["title"], encoding).lower()))
+        if static:
+            results.insert(0, static)
+        return results
+
+    def search_result(self):
+        """Returns only the search result for the new search result table"""
+
+        mtool = getToolByName(self.context, 'portal_membership')
+        gtool = getToolByName(self.context, 'portal_groups')
+
+        user_results = self.user_search_results()
+        group_results = self.group_search_results()
+        current_settings = user_results + group_results
+
+        requested = self.request.form.get('entries', [])
+        # Remove real/saved roles from requested
+        for item in self.existing_role_settings():
+            index = None
+            for r_item in requested:
+                if item['id'] == r_item['id']:
+                    index = requested.index(r_item)
+                    break
+            if index is not None:
+                requested.pop(index)
+
+
+        if requested is not None:
+            knownroles = [r['id'] for r in self.roles()]
+            settings = {}
+            result_like_settings = {}
+            for entry in requested:
+                roles = []
+                roles_for_settings = {}
+                for r in knownroles:
+                    if entry.get('role_%s' % r, False):
+                        roles.append(r)
+                        roles_for_settings[r] = True
+                    else:
+                        roles_for_settings[r] = False
+                    settings[(entry['id'], entry['type'])] = roles
+
+                # Add requested entries to current_settings if there is one or
+                #  more roles selected
+                # This is kind a temporary storage for search results.
+                # It allows you to do multible search queries and you will not
+                # lose allready selected roles for user/groups
+                if roles and not self.request.get('form.button.Save', None):
+                    # get group title or user fullname
+                    if entry['type'] == 'user':
+                        member = mtool.getMemberById(entry['id'])
+                        title = '%s (%s)' % (
+                            member.getProperty('fullname', entry['id']),
+                            member.getProperty('email', ''))
+                    else:
+                        group = gtool.getGroupById(entry['id'])
+                        title = group.getGroupTitleOrName()
+                    result_like_settings = {
+                        'id': entry['id'],
+                        'type': entry['type'],
+                        'title': title,
+                        'roles': roles_for_settings}
+                    current_settings.append(result_like_settings)
+            for entry in current_settings:
+                desired_roles = settings.get(
+                    (entry['id'], entry['type']),
+                    None)
+
+                if desired_roles is None:
+                    continue
+                for role in entry["roles"]:
+                    if entry["roles"][role] in [True, False]:
+                        entry["roles"][role] = role in desired_roles
+
+        encoding = getSiteEncoding(aq_inner(self.context))
+        current_settings.sort(
+            lambda x, y: cmp(
+                safe_unicode(x["title"], encoding).lower(),
+                safe_unicode(y["title"], encoding).lower()))
+
+
+        return current_settings
+
+    def roles(self):
+        """Get a list of roles that can be managed.
+
+        Returns a list of dicts with keys:
+
+            - id
+            - title
+        """
+        context = aq_inner(self.context)
+
+        pairs = []
+        has_manage_portal = context.portal_membership.checkPermission(
+            'ManagePortal',
+            context)
+        aviable_roles_for_users = [
+            u'Editor',
+            u'Reader',
+            u'Contributor',
+            u'Administrator']
+        for name, utility in getUtilitiesFor(ISharingPageRole):
+            if not has_manage_portal and name not in aviable_roles_for_users:
+                continue
+            pairs.append(dict(id = name, title = utility.title))
+
+        pairs.sort(key=lambda x: x["id"])
+        return pairs

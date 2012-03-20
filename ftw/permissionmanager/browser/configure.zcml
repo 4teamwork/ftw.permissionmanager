@@ -11,6 +11,13 @@
         directory="resources"
         />
 
+    <browser:page
+            name="sharing"
+            for="*"
+            layer="ftw.permissionmanager.interfaces.IFtwPermissioneManager"
+            class=".sharing.SharingView"
+            permission="plone.DelegateRoles"
+            />
 
     <browser:page
             name="permission_manager"
