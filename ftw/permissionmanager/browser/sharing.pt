@@ -65,8 +65,8 @@
 
                 <!-- Dispaly only search result -->
                 <div id="user-group-sharing-container">
-                    <h2 i18n:translate="title_search_results">Search result</h2>
-                    <p i18n:translate="help_user_group_search">Search help</p>
+                    <h2 i18n:translate="title_search_results" i18n:domain="ftw.permissionmanager">Search result</h2>
+                    <p i18n:translate="help_user_group_search" i18n:domain="ftw.permissionmanager">Search help</p>
                     <table metal:define-macro="user-group-sharing" id="user-group-sharing"
                            class="listing" sorted="Name"
                            summary="Current sharing permissions"
@@ -98,7 +98,7 @@
                               <tal:if condition="not:role_settings">
                                   <tr>
                                       <td tal:attributes="colspan num_columns">
-                                          <p i18n:translate="text_nothing_found">Nothing found</p>
+                                          <p i18n:translate="text_nothing_found" i18n:domain="ftw.permissionmanager">Nothing found</p>
                                       </td>
                                   </tr>
                               </tal:if>
@@ -159,7 +159,7 @@
                 </div>
 
                 <div id="user-group-sharing-container">
-                    <h2 i18n:translate="title_current_permissions">Current permissions</h2>
+                    <h2 i18n:translate="title_current_permissions" i18n:domain="ftw.permissionmanager">Current permissions</h2>
                     <table metal:define-macro="current-user-group-sharing" id="current-user-group-sharing"
                            class="listing" sorted="Name"
                            summary="Current sharing permissions"

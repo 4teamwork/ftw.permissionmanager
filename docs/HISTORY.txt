@@ -2,11 +2,17 @@ Changelog
 =========
 
 
-1.3.2 (unreleased)
+1.4 (unreleased)
 ------------------
 
 - Adde a better sharing view, which provides a user/group search and temp.
   stores selected (not yet saved selection) roles for a set of user/groups
+  [mathias.leimgruber]
+
+- Split up views
+  [mathias.leimgruber]
+
+- German translations
   [mathias.leimgruber]
 
 
