@@ -56,6 +56,10 @@ class SharingView(base):
     def search_result(self):
         """Returns only the search result for the new search result table"""
 
+        # XXX: This method is inefficient. To many interations and
+        # manipulations. # If someone really understands what to do,
+        # please do it.
+
         mtool = getToolByName(self.context, 'portal_membership')
         gtool = getToolByName(self.context, 'portal_groups')
 
@@ -64,6 +68,7 @@ class SharingView(base):
         current_settings = user_results + group_results
 
         requested = self.request.form.get('entries', [])
+
         # Remove real/saved roles from requested
         for item in self.existing_role_settings():
             index = None
@@ -89,19 +94,18 @@ class SharingView(base):
                     else:
                         roles_for_settings[r] = False
                     settings[(entry['id'], entry['type'])] = roles
-
                 # Add requested entries to current_settings if there is one or
                 #  more roles selected
                 # This is kind a temporary storage for search results.
                 # It allows you to do multible search queries and you will not
                 # lose allready selected roles for user/groups
                 if roles and not self.request.get('form.button.Save', None):
+
                     # get group title or user fullname
                     if entry['type'] == 'user':
                         member = mtool.getMemberById(entry['id'])
-                        title = '%s (%s)' % (
-                            member.getProperty('fullname', entry['id']),
-                            member.getProperty('email', ''))
+                        title = '%s' % (
+                            member.getProperty('fullname', entry['id']))
                     else:
                         group = gtool.getGroupById(entry['id'])
                         title = group.getGroupTitleOrName()
@@ -110,7 +114,16 @@ class SharingView(base):
                         'type': entry['type'],
                         'title': title,
                         'roles': roles_for_settings}
-                    current_settings.append(result_like_settings)
+
+                    # Add or update settings
+                    updated = False
+                    for given_entry in current_settings:
+                        if result_like_settings['id'] == given_entry['id']:
+                            given_entry.update(result_like_settings)
+                            updated = True
+                            break
+                    if not updated:
+                        current_settings.append(result_like_settings)
             for entry in current_settings:
                 desired_roles = settings.get(
                     (entry['id'], entry['type']),
@@ -127,7 +140,6 @@ class SharingView(base):
             lambda x, y: cmp(
                 safe_unicode(x["title"], encoding).lower(),
                 safe_unicode(y["title"], encoding).lower()))
-
 
         return current_settings
 

@@ -20,6 +20,16 @@
             />
 
     <browser:page
+            for="*"
+            class=".kss_sharing.KSSSharingView"
+            name="updateSharingInfo"
+            attribute="updateSharingInfo"
+            permission="plone.DelegateRoles"
+            layer="ftw.permissionmanager.interfaces.IFtwPermissioneManager"
+        />
+
+
+    <browser:page
             name="permission_manager"
             for="*"
             class=".permissionmanager.PermissionManager"
