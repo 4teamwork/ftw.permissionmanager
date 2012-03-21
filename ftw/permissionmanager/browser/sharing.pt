@@ -36,31 +36,34 @@
             <form method="post"
                   tal:attributes="action string:${context/absolute_url}/@@sharing">
 
-                <input type="hidden" name="form.submitted:boolean" value="True" />
-
-                <div class="field">
-                    <input type="text"
-                           id="sharing-user-group-search"
-                           size="30"
-                           name="search_term"
-                           title="Search for user or group"
-                           i18n:attributes="title"
-                           class="searchField inputLabel"
-                           value=""
-                           />
-                    <input type="submit"
-                           id="sharing-save-button"
-                           name="form.button.Search"
-                           value="Search"
-                           class="searchButton allowMultiSubmit"
-                           i18n:attributes="value label_search"
-                           />
-                </div>
-
-
                 <!-- Dispaly only search result -->
-                <div id="user-group-sharing-container">
+                <fieldset id="user-group-sharing-container">
                     <h2 i18n:translate="title_new_permissions" i18n:domain="ftw.permissionmanager">New</h2>
+
+                    <input type="hidden" name="form.submitted:boolean" value="True" />
+
+
+                    <div class="field">
+                        <input type="text"
+                               id="sharing-user-group-search"
+                               size="30"
+                               name="search_term"
+                               title="Search for user or group"
+                               i18n:attributes="title"
+                               class="searchField inputLabel"
+                               value=""
+                               />
+                        <input type="submit"
+                               id="sharing-save-button"
+                               name="form.button.Search"
+                               value="Search"
+                               class="searchButton allowMultiSubmit"
+                               i18n:attributes="value label_search"
+                               />
+                    </div>
+
+
+
                     <h3 i18n:translate="title_search_results" i18n:domain="ftw.permissionmanager">Search result</h3>
                     <table metal:define-macro="user-group-sharing" id="user-group-sharing"
                            class="listing" sorted="Name"
@@ -151,9 +154,9 @@
                         </tal:if>
 
                     </table>
-                </div>
+                </fieldset>
 
-                <div id="user-group-sharing-container">
+                <fieldset id="user-group-sharing-container">
                     <h2 i18n:translate="title_current_permissions" i18n:domain="ftw.permissionmanager">Current permissions</h2>
                     <table metal:define-macro="current-user-group-sharing" id="current-user-group-sharing"
                            class="listing" sorted="Name"
@@ -232,7 +235,7 @@
                         </tbody>
 
                     </table>
-                </div>
+                </fieldset>
 
 
 
