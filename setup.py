@@ -4,6 +4,9 @@ import os
 version = '1.4.dev0'
 maintainer = 'Mathias Leimgruber'
 
+tests_require = ['plone.app.testing',
+                 'plone.mocktestcase']
+
 setup(name='ftw.permissionmanager',
       version=version,
       description="",
@@ -25,6 +28,8 @@ setup(name='ftw.permissionmanager',
       namespace_packages=['ftw'],
       include_package_data=True,
       zip_safe=False,
+      tests_require=tests_require,
+      extras_require=dict(tests=tests_require),
       install_requires=[
           'setuptools',
           'collective.monkeypatcher',
