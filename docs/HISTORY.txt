@@ -5,6 +5,8 @@ Changelog
 1.4 (unreleased)
 ------------------
 
+- Show AuthenticatedUsers group, only to Users with ManagePortal permissions
+
 - Adde a better sharing view, which provides a user/group search and temp.
   stores selected (not yet saved selection) roles for a set of user/groups
   [mathias.leimgruber]

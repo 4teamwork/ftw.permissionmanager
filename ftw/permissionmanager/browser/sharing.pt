@@ -29,11 +29,6 @@
             <q tal:content="context/Title" i18n:name="folder">title</q>
         </h1>
 
-        <div class="documentDescription"
-           i18n:translate="description_sharing_control">
-            You can control who can view and edit your item using the list below.
-        </div>
-
         <div tal:replace="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
 
 
@@ -65,8 +60,8 @@
 
                 <!-- Dispaly only search result -->
                 <div id="user-group-sharing-container">
-                    <h2 i18n:translate="title_search_results" i18n:domain="ftw.permissionmanager">Search result</h2>
-                    <p i18n:translate="help_user_group_search" i18n:domain="ftw.permissionmanager">Search help</p>
+                    <h2 i18n:translate="title_new_permissions" i18n:domain="ftw.permissionmanager">New</h2>
+                    <h3 i18n:translate="title_search_results" i18n:domain="ftw.permissionmanager">Search result</h3>
                     <table metal:define-macro="user-group-sharing" id="user-group-sharing"
                            class="listing" sorted="Name"
                            summary="Current sharing permissions"

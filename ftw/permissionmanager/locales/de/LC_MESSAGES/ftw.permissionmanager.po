@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-03-21 12:37+0000\n"
+"POT-Creation-Date: 2012-03-21 13:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,9 +114,9 @@ msgid "help_search_user"
 msgstr "Benutzer suchen, an welche die Berechtigungen Übertragen werden sollen"
 
 #. Default: "Search help"
-#: ./ftw/permissionmanager/browser/sharing.pt:69
+#: ./ftw/permissionmanager/browser/sharing.pt:65
 msgid "help_user_group_search"
-msgstr "Suchen Sie nach Benutzer und Gruppen"
+msgstr ""
 
 #. Default: "Zugriffstabelle"
 #: ./ftw/permissionmanager/browser/permission_manager.pt:25
@@ -308,9 +308,9 @@ msgid "text_inheritance"
 msgstr "Ein roter Strich bedeutet, dass die Berechtigungen nicht vererbt werden. Die Benutzer über dem roten Strich haben keinen Zugriff auf alle Inhalte unter dem Strich."
 
 #. Default: "Nothing found"
-#: ./ftw/permissionmanager/browser/sharing.pt:101
+#: ./ftw/permissionmanager/browser/sharing.pt:97
 msgid "text_nothing_found"
-msgstr "Nichts gefunden"
+msgstr "Kein Treffer"
 
 #. Default: "Sie k&ouml;nnen die Berechtigungen eines Benutzers rekursiv entfernen."
 #: ./ftw/permissionmanager/browser/remove_user_permissions.pt:21
@@ -328,12 +328,17 @@ msgid "title_copy_permissions"
 msgstr "Berechtigungen kopieren"
 
 #. Default: "Current permissions"
-#: ./ftw/permissionmanager/browser/sharing.pt:162
+#: ./ftw/permissionmanager/browser/sharing.pt:158
 msgid "title_current_permissions"
 msgstr "Aktuelle Freigaben"
 
+#. Default: "New"
+#: ./ftw/permissionmanager/browser/sharing.pt:63
+msgid "title_new_permissions"
+msgstr "Neue Freigaben"
+
 #. Default: "Search result"
-#: ./ftw/permissionmanager/browser/sharing.pt:68
+#: ./ftw/permissionmanager/browser/sharing.pt:64
 msgid "title_search_results"
 msgstr "Suchresultat"
 

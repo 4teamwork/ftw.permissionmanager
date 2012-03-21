@@ -35,10 +35,9 @@ class SharingView(base):
         """Only return current settings"""
         results = self.existing_role_settings()
         encoding = getSiteEncoding(aq_inner(self.context))
-        if not self.has_manage_portal():
-            results = [r for r in results if r['type']!='group']
         static = {}
         index = None
+        # Puts AuthenticatedUsers group to position 0
         for item in results:
             if item['id'] == 'AuthenticatedUsers':
                 index = results.index(item)
@@ -49,7 +48,10 @@ class SharingView(base):
             lambda x, y: cmp(
                 safe_unicode(x["title"], encoding).lower(),
                 safe_unicode(y["title"], encoding).lower()))
-        if static:
+        # Only show AuthenticatedUsers group users with ManagePortal
+        # perission
+        # XXX: This should be configurable
+        if static and self.has_manage_portal():
             results.insert(0, static)
         return results
 
