@@ -4,8 +4,7 @@ import os
 version = '1.4.dev0'
 maintainer = 'Mathias Leimgruber'
 
-tests_require = ['plone.app.testing',
-                 'plone.mocktestcase']
+tests_require = ['plone.app.testing', ]
 
 setup(name='ftw.permissionmanager',
       version=version,

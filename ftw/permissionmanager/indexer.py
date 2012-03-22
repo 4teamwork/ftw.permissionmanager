@@ -12,6 +12,3 @@ def isLocalRoleAcquired(object):
     if getattr(object, '__ac_local_roles_block__', None):
         return False
     return True
-    
-    
-    

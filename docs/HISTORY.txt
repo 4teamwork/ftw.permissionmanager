@@ -5,7 +5,11 @@ Changelog
 1.4 (unreleased)
 ------------------
 
+- Added tests for remove permissions view.
+  [mathias.leimgruber]
+
 - Show AuthenticatedUsers group, only to Users with ManagePortal permissions
+  [mathias.leimgruber]
 
 - Adde a better sharing view, which provides a user/group search and temp.
   stores selected (not yet saved selection) roles for a set of user/groups
@@ -44,6 +48,7 @@ Changelog
   [16.02.2011, mathias.leimgruber]
 - Litte bit CSS
   [16.02.2011, mathias.leimgruber]
+
 
 1.0-dev (unreleased)
 --------------------

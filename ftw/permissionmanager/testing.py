@@ -1,22 +1,42 @@
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import applyProfile
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import IntegrationTesting
+from plone.testing import z2
 from zope.configuration import xmlconfig
-from plone.testing import Layer
-from plone.testing import zca
+from plone.app.testing import setRoles, TEST_USER_ID, TEST_USER_NAME, login
+
+import ftw.permissionmanager
 
 
-class FtwPermissionmanagerZCMLLayer(Layer):
-    """ZCML test layer for ftw.tooltips"""
+class FtwPermissionmanagerLayer(PloneSandboxLayer):
 
-    defaultBases = (zca.ZCML_DIRECTIVES, )
+    defaultBases = (PLONE_FIXTURE, )
 
-    def testSetUp(self):
-        self['configurationContext'] = zca.stackConfigurationContext(
-        self.get('configurationContext'))
+    def setUpZope(self, app, configurationContext):
+        # Load ZCML
 
-        import ftw.Permissionmanager.tests
-        xmlconfig.file('tests.zcml', ftw.tooltip.tests,
-            context=self['configurationContext'])
+        xmlconfig.file('configure.zcml',
+            ftw.permissionmanager,
+            context=configurationContext)
 
-    def testTearDown(self):
-        del self['configurationContext']
+        # installProduct() is *only* necessary for packages outside
+        # the Products.* namespace which are also declared as Zope 2 products,
+        # using <five:registerPackage /> in ZCML.
+        z2.installProduct(app, 'ftw.permissionmanager')
 
-FTWPERMISSIONMANAGER_ZCML_LAYER = FtwPermissionmanagerZCMLLayer()
+    def setUpPloneSite(self, portal):
+        # Install into Plone site using portal_setup
+        applyProfile(portal, 'ftw.permissionmanager:default')
+
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        login(portal, TEST_USER_NAME)
+        # Create one folder with one item
+        portal.invokeFactory('Folder', 'folder1', title='Folder1')
+        portal.folder1.invokeFactory('Folder', 'folder2', title='Folder2')
+
+
+FTW_PERMISSIONMANAGER_FIXTURE = FtwPermissionmanagerLayer()
+FTW_PERMISSIONMANAGER_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(FTW_PERMISSIONMANAGER_FIXTURE, ),
+    name="ftw.permissionmanager:Integration")
