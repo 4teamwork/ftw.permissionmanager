@@ -79,10 +79,10 @@ class TestRemovePermissions(unittest.TestCase):
             browser.contents)
 
         # Approve if user has no local roles on folder1 and folder2
-        self.assertFalse(portal.folder1.get_local_roles())
-        self.assertFalse(portal.folder1.folder2.get_local_roles())
-
-
+        self.assertFalse(
+            TEST_USER_ID in dict(portal.folder1.get_local_roles()))
+        self.assertFalse(
+            TEST_USER_ID in dict(portal.folder1.folder2.get_local_roles()))
 
     def test_remove_permission_form_group(self):
         portal = self.layer['portal']
