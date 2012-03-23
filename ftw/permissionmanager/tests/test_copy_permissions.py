@@ -1,16 +1,13 @@
 from zope.component import getMultiAdapter
-from ftw.permissionmanager.testing import FTW_PERMISSIONMANAGER_INTEGRATION_TESTING
+from ftw.permissionmanager.testing import (
+    FTW_PERMISSIONMANAGER_INTEGRATION_TESTING,
+    TEST_USER_ID_2, TEST_GROUP_ID, TEST_GROUP_ID_2)
 import unittest2 as unittest
 from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD, TEST_USER_ID
 from plone.testing.z2 import Browser
 import transaction
 
 
-
-TEST_USER_ID_2 = '_test_user_2_'
-TEST_USER_PW_2 = 'secret'
-TEST_GROUP_ID = 'test_group'
-TEST_GROUP_ID_2 = 'test_group_2'
 
 class TestCopyPermissions(unittest.TestCase):
 
@@ -28,9 +25,6 @@ class TestCopyPermissions(unittest.TestCase):
     def test_copy_permission_form_user(self):
         portal = self.layer['portal']
         portal_url = portal.absolute_url()
-
-        # Add a new user
-        portal.portal_registration.addMember(TEST_USER_ID_2, TEST_USER_PW_2)
 
         # Set local roles for test user
         portal.portal_membership.setLocalRoles(

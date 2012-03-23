@@ -5,7 +5,7 @@ Changelog
 1.4 (unreleased)
 ------------------
 
-- Added tests for remove permissions view.
+- Added tests for remove and copy permissions view.
   [mathias.leimgruber]
 
 - Show AuthenticatedUsers group, only to Users with ManagePortal permissions
