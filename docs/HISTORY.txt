@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.4 (unreleased)
-------------------
+1.4 (2012-03-26)
+----------------
 
 - Added tests for remove and copy permissions view.
   [mathias.leimgruber]
