@@ -3,14 +3,14 @@ import csv
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from ftw.permissionmanager import permission_manager_factory as _
+from plone.app.workflow.interfaces import ISharingPageRole
+from zope.component import getUtilitiesFor
+from plone.memoize.instance import memoize
 
+DEFAULT_ROLES = ['Owner', ]
 
 class ImportExportPermissionsView(BrowserView):
 
-    ROLES = ['Administrator', 'Anonymous', 'Authenticated', 'Contributor',
-                  'Editor', 'Manager', 'Member', 'Owner', 'Publisher',
-                  'Reader', 'Reviewer', ]
-    FIELDNAMES = ['Name', 'Userid', 'Title'] + ROLES + ['Path']
     READONLY = ('Name', 'Title', )
 
     def __call__(self, *args, **kwargs):
@@ -26,7 +26,19 @@ class ImportExportPermissionsView(BrowserView):
         else:
             self.recursive = True
             self.relative_paths = False
+            self.structure_only = False
         return super(ImportExportPermissionsView, self).__call__(*args, **kwargs)
+
+    @memoize
+    def get_roles(self):
+        roles = []
+        for name, utility in getUtilitiesFor(ISharingPageRole):
+            roles.append(name)
+        return roles + DEFAULT_ROLES
+
+    @memoize
+    def get_fieldnames(self):
+        return ['Name', 'Userid', 'Title'] + self.get_roles() + ['Path']
 
     def export(self):
         query = {}
@@ -40,12 +52,13 @@ class ImportExportPermissionsView(BrowserView):
             query['is_folderish'] = True
         objects = [b.getObject() for b in self.context.portal_catalog(**query)]
         self.file = StringIO.StringIO()
+        fieldnames = self.get_fieldnames()
         writer = csv.DictWriter(self.file,
-                                fieldnames=ImportExportPermissionsView.FIELDNAMES,
+                                fieldnames=fieldnames,
                                 dialect='excel_ger')
         labels = ['%s%s' % (l, l in ImportExportPermissionsView.READONLY and ' (RO)' or '')
-                  for l in ImportExportPermissionsView.FIELDNAMES]
-        writer.writerow(dict(zip(ImportExportPermissionsView.FIELDNAMES, labels)))
+                  for l in fieldnames]
+        writer.writerow(dict(zip(fieldnames, labels)))
         for obj in objects:
             self.export_object(writer, obj)
         self.file.seek(0)
@@ -69,7 +82,7 @@ class ImportExportPermissionsView(BrowserView):
                 'Path': path,
             }
             for role in roles:
-                if role in ImportExportPermissionsView.ROLES:
+                if role in self.get_roles():
                     row[role] = 'X'
             writer.writerow(row)
 
@@ -79,7 +92,7 @@ class ImportExportPermissionsView(BrowserView):
         data = StringIO.StringIO(data)
         dialect = csv.Sniffer().sniff(data.readline())
         data.seek(0)
-        reader = csv.DictReader(data, fieldnames=ImportExportPermissionsView.FIELDNAMES,
+        reader = csv.DictReader(data, fieldnames=self.get_fieldnames(),
                             dialect=dialect)
         titles = None
         rows_imported = 0
@@ -96,7 +109,6 @@ class ImportExportPermissionsView(BrowserView):
             type='info')
 
         self.context.reindexObjectSecurity()
-        #self.context.restrictedTraverse('@@update_security')()
 
     def setPermissions(self, row):
         try:
@@ -110,7 +122,7 @@ class ImportExportPermissionsView(BrowserView):
 
         user = row['Userid']
         roles = []
-        for role in ImportExportPermissionsView.ROLES:
+        for role in self.get_roles():
             if len(row[role])>0:
                 roles.append(role)
         if len(roles)>0:
