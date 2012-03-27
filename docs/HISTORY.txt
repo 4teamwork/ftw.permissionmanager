@@ -5,7 +5,8 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Translate defaults to english.
+  [mathias.leimgruber]
 
 
 1.4 (2012-03-26)

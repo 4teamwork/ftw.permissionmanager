@@ -12,23 +12,22 @@
     <div metal:define-macro="main">
 
         <h1 class="documentFirstHeading"
-            i18n:translate="title_copy_permissions">Berechtigungen kopieren</h1>
+            i18n:translate="title_copy_permissions">Copy permissions</h1>
         <a href=""
-           class="link-parent"
+           class="link-parent" i18n:translate="label_back_to_overview"
            tal:attributes="href string:${here/absolute_url}/@@permission_manager">
-            Zur&uuml;ck zur Berechtigungs-Verwaltung
+            Back to security
         </a>
 
-        <p class="documentDescription">
-            Berechtigungen eines Benutzers im ganzen Bereich auf einen
-            anderen Benutzer Ã¼bertragen.
+        <p class="documentDescription" i18n:translate="help_copy_permissions">
+            Copy all permissions of a user in this area
         </p>
 
         <br />
-        <b i18n:translate="label_search_user">1. Quellbenutzer suchen</b>
+        <b i18n:translate="label_search_user">1. Search source user</b>
         <tal:source_user_search_form condition="not:view/source_user">
             <p class="discreet" i18n:translate="help_search_user">
-                Benutzer suchen, von welchem die Berechtigungen kopiert werden sollen
+                Search user, to copy his permissions
             </p>
 
             <form method="post"
@@ -57,14 +56,14 @@
         </tal:source_user_search_form>
 
         <br />
-        <b i18n:translate="label_choose_source">2. Quellbenutzer ausw&auml;hlen</b>
+        <b i18n:translate="label_choose_source">2. Choose source user</b>
         <tal:source_user_results tal:condition="python:request.form.get('search_source_user_submitted', False)">
             <table class="listing">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Titel</th>
-                        <th>Typ</th>
+                        <th i18n:translate="label_id">ID</th>
+                        <th i18n:translate="label_title">Title</th>
+                        <th i18n:translate="label_typ">Typ</th>
                     </tr>
                 </thead>
                 <tal:result_list condition="view/search_source_user">
@@ -75,14 +74,17 @@
                                 <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${match/id}"
                                 tal:content="match/title"></a>
                             </td>
-                            <td tal:content="python:(match['type']=='user' and 'Benutzer') or (match['type']=='group' and 'Gruppe') or match['type']" />
+                            <td>
+                                <span tal:condition="python:match['type']=='user'" i18n:translate="label_user">User</span>
+                                <span tal:condition="python:match['type']=='group'" i18n:translate="label_group">Group</span>
+                            </td>
                         </tr>
                     </tbody>
                 </tal:result_list>
                 <tal:no_source_user_results tal:condition="python:request.form.get('search_source_user_submitted', False) and not view.search_source_user()">
                     <tbody>
                         <tr>
-                            <td colspan="3" i18n:translate="label_not_record_found">Keine Treffer gefunden.</td>
+                            <td colspan="3" i18n:translate="label_not_record_found">Nothing found</td>
                         </tr>
                     </tbody>
                 </tal:no_source_user_results>
@@ -90,7 +92,7 @@
         </tal:source_user_results>
         <tal:selected_source_user tal:condition="view/source_user">
             <div>
-                <i i18n:translate="label_choosen_user">Ausgew&auml;hlter Benutzer:</i>
+                <i i18n:translate="label_choosen_user">Chossen user</i>
                 <tal:userid content="view/source_user_title" />
                 (<tal:userid content="view/source_user" />)
             </div>
@@ -98,10 +100,10 @@
 
 
         <br />
-        <b i18n:translate="label_search_destination">3. Zielbenutzer suchen</b>
+        <b i18n:translate="label_search_destination">3. Search target user</b>
         <tal:target_user_search_form condition="python:view.source_user and not view.target_user">
             <p class="discreet" i18n:translate="help_search_destination">
-                Benutzer suchen, an welche die Berechtigungen &Uuml;bertragen werden sollen
+                Search user to assign the permissions
             </p>
 
             <form method="post"
@@ -131,14 +133,14 @@
         </tal:target_user_search_form>
 
         <br />
-        <b i18n:translate="label_chopse_destiantion">4. Zielbenutzer ausw&auml;len</b>
+        <b i18n:translate="label_chopse_destiantion">4. Choose target user</b>
         <tal:target_user_results tal:condition="python:request.form.get('search_target_user_submitted', False)">
             <table class="listing">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Titel</th>
-                        <th>Typ</th>
+                        <th i18n:translate="label_id">ID</th>
+                        <th i18n:translate="label_title">Title</th>
+                        <th i18n:translate="label_type">Type</th>
                     </tr>
                 </thead>
                 <tal:result_list condition="view/search_target_user">
@@ -156,41 +158,40 @@
                 <tal:no_target_user_results tal:condition="python:request.form.get('search_target_user_submitted', False) and not view.search_target_user()">
                     <tbody>
                         <tr>
-                            <td colspan="3"><i>Keine Treffer gefunden</i></td>
+                            <td colspan="3"><i i18n:translate="label_nothing_found">Nothing found</i></td>
                         </tr>
                     </tbody>
                 </tal:no_target_user_results>
             </table>
         </tal:target_user_results>
         <tal:selected_target_user tal:condition="view/target_user">
-            <div>
-                <i>Ausgew&auml;lter Benutzer:</i>
-                <tal:userid content="view/target_user_title" />
-                (<tal:userid content="view/target_user" />)
+            <div i18n:translate="label_shoosen_user">
+                <i>Choosen user:</i>
+                <tal:userid i18n:name="target_user_title" content="view/target_user_title" />
+                (<tal:userid i18n:name="target_user_name" content="view/target_user" />)
             </div>
         </tal:selected_target_user>
 
         <br />
-        <b i18n:translate="label_confirm">5. Best&auml;igen</b><br />
+        <p><b i18n:translate="label_confirm">5. Confirm</b></p>
         <tal:confirm tal:condition="python:view.source_user and view.target_user">
-            <div style="padding-left:1em;">
-                <span i18n:translate="">Sind Sie sicher, dass Sie vom Benutzer oder der Gruppe</span>
+            <div style="padding-left:1em;" i18n:translate="text_confirm">
+                Are you sure top copy the permissions of user
                 <div style="padding-left:1em;">
-                    <i tal:content="view/source_user_title"></i> (<tal:id replace="view/source_user" />)
+                    <i i18n:name="source_user_title" tal:content="view/source_user_title"></i> (<tal:id i18n:name="source_user_name" replace="view/source_user" />)
                 </div>
-                <b>alle Berechtigung</b> auf das Objekt &quot;<tal:replace replace="here/Title" />&quot;
-                und alle untergeordneten Objekte auf den Benutzer
+                on object &quot;<tal:replace i18n:name="object_title" replace="here/Title" />&quot;
+                and all sub objects, to
                 <div style="padding-left:1em;">
-                    <i tal:content="view/target_user_title"></i> (<tal:id replace="view/target_user" />)
+                    <i i18n:name="target_user_title" tal:content="view/target_user_title"></i> (<tal:id i18n:name="target_user_name" replace="view/target_user" />)
                 </div>
-                <b>&Uuml;bertragen</b> (kopieren) wollen?
             </div>
             <br />
             <p>
                 <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${view/source_user}&amp;target_user=${view/target_user}&amp;confirm=1"
-                    class="context" i18n:translate="label_yes">Ja, &Uuml;bertragen</a>
+                    class="context" i18n:translate="label_yes">Yes, assing</a>
                 <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions"
-                    class="standalone" i18n:translate="label_no">Nein, abbrechen</a>
+                    class="standalone" i18n:translate="label_no">No, abord</a>
             </p>
         </tal:confirm>
     </div>

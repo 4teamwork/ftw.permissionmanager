@@ -11,21 +11,21 @@
 
     <div metal:define-macro="main">
 
-        <h1 class="documentFirstHeading" i18n:translate="label_remove_permissions">Berechtigungen eines Benutzers entfernen</h1>
+        <h1 class="documentFirstHeading" i18n:translate="label_remove_permissions_heading">Remove user permissions</h1>
         <a href=""
            class="link-parent" i18n:translate="label_back_to_overview"
            tal:attributes="href string:${here/absolute_url}/@@permission_manager">
-            Zur&uuml;ck zur Berechtigungs-Verwaltung
+            Back to security
         </a>
 
         <p class="documentDescription" i18n:translate="text_remove_permissions">
-            Sie k&ouml;nnen die Berechtigungen eines Benutzers rekursiv entfernen.
+            You can remove the permissions of a user recursively
         </p>
 
         <br />
 
         <p i18n:translate="lable_search_user">
-            1. Benutzer suchen
+            1. Search user
         </p>
 
         <form method="post"
@@ -54,13 +54,13 @@
 
         <tal:search_results tal:condition="view/search">
             <div i18n:translate="label_choose_user">
-                2. Benutzer ausw&auml;len
+                2. Choose user
             </div>
             <table class="listing" tal:condition="view/search">
                 <thead>
                     <tr>
                         <th i18n:translate="label_id">ID</th>
-                        <th i18n:translate="label_title">Titel</th>
+                        <th i18n:translate="label_title">Title</th>
                         <th i18n:translate="label_typ">Typ</th>
                     </tr>
                 </thead>
@@ -71,7 +71,10 @@
                             <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user=${match/id}"
                             tal:content="match/title"></a>
                         </td>
-                        <td tal:content="python:(match['type']=='user' and 'Benutzer') or (match['type']=='group' and 'Gruppe') or match['type']" />
+                        <td>
+                            <span tal:condition="python:match['type']=='user'" i18n:translate="label_user">User</span>
+                            <span tal:condition="python:match['type']=='group'" i18n:translate="label_group">Group</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -79,21 +82,20 @@
 
         <tal:user_selected tal:condition="python:view.user_selected and not view.confirmed">
             <div i18n:translate="label_confirmation">
-                3. Best&auml;tigen
+                3. Confirm
             </div>
 
-            <p class="portalMessage error">
-                Sind Sie sicher, dass Sie dem Benutzer / der Gruppe
-                <i tal:content="view/getUserOrGroupTitle"></i>
-                (<tal:replace replace="view/user" />) <b>alle Berechtigungen</b>
-                auf das Objekt &quot;<tal:replace replace="here/Title" />&quot; und alle
-                untergeordneten Objekte <b>entfernen</b> wollen?
+            <p class="portalMessage error" i18n:translate="text_confirm_remove">
+                Are you sure to remove all permissions of
+                <i i18n:name="title" tal:content="view/getUserOrGroupTitle"></i>
+                (<tal:replace i18n:name="name" replace="view/user" />) on object &quot;<tal:replace i18n:name="object_title" replace="here/Title" />&quot;
+                 and all sub objects?
             </p>
             <p>
                 <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user=${view/user}&amp;confirmed=1"
-                    class="context" i18n:translate="label_yes_delete">Ja, Berechtigungen l&ouml;schen</a>
+                    class="context" i18n:translate="label_yes_delete">Yes, delete</a>
                 <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions"
-                    class="standalone" i18n:translate="label_no">Nein, abbrechen</a>
+                    class="standalone" i18n:translate="label_no">No, abord</a>
             </p>
         </tal:user_selected>
 
