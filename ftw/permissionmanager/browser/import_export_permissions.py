@@ -18,6 +18,7 @@ class ImportExportPermissionsView(BrowserView):
         # Export
         self.recursive = self.request.get('recursive') and True or False
         self.relative_paths = self.request.get('relative_paths') and True or False
+        self.structure_only = self.request.get('structure_only') and True or False
         if self.request.get('export'):
             return self.export()
         elif self.request.get('import'):
@@ -28,12 +29,16 @@ class ImportExportPermissionsView(BrowserView):
         return super(ImportExportPermissionsView, self).__call__(*args, **kwargs)
 
     def export(self):
+        query = {}
         path = {
             'query': '/'.join(self.context.getPhysicalPath()),
         }
         if not self.recursive:
             path['depth'] = 0
-        objects = [b.getObject() for b in self.context.portal_catalog({'path': path})]
+        query['path'] = path
+        if self.structure_only:
+            query['is_folderish'] = True
+        objects = [b.getObject() for b in self.context.portal_catalog(**query)]
         self.file = StringIO.StringIO()
         writer = csv.DictWriter(self.file,
                                 fieldnames=ImportExportPermissionsView.FIELDNAMES,

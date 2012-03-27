@@ -38,7 +38,12 @@
                 <label for="relative_paths" i18n:translate="label_export_relative">With relative path</label>
             </p>
 
-            <input type="submit" name="export" value="Exportieren" i18n:attributes="value" />
+            <p>
+                <input type="checkbox" name="structure_only" id="structure_only" tal:attributes="checked view/structure_only" />
+                <label for="structure_only" i18n:translate="label_export_structure_only">Nur Struktur exportieren</label>
+            </p>
+
+            <input type="submit" name="export" value="Export" i18n:attributes="value label_export" />
 
         </form>
 

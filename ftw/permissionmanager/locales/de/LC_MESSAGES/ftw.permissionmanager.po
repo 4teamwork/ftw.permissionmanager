@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-03-27 07:50+0000\n"
+"POT-Creation-Date: 2012-03-27 08:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:59
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:64
 msgid "Abord"
 msgstr "Abbrechen"
 
@@ -27,10 +27,6 @@ msgstr "Die Berechtigungen wurden kopiert"
 #: ./ftw/permissionmanager/browser/import_export_permissions.py:88
 msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgstr "Es wurden ${rows_imported} Berechtigungen gesetzt."
-
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:41
-msgid "Exportieren"
-msgstr "Exportieren"
 
 #: ./ftw/permissionmanager/profiles/default/actions.xml
 msgid "Manage permissions"
@@ -47,7 +43,7 @@ msgstr "Nach Benutzer/Gruppen suchen"
 
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:17
 msgid "Security table"
-msgstr ""
+msgstr "Zugriffstabelle"
 
 #. Default: "Search"
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:48
@@ -155,9 +151,14 @@ msgid "label_copy_permissions"
 msgstr "Berechtigungen kopieren"
 
 #. Default: "Permissions (CSV-File)"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:49
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:54
 msgid "label_csv_file"
 msgstr "Berechtigungen (CSV-Datei)"
+
+#. Default: "Export"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:46
+msgid "label_export"
+msgstr "Exportieren"
 
 #. Default: "Export/Import permissions"
 #: ./ftw/permissionmanager/browser/import_export_permissions.pt:14
@@ -179,6 +180,11 @@ msgstr "Berechtigungen rekursiv exportieren"
 msgid "label_export_relative"
 msgstr "Mit relativen Pfad ab aktuellem exportieren"
 
+#. Default: "Nur Struktur exportieren"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:43
+msgid "label_export_structure_only"
+msgstr "Nur Stuktur exportieren"
+
 #. Default: "Benutzer-Filter"
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:29
 msgid "label_filter"
@@ -197,7 +203,7 @@ msgid "label_id"
 msgstr "ID"
 
 #. Default: "Import"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:53
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:58
 msgid "label_import"
 msgstr "Importieren"
 
@@ -207,7 +213,7 @@ msgid "label_import_export_permissions"
 msgstr "Import / Export von Berechtigungen"
 
 #. Default: "Import permissions"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:45
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:50
 msgid "label_import_permissions"
 msgstr "Berechtigungen Importieren"
 

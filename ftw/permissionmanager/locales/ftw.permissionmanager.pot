@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-03-27 07:50+0000\n"
+"POT-Creation-Date: 2012-03-27 08:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ftw.permissionmanager\n"
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:59
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:64
 msgid "Abord"
 msgstr ""
 
@@ -31,10 +31,6 @@ msgstr ""
 
 #: ./ftw/permissionmanager/browser/import_export_permissions.py:88
 msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
-msgstr ""
-
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:41
-msgid "Exportieren"
 msgstr ""
 
 #: ./ftw/permissionmanager/profiles/default/actions.xml
@@ -160,8 +156,13 @@ msgid "label_copy_permissions"
 msgstr ""
 
 #. Default: "Permissions (CSV-File)"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:49
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:54
 msgid "label_csv_file"
+msgstr ""
+
+#. Default: "Export"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:46
+msgid "label_export"
 msgstr ""
 
 #. Default: "Export/Import permissions"
@@ -184,6 +185,11 @@ msgstr ""
 msgid "label_export_relative"
 msgstr ""
 
+#. Default: "Nur Struktur exportieren"
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:43
+msgid "label_export_structure_only"
+msgstr ""
+
 #. Default: "Benutzer-Filter"
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:29
 msgid "label_filter"
@@ -202,7 +208,7 @@ msgid "label_id"
 msgstr ""
 
 #. Default: "Import"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:53
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:58
 msgid "label_import"
 msgstr ""
 
@@ -212,7 +218,7 @@ msgid "label_import_export_permissions"
 msgstr ""
 
 #. Default: "Import permissions"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:45
+#: ./ftw/permissionmanager/browser/import_export_permissions.pt:50
 msgid "label_import_permissions"
 msgstr ""
 

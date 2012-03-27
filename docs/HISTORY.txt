@@ -5,6 +5,10 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
+- Added checkbox to choose if only folderish types will be exported
+  on export/import view.
+  [mathias.leimgruber]
+
 - Translate defaults to english.
   [mathias.leimgruber]
 
