@@ -83,7 +83,7 @@
                                           tal:content="role/title"  />
                                   </tr>
                                 <tr tal:condition="role_settings">
-                                      <td>&nbsp;</td>
+                                      <td i18n:translate="label_choose_all">choose all</td>
                                       <td tal:repeat="idx python:range(2, len(available_roles)+2)" class="listingCheckbox">
                                           <input type="checkbox" class="toggle_roles"
                                                   tal:attributes="onclick string:toggle_column(this, ${idx})"
@@ -175,7 +175,7 @@
                                       tal:content="role/title"/>
                               </tr>
                               <tr>
-                                  <td>&nbsp;</td>
+                                  <td i18n:translate="label_choose_all">choose all</td>
                                   <td tal:repeat="idx python:range(2, len(available_roles)+2)" class="listingCheckbox">
                                       <input type="checkbox" class="toggle_roles"
                                              tal:attributes="onclick string:toggle_column(this, ${idx})" />
