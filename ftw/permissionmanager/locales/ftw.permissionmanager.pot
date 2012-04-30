@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-03-27 08:02+0000\n"
+"POT-Creation-Date: 2012-04-30 07:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Die Berechtigungen wurden kopiert"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:88
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:106
 msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Manage permissions"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:101
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:118
 msgid "Objekt konnte nicht gefunden werden: ${path}"
 msgstr ""
 
@@ -113,6 +113,11 @@ msgstr ""
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:16
 #: ./ftw/permissionmanager/browser/import_export_permissions.pt:15
 msgid "label_back_to_overview"
+msgstr ""
+
+#. Default: "Back to the regular view"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:14
+msgid "label_back_to_view"
 msgstr ""
 
 #. Default: "2. Choose source user"

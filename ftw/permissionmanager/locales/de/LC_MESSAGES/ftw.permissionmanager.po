@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-03-27 08:02+0000\n"
+"POT-Creation-Date: 2012-04-30 07:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr "Die Berechtigungen wurden erfolgreich entfernt."
 msgid "Die Berechtigungen wurden kopiert"
 msgstr "Die Berechtigungen wurden kopiert"
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:88
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:106
 msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgstr "Es wurden ${rows_imported} Berechtigungen gesetzt."
 
@@ -32,7 +32,7 @@ msgstr "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgid "Manage permissions"
 msgstr "Sicherheit"
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:101
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:118
 msgid "Objekt konnte nicht gefunden werden: ${path}"
 msgstr "Objekt konnte nicht gefunden werden: ${path}"
 
@@ -109,6 +109,11 @@ msgstr "Zugriffstabelle"
 #: ./ftw/permissionmanager/browser/import_export_permissions.pt:15
 msgid "label_back_to_overview"
 msgstr "Zurück zu Sicherheit"
+
+#. Default: "Back to the regular view"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:14
+msgid "label_back_to_view"
+msgstr "Zurück zur normalen Ansicht"
 
 #. Default: "2. Choose source user"
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:59
@@ -225,7 +230,7 @@ msgstr "Vererbung von Berechtigungen"
 #. Default: "Security tools"
 #: ./ftw/permissionmanager/browser/permission_manager.pt:13
 msgid "label_manage_permission"
-msgstr "Sicherheits Werkzuge"
+msgstr "Sicherheitswerkzeuge"
 
 #. Default: "Name / Title"
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:83
