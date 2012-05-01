@@ -11,6 +11,9 @@ Changelog
 1.4.2 (2012-04-30)
 ------------------
 
+- Fix choose all function on sharing.pt
+  [mathias.leimgruber]
+
 - Fix german translations
   [mathias.leimgruber]
 

@@ -4,6 +4,30 @@
       i18n:domain="plone">
 
 <head>
+    <metal:javascriptslot fill-slot="javascript_head_slot">
+    <script type="text/javascript">
+        function toggle_column(box, column){
+            var checked = jq(box).attr('checked');
+            jq(box).closest('table').find('td:nth-child('+column+') input:enabled').attr('checked',checked);
+        }
+
+        jq(function(){
+            // Use live binding for ajax loaded content
+            var $author_links = jq('a.authorlink');
+            $author_links.live('click', function(e){
+                e.preventDefault();
+                $this = jq(this);
+                $this.prepOverlay({
+                    subtype:'ajax',
+                    urlmatch:'$',urlreplace:' .authorsInformation > *'
+                });
+                //trigger click event
+               $this.trigger('click');
+            });
+		});
+    </script>
+
+    </metal:javascriptslot>
 </head>
 
 <body>
@@ -83,7 +107,7 @@
                                           tal:content="role/title"  />
                                   </tr>
                                 <tr tal:condition="role_settings">
-                                      <td i18n:translate="label_choose_all">choose all</td>
+                                      <td i18n:domain="ftw.permissionmanager" i18n:translate="label_choose_all">choose all</td>
                                       <td tal:repeat="idx python:range(2, len(available_roles)+2)" class="listingCheckbox">
                                           <input type="checkbox" class="toggle_roles"
                                                   tal:attributes="onclick string:toggle_column(this, ${idx})"
@@ -175,7 +199,7 @@
                                       tal:content="role/title"/>
                               </tr>
                               <tr>
-                                  <td i18n:translate="label_choose_all">choose all</td>
+                                  <td i18n:domain="ftw.permissionmanager" i18n:translate="label_choose_all">choose all</td>
                                   <td tal:repeat="idx python:range(2, len(available_roles)+2)" class="listingCheckbox">
                                       <input type="checkbox" class="toggle_roles"
                                              tal:attributes="onclick string:toggle_column(this, ${idx})" />
