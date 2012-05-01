@@ -5,7 +5,8 @@ Changelog
 1.4.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Prepare Readme for public release
+  [mathias.leimgruber]
 
 
 1.4.3 (2012-05-01)
