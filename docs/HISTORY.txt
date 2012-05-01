@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.3 (unreleased)
+1.4.3 (2012-05-01)
 ------------------
 
 - Fix choose all function on sharing.pt
