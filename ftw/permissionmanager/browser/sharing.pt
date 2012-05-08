@@ -141,7 +141,7 @@
                                                tal:content="entry/title"
                                                class="authorlink"
                                                tal:omit-tag="is_group">
-                                                Member
+                                                <!-- Member -->
                                             </a>
                                             <input
                                                 tal:condition="not:disabled"
@@ -222,7 +222,7 @@
                                            tal:content="entry/title"
                                            class="authorlink"
                                            tal:omit-tag="is_group">
-                                            Member
+                                           <!-- Member -->
                                         </a>
 
                                         <input
@@ -241,8 +241,8 @@
                                     <td class="listingCheckbox"
                                         tal:repeat="role available_roles">
                                         <tal:block define="entry_role python:entry['roles'][role['id']]">
-                                            <img tal:condition="python:entry_role == 'global'" tal:replace="structure context/site_icon.gif">
-                                            <img tal:condition="python:entry_role == 'acquired'" tal:replace="structure context/confirm_icon.gif">
+                                            <img tal:condition="python:entry_role == 'global'" tal:replace="structure context/site_icon.gif" />
+                                            <img tal:condition="python:entry_role == 'acquired'" tal:replace="structure context/confirm_icon.gif" />
                                             <tal:block condition="python:entry_role in (True, False)">
                                                 <input class="noborder"
                                                     type="checkbox"

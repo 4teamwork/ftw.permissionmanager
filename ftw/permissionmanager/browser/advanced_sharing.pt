@@ -26,7 +26,7 @@
         </p>
 
         <tal:if tal:condition="view/user_selected">
-            <h2 i18n:translate="label_filter">Benutzer-Filter</h2>
+            <h2 i18n:translate="label_user_filter">User filter</h2>
             <p class="" i18n:translate="text_selected_user">
                 Show only permissions of the following user <b i18n:name="user" tal:content="view/user"></b>
             </p>
@@ -92,7 +92,7 @@
                         <td tal:content="item/name" />
                         <td tal:content="item/type" />
                         <td>
-                            <a class="context"
+                            <a class="context" i18n:translate="label_filter"
                                     tal:attributes="name string:user_${item/id};
                                                     href string:${here/absolute_url}/@@advanced-sharing?user=${item/id}">Filter</a>
                             <tal:permission condition="view/show_advanded_links">

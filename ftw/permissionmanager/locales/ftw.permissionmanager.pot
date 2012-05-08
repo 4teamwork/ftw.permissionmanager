@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-05-01 06:53+0000\n"
+"POT-Creation-Date: 2012-05-08 12:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,7 +121,7 @@ msgid "label_back_to_view"
 msgstr ""
 
 #. Default: "choose all"
-#: ./ftw/permissionmanager/browser/sharing.pt:86
+#: ./ftw/permissionmanager/browser/sharing.pt:110
 msgid "label_choose_all"
 msgstr ""
 
@@ -200,8 +200,8 @@ msgstr ""
 msgid "label_export_structure_only"
 msgstr ""
 
-#. Default: "Benutzer-Filter"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:29
+#. Default: "Filter"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:95
 msgid "label_filter"
 msgstr ""
 
@@ -333,6 +333,11 @@ msgstr ""
 msgid "label_user"
 msgstr ""
 
+#. Default: "User filter"
+#: ./ftw/permissionmanager/browser/advanced_sharing.pt:29
+msgid "label_user_filter"
+msgstr ""
+
 #. Default: "Username"
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:82
 msgid "label_username"
@@ -369,7 +374,7 @@ msgid "text_inheritance"
 msgstr ""
 
 #. Default: "Nothing found"
-#: ./ftw/permissionmanager/browser/sharing.pt:99
+#: ./ftw/permissionmanager/browser/sharing.pt:123
 msgid "text_nothing_found"
 msgstr ""
 
@@ -395,17 +400,17 @@ msgid "title_copy_permissions"
 msgstr ""
 
 #. Default: "Current permissions"
-#: ./ftw/permissionmanager/browser/sharing.pt:160
+#: ./ftw/permissionmanager/browser/sharing.pt:184
 msgid "title_current_permissions"
 msgstr ""
 
 #. Default: "New"
-#: ./ftw/permissionmanager/browser/sharing.pt:41
+#: ./ftw/permissionmanager/browser/sharing.pt:65
 msgid "title_new_permissions"
 msgstr ""
 
 #. Default: "Search result"
-#: ./ftw/permissionmanager/browser/sharing.pt:67
+#: ./ftw/permissionmanager/browser/sharing.pt:91
 msgid "title_search_results"
 msgstr ""
 

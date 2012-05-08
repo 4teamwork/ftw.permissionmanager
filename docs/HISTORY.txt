@@ -5,6 +5,9 @@ Changelog
 1.4.4 (unreleased)
 ------------------
 
+- Use new test buildout config and fix some translations.
+  [mathias.leimgruber]
+
 - Prepare Readme for public release
   [mathias.leimgruber]
 
