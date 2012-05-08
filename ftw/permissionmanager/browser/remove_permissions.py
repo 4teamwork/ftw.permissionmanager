@@ -9,6 +9,14 @@ class RemoveUserPermissionsView(SharingView):
 
     template = ViewPageTemplateFile('remove_user_permissions.pt')
 
+    def __init__(self, *args, **kwargs):
+        super(RemoveUserPermissionsView, self).__init__(*args, **kwargs)
+
+        self.search = None
+        self.user_selected = None
+        self.user = None
+        self.confirmed = None
+
     def __call__(self, *args, **kwargs):
         self.request.set('disable_border', True)
         form = self.request.form
@@ -30,7 +38,8 @@ class RemoveUserPermissionsView(SharingView):
         if not search_term:
             return []
         results = []
-        hunter = getMultiAdapter((self.context, self.request), name='pas_search')
+        hunter = getMultiAdapter((self.context, self.request),
+                                 name='pas_search')
         # users
         users = hunter.searchUsers(fullname=search_term) + \
             hunter.searchUsers(id=search_term)
@@ -38,7 +47,8 @@ class RemoveUserPermissionsView(SharingView):
             userid = userinfo['userid']
             user = self.context.acl_users.getUserById(userid)
             results.append(dict(id = userid,
-                             title = user.getProperty('fullname') or user.getId() or userid,
+                             title = user.getProperty(
+                                 'fullname') or user.getId() or userid,
                              type = 'user'))
         # groups
         for groupinfo in hunter.searchGroups(id=search_term):
@@ -61,7 +71,8 @@ class RemoveUserPermissionsView(SharingView):
         return ''
 
     def removePermissions(self):
-        brains = self.context.portal_catalog(path='/'.join(self.context.getPhysicalPath()))
+        brains = self.context.portal_catalog(
+            path='/'.join(self.context.getPhysicalPath()))
         for brain in brains:
             if self.user in dict(brain.get_local_roles).keys():
                 obj = brain.getObject()

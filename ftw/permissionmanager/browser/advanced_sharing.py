@@ -8,13 +8,19 @@ from plone.memoize.instance import memoize
 
 class AdvancedSharingView(BrowserView):
 
+    def __init__(self, *args, **kwargs):
+        super(AdvancedSharingView, self).__init__(*args, **kwargs)
+
+        self.user_selected = None
+        self.user = None
+        registry = getUtility(IRegistry)
+        self.types = registry['ftw.permissionmanager.manage_types']
+
     def __call__(self, *args, **kwargs):
         self.request.set('disable_border', True)
         form = self.request.form
         self.user_selected = form.get('user', False) and True
         self.user = form.get('user', False)
-        registry = getUtility(IRegistry)
-        self.types = registry['ftw.permissionmanager.manage_types']
         return super(AdvancedSharingView, self).__call__(*args, **kwargs)
 
     @memoize
@@ -46,11 +52,11 @@ class AdvancedSharingView(BrowserView):
                 'depth': 0,
             },
         })[0]
-        items, index = self.brainsToItems([rootBrain])
+        items, _index = self.brainsToItems([rootBrain])
         return items
 
     def brainsToItems(self, brains, index=0):
-        if index>0:
+        if index > 0:
             cssClass = 'child-of-node-%i' % index
         else:
             cssClass = 'expanded'
@@ -75,7 +81,7 @@ class AdvancedSharingView(BrowserView):
                 item[role] = []
             if brain.get_local_roles:
                 for user, roles in brain.get_local_roles:
-                    if not self.user_selected or user==self.user:
+                    if not self.user_selected or user == self.user:
                         for role in roles:
                             if role in item:
                                 item[role].append(user)
@@ -117,32 +123,32 @@ class AdvancedSharingView(BrowserView):
         userGroupList.sort(lambda a, b: cmp(a['id'], b['id']))
         return userGroupList
 
-    def _getUserOrGroupItem(self, id):
-        item = self._getUserItem(id)
+    def _getUserOrGroupItem(self, id_):
+        item = self._getUserItem(id_)
         if item:
             return item
-        item = self._getGroupItem(id)
+        item = self._getGroupItem(id_)
         if item:
             return item
         return None
 
-    def _getUserItem(self, id):
-        user = self.context.acl_users.getUserById(id)
+    def _getUserItem(self, id_):
+        user = self.context.acl_users.getUserById(id_)
         if not user:
             return None
         item = {
-                'id': id,
+                'id': id_,
                 'name': user.getProperty('fullname'),
                 'type': 'Benutzer',
         }
         return item
 
-    def _getGroupItem(self, id):
-        group = self.context.portal_groups.getGroupById(id)
+    def _getGroupItem(self, id_):
+        group = self.context.portal_groups.getGroupById(id_)
         if not group:
             return None
         item = {
-                'id': id,
+                'id': id_,
                 'name': group.getGroupTitleOrName(),
                 'type': 'Gruppe',
         }

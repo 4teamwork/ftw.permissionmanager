@@ -6,6 +6,13 @@ from ftw.permissionmanager import permission_manager_factory as _
 
 class CopyUserPermissionsView(BrowserView):
 
+    def __init__(self, *args, **kwargs):
+        super(CopyUserPermissionsView, self).__init__(*args, **kwargs)
+
+        self.source_user = None
+        self.target_user = None
+        self.confirm = None
+
     def __call__(self, *args, **kwargs):
         self.request.set('disable_border', True)
         form = self.request.form
@@ -28,7 +35,8 @@ class CopyUserPermissionsView(BrowserView):
         if not search_term:
             return []
         results = []
-        hunter = getMultiAdapter((self.context, self.request), name='pas_search')
+        hunter = getMultiAdapter((self.context, self.request),
+                                  name='pas_search')
         # users
         users = hunter.searchUsers(fullname=search_term) + \
             hunter.searchUsers(id=search_term)
@@ -36,7 +44,8 @@ class CopyUserPermissionsView(BrowserView):
             userid = userinfo['userid']
             user = self.context.acl_users.getUserById(userid)
             results.append(dict(id = userid,
-                             title = user.getProperty('fullname') or user.getId() or userid,
+                             title = user.getProperty(
+                                'fullname') or user.getId() or userid,
                              type = 'user'))
         # groups
         for groupinfo in hunter.searchGroups(id=search_term):
@@ -65,11 +74,12 @@ class CopyUserPermissionsView(BrowserView):
         return ''
 
     def copy_permissions(self):
-        brains = self.context.portal_catalog(path='/'.join(self.context.getPhysicalPath()))
+        brains = self.context.portal_catalog(
+            path='/'.join(self.context.getPhysicalPath()))
         for brain in brains:
             for user, roles in dict(brain.get_local_roles).items():
                 obj = brain.getObject()
-                if user==self.source_user:
+                if user == self.source_user:
                     obj.manage_setLocalRoles(self.target_user, roles)
         IStatusMessage(self.request).addStatusMessage(
             _(u'Die Berechtigungen wurden kopiert'), type='info')

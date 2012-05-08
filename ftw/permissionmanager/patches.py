@@ -25,7 +25,7 @@ def egov_reindexObjectSecurity(self, skip_self=False):
                 continue
 
             # Get the object
-            if hasattr(aq_base  (brain), '_unrestrictedGetObject'):
+            if hasattr(aq_base(brain), '_unrestrictedGetObject'):
                 ob = brain._unrestrictedGetObject()
             else:
                 # BBB: Zope 2.7
@@ -37,8 +37,6 @@ def egov_reindexObjectSecurity(self, skip_self=False):
                 log("reindexObjectSecurity: Cannot get %s from catalog" %
                     brain_path, level=WARNING)
                 continue
-
-
             # Also append our new index
             indexes = list(self._cmf_security_indexes)
             indexes.append('get_local_roles')

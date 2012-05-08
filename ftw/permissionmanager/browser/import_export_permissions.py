@@ -9,16 +9,24 @@ from plone.memoize.instance import memoize
 
 DEFAULT_ROLES = ['Owner', ]
 
+
 class ImportExportPermissionsView(BrowserView):
 
     READONLY = ('Name', 'Title', )
 
+
+    def __init__(self, *args, **kwargs):
+        super(ImportExportPermissionsView, self).__init__(*args, **kwargs)
+        self.recursive = None
+        self.relative_paths = None
+        self.structure_only = None
+
     def __call__(self, *args, **kwargs):
         self.request.set('disable_border', True)
         # Export
-        self.recursive = self.request.get('recursive') and True or False
-        self.relative_paths = self.request.get('relative_paths') and True or False
-        self.structure_only = self.request.get('structure_only') and True or False
+        self.recursive = self.request.get('recursive') and True
+        self.relative_paths = self.request.get('relative_paths') and True
+        self.structure_only = self.request.get('structure_only') and True
         if self.request.get('export'):
             return self.export()
         elif self.request.get('import'):
@@ -27,12 +35,13 @@ class ImportExportPermissionsView(BrowserView):
             self.recursive = True
             self.relative_paths = False
             self.structure_only = False
-        return super(ImportExportPermissionsView, self).__call__(*args, **kwargs)
+        return super(ImportExportPermissionsView, self).__call__(
+            *args, **kwargs)
 
     @memoize
     def get_roles(self):
         roles = []
-        for name, utility in getUtilitiesFor(ISharingPageRole):
+        for name, _utility in getUtilitiesFor(ISharingPageRole):
             roles.append(name)
         return roles + DEFAULT_ROLES
 
@@ -51,22 +60,29 @@ class ImportExportPermissionsView(BrowserView):
         if self.structure_only:
             query['is_folderish'] = True
         objects = [b.getObject() for b in self.context.portal_catalog(**query)]
-        self.file = StringIO.StringIO()
+        file_ = StringIO.StringIO()
         fieldnames = self.get_fieldnames()
-        writer = csv.DictWriter(self.file,
+        writer = csv.DictWriter(file_,
                                 fieldnames=fieldnames,
                                 dialect='excel_ger')
-        labels = ['%s%s' % (l, l in ImportExportPermissionsView.READONLY and ' (RO)' or '')
-                  for l in fieldnames]
+
+        labels = []
+        for name in fieldnames:
+            if name in ImportExportPermissionsView.READONLY:
+                name += ' (RO)'
+            labels.append(name)
+
         writer.writerow(dict(zip(fieldnames, labels)))
         for obj in objects:
             self.export_object(writer, obj)
-        self.file.seek(0)
-        data = self.file.read()
+        file_.seek(0)
+        data = file_.read()
         #
-        self.request.RESPONSE.setHeader('Content-Type', 'text/csv; charset=utf-8')
+        self.request.RESPONSE.setHeader(
+            'Content-Type', 'text/csv; charset=utf-8')
         filename = '%s-permissions.csv' % self.context.id
-        self.request.RESPONSE.setHeader('Content-disposition', 'attachment; filename=%s' % filename)
+        self.request.RESPONSE.setHeader(
+            'Content-disposition', 'attachment; filename=%s' % filename)
         return data
 
     def export_object(self, writer, obj):
@@ -113,7 +129,7 @@ class ImportExportPermissionsView(BrowserView):
     def setPermissions(self, row):
         try:
             obj = self.getObjectByPath(row)
-        except:
+        except AttributeError:
             IStatusMessage(self.request).addStatusMessage(
                 _(
                     u'Objekt konnte nicht gefunden werden: ${path}',

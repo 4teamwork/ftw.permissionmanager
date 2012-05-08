@@ -81,7 +81,6 @@ class SharingView(base):
             if index is not None:
                 requested.pop(index)
 
-
         if requested is not None:
             knownroles = [r['id'] for r in self.roles()]
             settings = {}
@@ -167,7 +166,7 @@ class SharingView(base):
         for name, utility in getUtilitiesFor(ISharingPageRole):
             if not has_manage_portal and name not in aviable_roles_for_users:
                 continue
-            pairs.append(dict(id = name, title = utility.title))
+            pairs.append(dict(id=name, title=utility.title))
 
         pairs.sort(key=lambda x: x["id"])
         return pairs
