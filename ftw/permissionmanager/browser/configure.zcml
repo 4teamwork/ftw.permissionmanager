@@ -4,6 +4,7 @@
     xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="ftw.permissionmanager">
 
+    <include package="Products.CMFPlone" />
 
     <!-- Resource directory -->
     <browser:resourceDirectory
