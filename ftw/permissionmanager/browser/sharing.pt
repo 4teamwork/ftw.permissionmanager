@@ -143,6 +143,7 @@
                                                tal:omit-tag="is_group">
                                                 <!-- Member -->
                                             </a>
+                                            <span tal:replace="string:(${entry/id})"><!-- id --></span>
                                             <input
                                                 tal:condition="not:disabled"
                                                 type="hidden"
@@ -224,7 +225,7 @@
                                            tal:omit-tag="is_group">
                                            <!-- Member -->
                                         </a>
-
+                                        <span tal:replace="string:(${entry/id})"><!-- id --></span>
                                         <input
                                             tal:condition="not:disabled"
                                             type="hidden"
