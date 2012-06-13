@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.5 (unreleased)
+1.4.5 (2012-06-13)
 ------------------
 
 - Show User-ID in local roles listing and search form.
