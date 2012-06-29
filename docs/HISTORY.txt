@@ -5,7 +5,8 @@ Changelog
 1.4.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Encode User/Group ID with utf-8 to prevent unicodeerrors
+  [tschanzt]
 
 
 1.4.5 (2012-06-13)

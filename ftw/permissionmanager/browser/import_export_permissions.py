@@ -92,8 +92,8 @@ class ImportExportPermissionsView(BrowserView):
             path = '...%s' % path[len(contextPath):]
         for user, roles in obj.get_local_roles():
             row = {
-                'Name': user,
-                'Userid': user,
+                'Name': user.encode('utf-8'),
+                'Userid': user.encode('utf-8'),
                 'Title': obj.Title(),
                 'Path': path,
             }
