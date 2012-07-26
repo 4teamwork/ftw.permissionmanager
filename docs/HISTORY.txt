@@ -5,6 +5,10 @@ Changelog
 1.4.6 (unreleased)
 ------------------
 
+- Sharing view: move visible roles configuration to a seperate method
+  for making it easier to customize it.
+  [jone]
+
 - Encode User/Group ID with utf-8 to prevent unicodeerrors
   [tschanzt]
 

@@ -144,6 +144,14 @@ class SharingView(base):
 
         return current_settings
 
+    def get_visible_roles(self):
+        # XXX move to configuration
+        return [
+            u'Editor',
+            u'Reader',
+            u'Contributor',
+            u'Administrator']
+
     def roles(self):
         """Get a list of roles that can be managed.
 
@@ -158,11 +166,7 @@ class SharingView(base):
         has_manage_portal = context.portal_membership.checkPermission(
             'ManagePortal',
             context)
-        aviable_roles_for_users = [
-            u'Editor',
-            u'Reader',
-            u'Contributor',
-            u'Administrator']
+        aviable_roles_for_users = self.get_visible_roles()
         for name, utility in getUtilitiesFor(ISharingPageRole):
             if not has_manage_portal and name not in aviable_roles_for_users:
                 continue
