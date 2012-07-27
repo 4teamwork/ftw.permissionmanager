@@ -161,15 +161,22 @@ class SharingView(base):
             - title
         """
         context = aq_inner(self.context)
+        portal_membership = getToolByName(context, 'portal_membership')
 
         pairs = []
-        has_manage_portal = context.portal_membership.checkPermission(
+        has_manage_portal = portal_membership.checkPermission(
             'ManagePortal',
             context)
         aviable_roles_for_users = self.get_visible_roles()
         for name, utility in getUtilitiesFor(ISharingPageRole):
             if not has_manage_portal and name not in aviable_roles_for_users:
                 continue
+
+            permission = utility.required_permission
+            if permission and not portal_membership.checkPermission(
+                permission, context):
+                continue
+
             pairs.append(dict(id=name, title=utility.title))
 
         pairs.sort(key=lambda x: x["id"])

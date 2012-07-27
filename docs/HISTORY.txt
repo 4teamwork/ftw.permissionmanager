@@ -5,6 +5,9 @@ Changelog
 1.4.6 (unreleased)
 ------------------
 
+- Sharing view: do not list roles for which the user has no delegate permission.
+  [jone]
+
 - Sharing view: move visible roles configuration to a seperate method
   for making it easier to customize it.
   [jone]
