@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.6 (unreleased)
+1.4.6 (2012-07-30)
 ------------------
 
 - Sharing view: do not list roles for which the user has no delegate permission.
