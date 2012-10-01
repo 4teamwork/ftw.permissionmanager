@@ -153,7 +153,7 @@ msgstr "3. Bestätigen"
 #. Default: "Copy permissions"
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:101
 msgid "label_copy_permission"
-msgstr "Berectigungen kopieren"
+msgstr "Berechtigungen kopieren"
 
 #. Default: "Berechtigungen kopieren"
 #: ./ftw/permissionmanager/browser/permission_manager.pt:40
@@ -408,5 +408,3 @@ msgstr "Neue Freigaben"
 #: ./ftw/permissionmanager/browser/sharing.pt:91
 msgid "title_search_results"
 msgstr "Suchresultat"
-
-
