@@ -41,7 +41,7 @@
                 onclick="jq('#permissionListingTable').find('tr.collapsed, tr.parent').show().expand()"/>
         <br/>
         <br/>
-        <table class="listing" id="permissionListingTable">
+        <table class="listing nosort" id="permissionListingTable">
             <thead>
                 <tr>
                     <th i18n:translate="label_object">Object</th>
@@ -76,7 +76,7 @@
         <p i18n:translate="text_user">
             Lists all user, which appears in the table above.
         </p>
-        <table class="listing">
+        <table class="listing nosort">
             <thead>
                 <tr>
                     <th i18n:translate="label_username">Username</th>
