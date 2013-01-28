@@ -18,6 +18,8 @@ class AdvancedSharingView(BrowserView):
 
     def __call__(self, *args, **kwargs):
         self.request.set('disable_border', True)
+        self.request.set('disable_plone.rightcolumn', True)
+        self.request.set('disable_plone.leftcolumn', True)
         form = self.request.form
         self.user_selected = form.get('user', False) and True
         self.user = form.get('user', False)

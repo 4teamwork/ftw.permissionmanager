@@ -5,6 +5,9 @@ Changelog
 1.4.8 (unreleased)
 ------------------
 
+- Advanced sharing: disable right and left column in order to gain space.
+  [jone]
+
 - Advanced sharing: make table not sortable (it's a tree).
   [jone]
 
