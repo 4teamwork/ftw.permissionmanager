@@ -16,7 +16,38 @@ Provides several new permission / role management views:
 - A better sharing view:
 
   - Search for users.
-  - Temporary stores your selection over multiple search operations.
+- Temporary stores your selection over multiple search operations.
+
+
+Usage
+-----
+
+- Add ``ftw.permissionmanager`` to your buildout configuration:
+
+::
+
+    [instance]
+    eggs +=
+        ftw.permissionmanager
+
+- Install the generic import profile.
+
+- Configure the types that should be visible in the recursive sharing view by setting it in the registry.
+  You can do this configuring it in ``portal_registry`` or by adding a ``registry.xml`` to your
+  generic setup profile::
+
+    <registry>
+
+        <record name="ftw.permissionmanager.manage_types">
+            <value>
+                <element>Folder</element>
+                <element>Document</element>
+            </value>
+        </record>
+
+    </registry>
+
+
 
 Links
 =====
