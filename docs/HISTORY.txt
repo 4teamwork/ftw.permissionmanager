@@ -5,6 +5,9 @@ Changelog
 1.4.8 (unreleased)
 ------------------
 
+- Prevent duplicated userids.
+  [mathias.leimgruber]
+
 - Advanced sharing: disable right and left column in order to gain space.
   [jone]
 
