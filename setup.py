@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.4.8.dev0'
+version = '2.0.dev0'
 maintainer = 'Mathias Leimgruber'
 
 tests_require = ['plone.app.testing', ]
@@ -17,8 +17,6 @@ setup(name='ftw.permissionmanager',
 
       classifiers=[
         'Framework :: Plone',
-        'Framework :: Plone :: 4.1',
-        'Framework :: Plone :: 4.2',
         'Framework :: Plone :: 4.3',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
@@ -39,6 +37,7 @@ setup(name='ftw.permissionmanager',
       install_requires=[
         'setuptools',
         'collective.monkeypatcher',
+        'Products.CMFPlone >= 4.3b'
         # -*- Extra requirements: -*-
         ],
       tests_require=tests_require,

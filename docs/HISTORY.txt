@@ -2,8 +2,14 @@ Changelog
 =========
 
 
-1.4.8 (unreleased)
-------------------
+2.0 (unreleased)
+----------------
+
+- Drop KSS for custom sharing view.
+  [jone]
+
+- Drop compatibility for Plone <= 4.2.
+  [jone]
 
 - Prevent duplicated userids.
   [mathias.leimgruber]

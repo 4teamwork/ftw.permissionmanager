@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ftw.permissionmanager">
 
     <include package="Products.CMFPlone" />
@@ -19,16 +20,6 @@
             class=".sharing.SharingView"
             permission="plone.DelegateRoles"
             />
-
-    <browser:page
-            for="*"
-            class=".kss_sharing.KSSSharingView"
-            name="updateSharingInfo"
-            attribute="updateSharingInfo"
-            permission="plone.DelegateRoles"
-            layer="ftw.permissionmanager.interfaces.IFtwPermissioneManager"
-        />
-
 
     <browser:page
             name="permission_manager"
