@@ -1,6 +1,7 @@
 from Acquisition import aq_inner
 from plone.app.workflow.browser.sharing import SharingView as base
 from plone.app.workflow.interfaces import ISharingPageRole
+from plone.memoize.instance import memoize
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode, getSiteEncoding
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -144,14 +145,10 @@ class SharingView(base):
 
         return current_settings
 
-    def get_visible_roles(self):
-        # XXX move to configuration
-        return [
-            u'Editor',
-            u'Reader',
-            u'Contributor',
-            u'Administrator']
-
+    # Basically the same implementation as in p.a.workflow but we sort roles
+    # by id instead of the translated title to have the same order for all
+    # languages.
+    @memoize
     def roles(self):
         """Get a list of roles that can be managed.
 
@@ -160,24 +157,16 @@ class SharingView(base):
             - id
             - title
         """
-        context = aq_inner(self.context)
+        context = self.context
         portal_membership = getToolByName(context, 'portal_membership')
 
         pairs = []
-        has_manage_portal = portal_membership.checkPermission(
-            'ManagePortal',
-            context)
-        aviable_roles_for_users = self.get_visible_roles()
+
         for name, utility in getUtilitiesFor(ISharingPageRole):
-            if not has_manage_portal and name not in aviable_roles_for_users:
-                continue
-
             permission = utility.required_permission
-            if permission and not portal_membership.checkPermission(
-                permission, context):
-                continue
-
-            pairs.append(dict(id=name, title=utility.title))
+            if permission is None or portal_membership.checkPermission(
+              permission, context):
+                pairs.append(dict(id=name, title=utility.title))
 
         pairs.sort(key=lambda x: x["id"])
         return pairs

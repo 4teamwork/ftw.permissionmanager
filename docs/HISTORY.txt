@@ -5,6 +5,10 @@ Changelog
 1.4.8 (unreleased)
 ------------------
 
+- Sharing view: No longer limit visible roles. Visibility of roles is
+  determined by delegate permissions.
+  [buchi]
+ 
 - Prevent duplicated userids.
   [mathias.leimgruber]
 
