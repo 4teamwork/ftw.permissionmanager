@@ -27,6 +27,7 @@ class ImportExportPermissionsView(BrowserView):
         self.recursive = self.request.get('recursive') and True
         self.relative_paths = self.request.get('relative_paths') and True
         self.structure_only = self.request.get('structure_only') and True
+        self.encoding = self.request.get('select_encoding')
         if self.request.get('export'):
             return self.export()
         elif self.request.get('import'):
@@ -79,7 +80,7 @@ class ImportExportPermissionsView(BrowserView):
         data = file_.read()
         #
         self.request.RESPONSE.setHeader(
-            'Content-Type', 'text/csv; charset=utf-8')
+            'Content-Type', 'text/csv; charset=%s' % self.encoding)
         filename = '%s-permissions.csv' % self.context.id
         self.request.RESPONSE.setHeader(
             'Content-disposition', 'attachment; filename=%s' % filename)
@@ -92,9 +93,9 @@ class ImportExportPermissionsView(BrowserView):
             path = '...%s' % path[len(contextPath):]
         for user, roles in obj.get_local_roles():
             row = {
-                'Name': user.encode('utf-8'),
-                'Userid': user.encode('utf-8'),
-                'Title': obj.Title(),
+                'Name': user.encode(self.encoding),
+                'Userid': user.encode(self.encoding),
+                'Title': obj.Title().decode('utf-8').encode(self.encoding),
                 'Path': path,
             }
             for role in roles:
@@ -136,7 +137,7 @@ class ImportExportPermissionsView(BrowserView):
                     mapping=dict(path=row['Path'])),
                 type='error')
 
-        user = row['Userid']
+        user = row['Userid'].decode(self.encoding)
         roles = []
         for role in self.get_roles():
             if len(row[role])>0:
@@ -148,7 +149,7 @@ class ImportExportPermissionsView(BrowserView):
         return True
 
     def getObjectByPath(self, row):
-        path = row['Path']
+        path = row['Path'].decode(self.encoding)
         if path.startswith('...'):
             # relative paths
             path = path[len('.../'):]

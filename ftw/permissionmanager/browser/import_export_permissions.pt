@@ -42,6 +42,13 @@
                 <input type="checkbox" name="structure_only" id="structure_only" tal:attributes="checked view/structure_only" />
                 <label for="structure_only" i18n:translate="label_export_structure_only">Nur Struktur exportieren</label>
             </p>
+            <p>
+              <select name="select_encoding">
+              <option value="utf-8">Openoffice(UTF-8)</option>
+              <option value="latin1">Windows/ MS Office for Mac 2011(Latin-1)</option>
+              <option value="MacRoman">MS Office for Mac 2008(MacRoman)</option>
+              </select>
+            </p>
 
             <input type="submit" name="export" value="Export" i18n:attributes="value label_export" />
 
@@ -55,6 +62,14 @@
                 <input type="file" name="file" id="file" />
             </p>
 
+            <p>
+              <select name="select_encoding">
+              <option value="utf-8">Openoffice(UTF-8)</option>
+              <option value="latin1">Windows/ MS Office for Mac 2011(Latin-1)</option>
+              <option value="MacRoman">MS Office for Mac 2008(MacRoman)</option>
+              </select>
+            </p>
+
             <input type="submit" name="import" value="Import" i18n:attributes="value label_import" />
 
         </form>
@@ -63,7 +78,7 @@
 
         <a href=""
                 tal:attributes="href string:${here/absolute_url}/@@permission_manager"
-                class="standalone" i18n:translate="">Abord</a>
+                class="standalone" i18n:translate="">Abort</a>
 
     </div>
 
