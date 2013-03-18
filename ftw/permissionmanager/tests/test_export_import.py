@@ -178,12 +178,53 @@ class TestCopyPermissions(unittest.TestCase):
         portal = self.layer['portal']
         # set up request
         request = portal.folder1.REQUEST
-
+        request.set('select_encoding', 'utf-8')
         view = getMultiAdapter(
             (portal.folder1, request),
             name="import_export_permissions")
         view()
         data = view.export()
+        head = data.split('\r\n')[0].split(';')
+        # Change permission - set TEST_USER_ID_2 as Owner of folder2 and
+        # docuement1
+        new_records = []
+        for line in data.split('\r\n')[1:-1]:
+            record = line.split(';')
+            if record[1] == TEST_USER_ID_2:
+                index = head.index('Owner')
+                new_record = record
+                new_record.pop(index)
+                new_record.insert(index, 'X')
+                new_records.append(';'.join(new_record))
+        data += '\r\n'.join(new_records)
+
+        # Prepare import
+        request.set('import', '1')
+        request.set('file', StringIO.StringIO(data))
+        request.set('select_encoding', 'utf-8')
+        view = getMultiAdapter(
+            (portal.folder1, request),
+            name="import_export_permissions")
+        view()
+        self.assertIn(
+            'Owner',
+            portal.folder1.folder2.get_local_roles_for_userid(TEST_USER_ID_2))
+        self.assertIn(
+            'Owner',
+            portal.folder1.folder2.document1.get_local_roles_for_userid(TEST_USER_ID_2))
+
+    def test_import_permissions_not_existing_path(self):
+        # First do a export
+        portal = self.layer['portal']
+        # set up request
+        request = portal.folder1.REQUEST
+        request.set('select_encoding', 'utf-8')
+        view = getMultiAdapter(
+            (portal.folder1, request),
+            name="import_export_permissions")
+        view()
+        data = view.export()
+        data += 'test_user_1_;test_user_1_;Document 1;;;;;X;/plone/folder111/folder222/document111\r\n'
         head = data.split('\r\n')[0].split(';')
         # Change permission - set TEST_USER_ID_2 as Owner of folder2 and
         # docuement1

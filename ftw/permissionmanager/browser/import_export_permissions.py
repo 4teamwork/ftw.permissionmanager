@@ -130,12 +130,13 @@ class ImportExportPermissionsView(BrowserView):
     def setPermissions(self, row):
         try:
             obj = self.getObjectByPath(row)
-        except AttributeError:
+        except (AttributeError, KeyError):
             IStatusMessage(self.request).addStatusMessage(
                 _(
                     u'Objekt konnte nicht gefunden werden: ${path}',
                     mapping=dict(path=row['Path'])),
                 type='error')
+            return
 
         user = row['Userid'].decode(self.encoding)
         roles = []
