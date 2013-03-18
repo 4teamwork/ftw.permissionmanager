@@ -56,6 +56,7 @@ class TestCopyPermissions(unittest.TestCase):
         request.set('recursive', '1')
         request.set('relative_paths', '')
         request.set('structure_only', '')
+        request.set('select_encoding', 'utf-8')
 
         view = getMultiAdapter(
             (portal.folder1, request),
@@ -84,6 +85,7 @@ class TestCopyPermissions(unittest.TestCase):
         request.set('recursive', '1')
         request.set('relative_paths', '')
         request.set('structure_only', '')
+        request.set('select_encoding', 'utf-8')
 
         view = getMultiAdapter(
             (portal.folder1, request),
@@ -122,6 +124,7 @@ class TestCopyPermissions(unittest.TestCase):
         request.set('recursive', '1')
         request.set('relative_paths', '')
         request.set('structure_only', '1')
+        request.set('select_encoding', 'utf-8')
 
         view = getMultiAdapter(
             (portal.folder1, request),
@@ -141,6 +144,7 @@ class TestCopyPermissions(unittest.TestCase):
         request.set('recursive', '1')
         request.set('relative_paths', '1')
         request.set('structure_only', '')
+        request.set('select_encoding', 'utf-8')
 
         view = getMultiAdapter(
             (portal.folder1, request),
@@ -159,7 +163,7 @@ class TestCopyPermissions(unittest.TestCase):
         request.set('recursive', '')
         request.set('relative_paths', '')
         request.set('structure_only', '')
-
+        request.set('select_encoding', 'utf-8')
         view = getMultiAdapter(
             (portal.folder1, request),
             name="import_export_permissions")
@@ -197,6 +201,7 @@ class TestCopyPermissions(unittest.TestCase):
         # Prepare import
         request.set('import', '1')
         request.set('file', StringIO.StringIO(data))
+        request.set('select_encoding', 'utf-8')
         view = getMultiAdapter(
             (portal.folder1, request),
             name="import_export_permissions")
@@ -207,3 +212,24 @@ class TestCopyPermissions(unittest.TestCase):
         self.assertIn(
             'Owner',
             portal.folder1.folder2.document1.get_local_roles_for_userid(TEST_USER_ID_2))
+
+    def test_export_changeencoding(self):
+        portal = self.layer['portal']
+        # set up request
+        request = portal.folder1.REQUEST
+        request.set('export', '1')
+        request.set('recursive', '1')
+        request.set('relative_paths', '1')
+        request.set('structure_only', '')
+        request.set('select_encoding', 'latin1')
+
+        view = getMultiAdapter(
+            (portal.folder1, request),
+            name="import_export_permissions")
+        view()
+        view.export()
+        self.assertEqual(view.request.RESPONSE.getHeader('Content-Type'), 'text/csv; charset=latin1')
+        request.set('select_encoding', 'MacRoman')
+        view()
+        view.export()
+        self.assertEqual(view.request.RESPONSE.getHeader('Content-Type'), 'text/csv; charset=MacRoman')

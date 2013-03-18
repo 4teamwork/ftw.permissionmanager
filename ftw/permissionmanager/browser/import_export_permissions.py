@@ -150,6 +150,7 @@ class ImportExportPermissionsView(BrowserView):
 
     def getObjectByPath(self, row):
         path = row['Path'].decode(self.encoding)
+        path = path.encode('utf-8')
         if path.startswith('...'):
             # relative paths
             path = path[len('.../'):]
