@@ -44,9 +44,9 @@
             </p>
             <p>
               <select name="select_encoding">
-              <option value="utf-8">Openoffice(UTF-8)</option>
-              <option value="latin1">Windows/ MS Office for Mac 2011(Latin-1)</option>
-              <option value="MacRoman">MS Office for Mac 2008(MacRoman)</option>
+              <option value="utf-8">Openoffice (UTF-8)</option>
+              <option value="latin1">Windows/ MS Office for Mac 2011 (Latin-1)</option>
+              <option value="MacRoman">MS Office for Mac 2008 (MacRoman)</option>
               </select>
             </p>
 
@@ -64,9 +64,9 @@
 
             <p>
               <select name="select_encoding">
-              <option value="utf-8">Openoffice(UTF-8)</option>
-              <option value="latin1">Windows/ MS Office for Mac 2011(Latin-1)</option>
-              <option value="MacRoman">MS Office for Mac 2008(MacRoman)</option>
+              <option value="utf-8">Openoffice (UTF-8)</option>
+              <option value="latin1">Windows/ MS Office for Mac 2011 (Latin-1)</option>
+              <option value="MacRoman">MS Office for Mac 2008 (MacRoman)</option>
               </select>
             </p>
 
