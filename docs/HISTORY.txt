@@ -5,6 +5,9 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+- Use also the patched sharinf.py for updateSharingInfo (ajax call).
+  [mathias.leimgruber]
+
 - Drop KSS for custom sharing view.
   [jone]
 

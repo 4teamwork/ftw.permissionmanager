@@ -22,6 +22,15 @@
             />
 
     <browser:page
+        name="updateSharingInfo"
+        for="*"
+        layer="ftw.permissionmanager.interfaces.IFtwPermissioneManager"
+        class=".sharing.SharingView"
+        attribute="updateSharingInfo"
+        permission="plone.DelegateRoles"
+        />
+
+    <browser:page
             name="permission_manager"
             for="*"
             class=".permissionmanager.PermissionManager"
