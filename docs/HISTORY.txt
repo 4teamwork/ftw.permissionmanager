@@ -5,8 +5,12 @@ Changelog
 2.0 (unreleased)
 ----------------
 
-- Use also the patched sharinf.py for updateSharingInfo (ajax call).
+
+- Use also the patched sharing.py for updateSharingInfo (ajax call).
   [mathias.leimgruber]
+
+- Add dropdown to select encoding.
+  [tschanzt]
 
 - Drop KSS for custom sharing view.
   [jone]
@@ -17,7 +21,7 @@ Changelog
 - Sharing view: No longer limit visible roles. Visibility of roles is
   determined by delegate permissions.
   [buchi]
- 
+
 - Prevent duplicated userids.
   [mathias.leimgruber]
 
