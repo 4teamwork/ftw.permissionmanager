@@ -15,7 +15,9 @@ class SharingView(base):
        to current_settings, this (kind of) saves the result for the user
     """
 
-    template = ViewPageTemplateFile('sharing.pt')
+    # index: New integration for Plone >= 4.3.2
+    # template: Backward compatibility Plone < 4.3.2
+    index = template = ViewPageTemplateFile('sharing.pt')
 
     def has_manage_portal(self):
         return self.context.portal_membership.checkPermission(

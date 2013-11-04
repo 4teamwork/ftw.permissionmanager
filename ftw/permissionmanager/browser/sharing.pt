@@ -7,16 +7,16 @@
     <metal:javascriptslot fill-slot="javascript_head_slot">
     <script type="text/javascript">
         function toggle_column(box, column){
-            var checked = jq(box).attr('checked');
-            jq(box).closest('table').find('td:nth-child('+column+') input:enabled').attr('checked',checked);
+            var checked = $(box).attr('checked');
+            $(box).closest('table').find('td:nth-child('+column+') input:enabled').attr('checked',checked);
         }
 
-        jq(function(){
+        $(function(){
             // Use live binding for ajax loaded content
-            var $author_links = jq('a.authorlink');
+            var $author_links = $('a.authorlink');
             $author_links.live('click', function(e){
                 e.preventDefault();
-                $this = jq(this);
+                $this = $(this);
                 $this.prepOverlay({
                     subtype:'ajax',
                     urlmatch:'$',urlreplace:' .authorsInformation > *'
@@ -25,6 +25,44 @@
                $this.trigger('click');
             });
 		});
+
+  $(document).ready(function(){
+
+    // START copy of updateSharing method in kss-bbb.js
+    function updateSharing(data){
+        var sharing = $(data.body);
+        var messages = $(data.messages).filter(function(){ return this.tagName == 'DL'; });
+        $('.portalMessage').remove();
+        $('#user-group-sharing').replaceWith(sharing);
+        $('#content').prepend(messages);
+    }
+
+    // END copy of updateSharing method in kss-bbb.js
+
+    // START patched sharing search method kss-bbb.js
+    $('#content-core').delegate('#sharing-custom-search-button', 'click', function(){
+        var btn = $(this);
+        var form = btn.parents('form');
+        var data = form.serializeArray();
+
+        $.extend(
+          data,
+          {
+            search_term: $('#sharing-custom-search-button').val(),
+            'form.button.Search': 'Search'
+          }
+        );
+        $.ajax({
+            url: $('base').attr('href') + '/@@updateSharingInfo',
+            data: data,
+            type: 'GET',
+            dataType: 'json',
+            success: updateSharing
+        });
+        return false;
+    });
+    // END patched sharing search method kss-bbb.js
+  });
     </script>
 
     </metal:javascriptslot>
@@ -78,7 +116,7 @@
                                value=""
                                />
                         <input type="submit"
-                               id="sharing-save-button"
+                               id="sharing-custom-search-button"
                                name="form.button.Search"
                                value="Search"
                                class="searchButton allowMultiSubmit"
