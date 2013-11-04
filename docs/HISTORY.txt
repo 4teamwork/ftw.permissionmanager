@@ -5,7 +5,11 @@ Changelog
 2.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Since plone.app.workflow >= 2.1.4 the sharing-view uses 'index' instead 'template'
+  variable to access the page-template.
+  plone.app.workflow >= 2.1.4 is integrated in Plone >= 4.3.2
+  For backward compatibility we use both variables.
+  [elioschmutz]
 
 
 2.0 (2013-05-24)
