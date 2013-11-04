@@ -5,10 +5,12 @@ Changelog
 2.1 (unreleased)
 ----------------
 
+- Replace jq by $ (Plone 4.3 compatibility).
+  [mathias.leimgruber]
+
 - Add custom ajax search handler on sharing view.
   It returns the selected users too.
   [mathias.leimgruber]
-
 
 - Since plone.app.workflow >= 2.1.4 the sharing-view uses 'index' instead 'template'
   variable to access the page-template.

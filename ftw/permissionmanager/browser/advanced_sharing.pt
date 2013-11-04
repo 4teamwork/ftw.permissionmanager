@@ -37,7 +37,7 @@
         </p>
 
         <input type="button" class="standalone" value="Struktur aufklappen" i18n:attributes="value label_show_structure"
-                onclick="jq('#permissionListingTable').find('tr.collapsed, tr.parent').show().expand()"/>
+                onclick="$('#permissionListingTable').find('tr.collapsed, tr.parent').show().expand()"/>
         <br/>
         <br/>
         <table class="listing nosort" id="permissionListingTable">
@@ -107,15 +107,15 @@
         </table>
 
         <script>
-        jq(document).ready(function() {
+        $(document).ready(function() {
            var updateOddEven = function() {
-                jq('#permissionListingTable tr:visible').each(function(i) {
+                $('#permissionListingTable tr:visible').each(function(i) {
                     var cls = (Math.floor(i/2)*2==i) ? 'even' : 'odd';
-                    jq(this).removeClass('odd').removeClass('even').addClass(cls);
+                    $(this).removeClass('odd').removeClass('even').addClass(cls);
                 });
            };
-           jq("#permissionListingTable").treeTable();
-           jq('span.expander').click(updateOddEven);
+           $("#permissionListingTable").treeTable();
+           $('span.expander').click(updateOddEven);
            updateOddEven();
         });
         </script>
