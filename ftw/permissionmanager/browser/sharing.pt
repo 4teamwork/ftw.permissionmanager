@@ -55,7 +55,7 @@
         $.ajax({
             url: $('base').attr('href') + '/@@updateSharingInfo',
             data: data,
-            type: 'GET',
+            type: 'POST',
             dataType: 'json',
             success: updateSharing
         });
