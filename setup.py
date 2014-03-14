@@ -4,7 +4,10 @@ import os
 version = '2.1.2.dev0'
 maintainer = 'Mathias Leimgruber'
 
-tests_require = ['plone.app.testing', ]
+tests_require = [
+    'plone.app.testing',
+    'ftw.testbrowser',
+    'ftw.builder']
 
 setup(name='ftw.permissionmanager',
       version=version,
