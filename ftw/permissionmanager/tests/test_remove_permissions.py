@@ -1,9 +1,10 @@
-from zope.component import getMultiAdapter
 from ftw.permissionmanager.testing import FTW_PERMISSIONMANAGER_INTEGRATION_TESTING
-import unittest2 as unittest
 from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD, TEST_USER_ID
 from plone.testing.z2 import Browser
+from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 import transaction
+import unittest2 as unittest
 
 class TestRemovePermissions(unittest.TestCase):
 
@@ -143,3 +144,22 @@ class TestRemovePermissions(unittest.TestCase):
             TEST_GROUP_ID in [entry[0] for entry in portal.folder1.get_local_roles()])
         self.assertFalse(
             TEST_GROUP_ID in [entry[0] for entry in portal.folder1.folder2.get_local_roles()])
+
+    def test_user_is_not_twice_in_result_set(self):
+        portal = self.layer['portal']
+        portal.portal_registration.addMember(
+            'John.Doe',
+            'secret',
+            properties={'username': 'John.Doe',
+                        'fullname': 'John Doe',
+                        'email': 'john@doe.com'})
+
+        folder = portal['folder1']
+        folder.REQUEST.form['search_term'] = 'John'
+
+        view = queryMultiAdapter((folder, folder.REQUEST),
+                                 name='remove_user_permissions')
+
+        self.assertEquals(1,
+                          len(view.search_results()),
+                          'Expect to find only one user')
