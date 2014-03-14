@@ -49,12 +49,12 @@ class FtwPermissionmanagerLayer(PloneSandboxLayer):
 
 
 FTW_PERMISSIONMANAGER_FIXTURE = FtwPermissionmanagerLayer()
-FTW_PERMISSIONMANAGER_INTEGRATION_TESTING = IntegrationTesting(
+FTW_PERMISSIONMGR_INTEGRATION_TESTING = IntegrationTesting(
     bases=(FTW_PERMISSIONMANAGER_FIXTURE, ),
     name="ftw.permissionmanager:Integration")
 
 
-FTW_PERMISSIONMANAGER_FUNCTIONAL_TESTING = FunctionalTesting(
+FTW_PERMISSIONMGR_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FTW_PERMISSIONMANAGER_FIXTURE,
            set_builder_session_factory(functional_session_factory)),
     name="ftw.permissionmanager:Functional")
