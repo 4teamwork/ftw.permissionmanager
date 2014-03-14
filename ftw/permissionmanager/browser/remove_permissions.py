@@ -38,6 +38,7 @@ class RemoveUserPermissionsView(SharingView):
         if not search_term:
             return []
         results = []
+        userids = []
         hunter = getMultiAdapter((self.context, self.request),
                                  name='pas_search')
         # users
@@ -46,10 +47,12 @@ class RemoveUserPermissionsView(SharingView):
         for userinfo in users:
             userid = userinfo['userid']
             user = self.context.acl_users.getUserById(userid)
-            results.append(dict(id = userid,
-                             title = user.getProperty(
-                                 'fullname') or user.getId() or userid,
-                             type = 'user'))
+            if userid not in userids:
+                results.append(dict(id = userid,
+                                 title = user.getProperty(
+                                     'fullname') or user.getId() or userid,
+                                 type = 'user'))
+                userids.append(userid)
         # groups
         for groupinfo in hunter.searchGroups(id=search_term):
             groupid = groupinfo['groupid']

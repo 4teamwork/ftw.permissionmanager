@@ -5,7 +5,8 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Prevent from display a user twice in remove user permission search_result.
+  [mathias.leimgruber]
 
 
 2.1.1 (2014-02-10)
