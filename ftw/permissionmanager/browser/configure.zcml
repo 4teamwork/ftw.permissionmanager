@@ -7,10 +7,14 @@
 
     <include package="Products.CMFPlone" />
 
-    <!-- Resource directory -->
     <browser:resourceDirectory
         name="permissionmanager.resources"
         directory="resources"
+        />
+
+    <browser:resourceDirectory
+        name="permissionmanager.select2"
+        directory="select2-3.4.5"
         />
 
     <browser:page
@@ -68,6 +72,21 @@
             class=".copy_permissions.CopyUserPermissionsView"
             permission="plone.DelegateRoles"
             template="copy_user_permissions.pt"
+            />
+
+    <browser:page
+            name="prinicpal_role_tree"
+            for="*"
+            class=".principal_role_tree.PrincipalRoleTree"
+            permission="plone.DelegateRoles"
+            template="principal_role_tree.pt"
+            />
+
+    <browser:page
+            name="principal_role_tree_search"
+            for="*"
+            class=".principal_role_tree.SearchPrincipals"
+            permission="plone.DelegateRoles"
             />
 
 
