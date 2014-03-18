@@ -25,7 +25,16 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:importStep
+      name="ftw.permissionmanager"
+      title="ftw.permissionmanager special import handlers"
+      description=""
+      handler="ftw.permissionmanager.setuphandlers.import_various"
+      />
+
+
       <adapter name="get_local_roles" factory=".indexer.global_get_local_roles" />
+      <adapter name="principal_with_local_roles" factory=".indexer.principal_with_local_roles" />
       <adapter name="isLocalRoleAcquired" factory=".indexer.isLocalRoleAcquired" />
 
     <!-- Patches, using monkeypatcher -->
