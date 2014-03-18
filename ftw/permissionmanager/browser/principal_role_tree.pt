@@ -7,6 +7,14 @@
     <head>
         <div metal:fill-slot="style_slot" tal:omit-tag="">
             <link href="++resource++permissionmanager.select2/select2.css" rel="stylesheet"/>
+
+            <style>
+                #content ul.select2-choices {
+                    margin-left:0;
+                }
+
+            </style>
+
         </div>
 
         <div metal:fill-slot="javascript_head_slot" tal:omit-tag="">
@@ -31,6 +39,12 @@
                         data-placeholder="Search principals" />
 
             </form>
+
+            <a id="show_principal_tree" href="#" class="context" i18n:translate="label_show">
+                Show role tree
+            </a>
+            <div class="principals_tree">
+            </div>
 
     </div>
 

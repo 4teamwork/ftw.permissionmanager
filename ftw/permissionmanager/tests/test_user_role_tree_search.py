@@ -7,7 +7,7 @@ from zope.component import queryMultiAdapter
 import json
 
 
-class TestUserRoleTreeUserSearch(TestCase):
+class TestPrincipalRoleTreeUserSearch(TestCase):
 
     layer = FTW_PERMISSIONMGR_INTEGRATION_TESTING
 

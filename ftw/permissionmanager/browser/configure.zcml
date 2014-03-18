@@ -89,5 +89,12 @@
             permission="plone.DelegateRoles"
             />
 
+    <browser:page
+            name="build_principal_role_tree"
+            for="*"
+            class=".principal_role_tree.BuildPrincipalRoleTree"
+            permission="plone.DelegateRoles"
+            />
+
 
 </configure>
