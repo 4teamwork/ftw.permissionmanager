@@ -50,6 +50,24 @@
                 </h2>
                 <ul class="level0 principals_tree">
                 </ul>
+
+                <div class="UserActions">
+                    <h2 i18n:translate="title_actions">Actions</h2>
+                    <p i18n:translate="text_user_actions">
+                        You can do the following actions for the selected user.
+                    </p>
+                    <ul>
+                        <li>
+                            <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user="
+                               i18n:translate="label_remove_permission">Remove permissions</a>
+                        </li>
+                        <li>
+                            <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user="
+                               i18n:translate="label_copy_permission">Copy permissions</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
 
     </div>

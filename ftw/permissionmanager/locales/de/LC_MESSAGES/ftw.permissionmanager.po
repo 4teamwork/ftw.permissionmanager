@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-19 15:21+0000\n"
+"POT-Creation-Date: 2014-03-19 16:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,6 +151,7 @@ msgstr "3. Bestätigen"
 
 #. Default: "Copy permissions"
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:100
+#: ./ftw/permissionmanager/browser/principal_role_tree.pt:65
 msgid "label_copy_permission"
 msgstr "Berechtigungen kopieren"
 
@@ -264,6 +265,7 @@ msgstr "Objekt"
 
 #. Default: "Remove permissions"
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:98
+#: ./ftw/permissionmanager/browser/principal_role_tree.pt:61
 msgid "label_remove_permission"
 msgstr "Berechtigungen entfernen"
 
@@ -392,6 +394,16 @@ msgstr "Es werde nur Berechtigungen vom Benutzer ${user} angezeigt."
 #: ./ftw/permissionmanager/browser/advanced_sharing.pt:75
 msgid "text_user"
 msgstr "Auflistung aller Benutzer, die in der Berechtigungstabelle aufgeführt sind."
+
+#. Default: "You can do the following actions for the selected user."
+#: ./ftw/permissionmanager/browser/principal_role_tree.pt:56
+msgid "text_user_actions"
+msgstr "Sie können für den ausgwählten Benutzer die folgenden Aktionen ausführen."
+
+#. Default: "Actions"
+#: ./ftw/permissionmanager/browser/principal_role_tree.pt:55
+msgid "title_actions"
+msgstr "Aktionen"
 
 #. Default: "Copy permissions"
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:14

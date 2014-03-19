@@ -88,6 +88,7 @@ class BuildPrincipalRoleTree(BrowserView):
         super(BuildPrincipalRoleTree, self).__init__(context, request)
         self.principalid = None
         self.groupids = []
+        self.tree = None
 
     def __call__(self):
         mtool = getToolByName(self.context, 'portal_membership')
