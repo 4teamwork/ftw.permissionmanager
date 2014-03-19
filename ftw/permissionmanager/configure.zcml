@@ -42,8 +42,7 @@
         description="Also Update metadata on security reindex"
         class="Products.Archetypes.CatalogMultiplex.CatalogMultiplex"
         original="reindexObjectSecurity"
-        replacement=".patches.egov_reindexObjectSecurity"
+        replacement=".patches.permissionmanager_reindexObjectSecurity"
         />
-    
 
 </configure>
