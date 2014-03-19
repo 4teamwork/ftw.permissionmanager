@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
+    i18n_domain="ftw.permissionmanager">
+
+    <include package="ftw.upgrade" file="meta.zcml" />
+
+    <!-- 1-0 -> 2300 -->
+    <upgrade-step:importProfile
+        title="Remove jquery.treeTable.js/css (no longer in use)"
+        profile="ftw.permissionmanager:default"
+        source="1.0"
+        destination="2300"
+        directory="profiles/2300"
+        />
+
+
+</configure>

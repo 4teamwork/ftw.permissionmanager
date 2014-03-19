@@ -42,14 +42,6 @@
             template="permission_manager.pt"
             />
 
-    <browser:page
-            name="advanced-sharing"
-            for="*"
-            class=".advanced_sharing.AdvancedSharingView"
-            permission="zope2.View"
-            template="advanced_sharing.pt"
-            />
-
 
     <browser:page
             name="import_export_permissions"

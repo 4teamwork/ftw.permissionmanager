@@ -40,7 +40,8 @@ setup(name='ftw.permissionmanager',
       install_requires=[
         'setuptools',
         'collective.monkeypatcher',
-        'Products.CMFPlone >= 4.3b'
+        'Products.CMFPlone >= 4.3b',
+        'ftw.upgrade',
         # -*- Extra requirements: -*-
         ],
       tests_require=tests_require,
