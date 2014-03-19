@@ -1,5 +1,6 @@
 <div tal:define="node            options/node;
-                 item_url        node/item/getURL">
+                 item_url        node/item/getURL"
+      tal:attributes="class python: node['item'].isLocalRoleAcquired and 'acquired' or 'not-acquired'">
 
   <a tal:attributes="href item_url;
                      title node/item/Description">

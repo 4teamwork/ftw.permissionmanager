@@ -201,13 +201,13 @@ class TestBuildPrincipalRoleTree(TestCase):
                               view='build_principal_role_tree')
 
         self.assertEquals('navTree navTreeLevel1',
-                          browser.css('ul')[0].attrib['class'],
+                          browser.css('ul')[1].attrib['class'],
                           'Expect a navTreeLevel1')
         self.assertEquals('navTree navTreeLevel2',
-                          browser.css('ul')[1].attrib['class'],
+                          browser.css('ul')[2].attrib['class'],
                           'Expect a navTreeLevel2')
         self.assertEquals('navTree navTreeLevel3',
-                          browser.css('ul')[2].attrib['class'],
+                          browser.css('ul')[3].attrib['class'],
                           'Expect a navTreeLevel3')
 
         self.assertTrue(
@@ -247,6 +247,23 @@ class TestBuildPrincipalRoleTree(TestCase):
             browser.css('[href="{0}"]'.format(self.a1.absolute_url())),
             'Expecrt NOT to find the following url {0}'.format(
                 self.a1.absolute_url()))
+
+    @browsing
+    def test_item_is_marked_as_not_acquired(self, browser):
+        self._create_structure()
+        john = create(Builder('user').with_roles('Reader', on=self.b11))
+        self.b11.reindexObject()
+
+        setattr(self.b1, '__ac_local_roles_block__', True)
+        transaction.commit()
+
+        data = {'principalid': john.getId()}
+        browser.login().visit(self.portal,
+                              data=data,
+                              view='build_principal_role_tree')
+
+        self.assertEquals(self.b1.Title(),
+                          browser.css('div.not-acquired a').first.text)
 
     @browsing
     def test_empty_result(self, browser):

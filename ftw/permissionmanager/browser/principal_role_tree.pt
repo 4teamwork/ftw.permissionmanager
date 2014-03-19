@@ -13,6 +13,10 @@
                     margin-left:0;
                 }
 
+                #content div.not-acquired {
+                    border-bottom: 1px solid red;
+                }
+
             </style>
 
         </div>
