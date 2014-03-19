@@ -1,5 +1,6 @@
 jQuery().ready(function($) {
-    var principals_tree = $('div.principals_tree');
+    var principals_tree = $('ul.principals_tree');
+
     principals_tree.parent().hide();
 
     $('input#principals').select2({

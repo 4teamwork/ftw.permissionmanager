@@ -39,17 +39,17 @@
 
             <form class="search_principals">
                 <input type="text" name="principals" id="principals" multiple="multiple"
-                        i18n:attributes="data-placeholder placeholder_keyword"
+                        i18n:attributes="data-placeholder placeholder_search"
                         data-placeholder="Search principals" />
 
             </form>
 
             <div>
                 <h2 i18n:translate="title_roles_for_principal">
-                    The chossen Principal has the folling roles...
+                    The chosen Principal has the following roles...
                 </h2>
-                <div class="principals_tree">
-                </div>
+                <ul class="level0 principals_tree">
+                </ul>
             </div>
 
     </div>

@@ -108,17 +108,16 @@ class BuildPrincipalRoleTree(BrowserView):
         return self.render_tree(self.build_tree()['children'])
 
     def render_tree(self, children=[], level=1):
-        output = '<ul class="navTree navTreeLevel0">'
+        output = ''
         for node in children:
-            output += '<li class="navTreeItem visualNoMarker">\n'
+            output += '<li class="treeItem visualNoMarker">\n'
             output += self.item_template(node=node)
             children = node.get('children', [])
             if len(children):
                 output += \
-                    '<ul class="navTree navTreeLevel%d">\n%s\n</ul>\n' % (
+                    '<ul class="level%d">\n%s\n</ul>\n' % (
                         level, self.render_tree(children, level + 1))
             output += '</li>\n'
-        output += '</ul>'
         return output
 
     def build_query(self):

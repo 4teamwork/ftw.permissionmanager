@@ -200,15 +200,15 @@ class TestBuildPrincipalRoleTree(TestCase):
                               data=data,
                               view='build_principal_role_tree')
 
-        self.assertEquals('navTree navTreeLevel1',
+        self.assertEquals('level1',
+                          browser.css('ul')[0].attrib['class'],
+                          'Expect a level1')
+        self.assertEquals('level2',
                           browser.css('ul')[1].attrib['class'],
-                          'Expect a navTreeLevel1')
-        self.assertEquals('navTree navTreeLevel2',
+                          'Expect a level2')
+        self.assertEquals('level3',
                           browser.css('ul')[2].attrib['class'],
-                          'Expect a navTreeLevel2')
-        self.assertEquals('navTree navTreeLevel3',
-                          browser.css('ul')[3].attrib['class'],
-                          'Expect a navTreeLevel3')
+                          'Expect a level3')
 
         self.assertTrue(
             browser.css('[href="{0}"]'.format(self.folder.absolute_url())),
@@ -255,6 +255,7 @@ class TestBuildPrincipalRoleTree(TestCase):
         self.b11.reindexObject()
 
         setattr(self.b1, '__ac_local_roles_block__', True)
+        self.b1.reindexObject()
         transaction.commit()
 
         data = {'principalid': john.getId()}
