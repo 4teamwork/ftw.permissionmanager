@@ -1,16 +1,6 @@
 jQuery().ready(function($) {
     var principals_tree = $('div.principals_tree');
-    var show_link = $('#show_principal_tree');
-    show_link.hide();
-
-    show_link.on('click', function(e){
-        e.preventDefault();
-
-        principals_tree.load(
-            './build_principal_role_tree',
-            {principalid: $('input#principals').val()});
-
-    });
+    principals_tree.parent().hide();
 
     $('input#principals').select2({
         minimumInputLength: 3,
@@ -31,11 +21,16 @@ jQuery().ready(function($) {
         }
     }).on('change', function(e){
         if (e.val.length !== 0){
-            show_link.show();
+            principals_tree.load(
+                './build_principal_role_tree',
+                {principalid: $('input#principals').val()},
+                function( response, status, xhr ){
+                    principals_tree.parent().show();
+                });
+
         } else {
-            show_link.hide();
+            principals_tree.hide();
         }
-    }
-  });
+    });
 
 });

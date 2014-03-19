@@ -30,7 +30,7 @@
      <div metal:fill-slot="main">
 
             <h1 i18n:translate="title_search_user_for_role_tree">
-                Display roles of one or more principals in as tree
+                Show roles of a principal in a tree
             </h1>
 
             <form class="search_principals">
@@ -40,10 +40,12 @@
 
             </form>
 
-            <a id="show_principal_tree" href="#" class="context" i18n:translate="label_show">
-                Show role tree
-            </a>
-            <div class="principals_tree">
+            <div>
+                <h2 i18n:translate="title_roles_for_principal">
+                    The chossen Principal has the folling roles...
+                </h2>
+                <div class="principals_tree">
+                </div>
             </div>
 
     </div>
