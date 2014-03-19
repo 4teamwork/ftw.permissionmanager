@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-19 16:39+0000\n"
+"POT-Creation-Date: 2014-03-19 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,10 +43,6 @@ msgstr ""
 msgid "Search for user or group"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:16
-msgid "Security table"
-msgstr ""
-
 #. Default: "Search"
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:48
 #: ./ftw/permissionmanager/browser/remove_user_permissions.pt:46
@@ -56,12 +52,6 @@ msgstr ""
 #. Default: "Search for user or group"
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:39
 msgid "form_search_user_group"
-msgstr ""
-
-#. Default: "The advanced sharing lists all security settings recursively. This may take a long time"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:23
-#: ./ftw/permissionmanager/browser/permission_manager.pt:28
-msgid "help_advanced_sharing"
 msgstr ""
 
 #. Default: "Copy all permissions of a user in this area"
@@ -100,15 +90,15 @@ msgstr ""
 msgid "help_search_user"
 msgstr ""
 
-#. Default: "Security table"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:25
-msgid "label_access_table"
+#. Default: "This view helps you to find local roles of a user on the site."
+#: ./ftw/permissionmanager/browser/permission_manager.pt:28
+msgid "help_user_role_tree"
 msgstr ""
 
 #. Default: "Back to security"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:17
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:16
 #: ./ftw/permissionmanager/browser/import_export_permissions.pt:15
+#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:15
 msgid "label_back_to_overview"
 msgstr ""
 
@@ -153,7 +143,6 @@ msgid "label_confirmation"
 msgstr ""
 
 #. Default: "Copy permissions"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:100
 #: ./ftw/permissionmanager/browser/principal_role_tree.pt:65
 msgid "label_copy_permission"
 msgstr ""
@@ -198,11 +187,6 @@ msgstr ""
 msgid "label_export_structure_only"
 msgstr ""
 
-#. Default: "Filter"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:94
-msgid "label_filter"
-msgstr ""
-
 #. Default: "Group"
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:79
 #: ./ftw/permissionmanager/browser/remove_user_permissions.pt:76
@@ -230,19 +214,9 @@ msgstr ""
 msgid "label_import_permissions"
 msgstr ""
 
-#. Default: "Inheritance of permissions"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:34
-msgid "label_inheritance"
-msgstr ""
-
 #. Default: "Security tools"
 #: ./ftw/permissionmanager/browser/permission_manager.pt:13
 msgid "label_manage_permission"
-msgstr ""
-
-#. Default: "Name / Title"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:82
-msgid "label_name_title"
 msgstr ""
 
 #. Default: "No, abord"
@@ -261,13 +235,7 @@ msgstr ""
 msgid "label_nothing_found"
 msgstr ""
 
-#. Default: "Object"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:46
-msgid "label_object"
-msgstr ""
-
 #. Default: "Remove permissions"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:98
 #: ./ftw/permissionmanager/browser/principal_role_tree.pt:61
 msgid "label_remove_permission"
 msgstr ""
@@ -297,16 +265,6 @@ msgstr ""
 msgid "label_shoosen_user"
 msgstr ""
 
-#. Default: "Show all"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:32
-msgid "label_show_all"
-msgstr ""
-
-#. Default: "Struktur aufklappen"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:39
-msgid "label_show_structure"
-msgstr ""
-
 #. Default: "Title"
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:65
 #: ./ftw/permissionmanager/browser/remove_user_permissions.pt:63
@@ -320,26 +278,19 @@ msgid "label_typ"
 msgstr ""
 
 #. Default: "Type"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:83
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:143
 msgid "label_type"
 msgstr ""
 
 #. Default: "User"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:74
 #: ./ftw/permissionmanager/browser/copy_user_permissions.pt:78
 #: ./ftw/permissionmanager/browser/remove_user_permissions.pt:75
 msgid "label_user"
 msgstr ""
 
-#. Default: "User filter"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:28
-msgid "label_user_filter"
-msgstr ""
-
-#. Default: "Username"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:81
-msgid "label_username"
+#. Default: "User roles Tree"
+#: ./ftw/permissionmanager/browser/permission_manager.pt:25
+msgid "label_user_role_tree"
 msgstr ""
 
 #. Default: "Yes, assing"
@@ -372,11 +323,6 @@ msgstr ""
 msgid "text_confirm_remove"
 msgstr ""
 
-#. Default: "A red border means the permissions will no be inherited."
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:35
-msgid "text_inheritance"
-msgstr ""
-
 #. Default: "Nothing found"
 #: ./ftw/permissionmanager/browser/sharing.pt:161
 msgid "text_nothing_found"
@@ -386,16 +332,6 @@ msgstr ""
 #: ./ftw/permissionmanager/browser/permission_manager.pt:35
 #: ./ftw/permissionmanager/browser/remove_user_permissions.pt:21
 msgid "text_remove_permissions"
-msgstr ""
-
-#. Default: "Show only permissions of the following user ${user}"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:30
-msgid "text_selected_user"
-msgstr ""
-
-#. Default: "Lists all user, which appears in the table above."
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:75
-msgid "text_user"
 msgstr ""
 
 #. Default: "You can do the following actions for the selected user."
