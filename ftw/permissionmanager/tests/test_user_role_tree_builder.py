@@ -339,3 +339,23 @@ class TestBuildPrincipalRoleTree(TestCase):
         view()
         self.assertEquals([{'title': 'Group', 'roles': 'Can add'}],
                           view.get_group_roles(result[0]))
+
+    @browsing
+    def test_build_tree_shows_nested_local_roles(self, browser):
+        self._create_structure()
+        john = create(Builder('user')
+                      .with_roles('Reader', on=self.b11)
+                      .with_roles('Reader', on=self.b))
+        self.b11.reindexObject()
+        self.b.reindexObject()
+        transaction.commit()
+
+        data = {'principalid': john.getId()}
+        browser.login().visit(self.portal,
+                              data=data,
+                              view='build_principal_role_tree')
+
+        self.assertEquals('Can view',
+                          browser.css('.level1 .UserRoles').first.text)
+        self.assertEquals('Can view',
+                          browser.css('.level3 .UserRoles').first.text)

@@ -1,3 +1,4 @@
+from ftw.permissionmanager.treeifier import Treeify
 from plone.app.workflow.interfaces import ISharingPageRole
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
@@ -88,7 +89,6 @@ class BuildPrincipalRoleTree(BrowserView):
         super(BuildPrincipalRoleTree, self).__init__(context, request)
         self.principalid = None
         self.groupids = []
-        self.tree = None
 
     def __call__(self):
         mtool = getToolByName(self.context, 'portal_membership')
@@ -106,7 +106,11 @@ class BuildPrincipalRoleTree(BrowserView):
             groups = gtool.getGroupsByUserId(self.principalid)
             self.groupids = [group.getId() for group in groups]
 
-        return self.render_tree(self.build_tree()['children'])
+        tree = self.build_tree()
+        if not tree:
+            return ''
+        else:
+            return self.render_tree(tree['children'])
 
     def render_tree(self, children=[], level=1):
         output = ''
@@ -126,71 +130,25 @@ class BuildPrincipalRoleTree(BrowserView):
         principals = [self.principalid] + self.groupids
 
         query['principal_with_local_roles'] = principals
-
+        query['sort_on'] = 'getObjPositionInParent'
         query['path'] = {'query': '/'.join(self.context.getPhysicalPath()),
                          'depth': -1}
         return query
 
     def build_tree(self):
-        items = {}
         root_path = '/'.join(self.context.getPhysicalPath())
-        query = self.build_query()
-        catalog = getToolByName(self.context, 'portal_catalog')
-        results = self.context.portal_catalog(**query)
+        brains = self.context.portal_catalog(**self.build_query())
 
-        items[root_path] = {'children': []}
+        if not brains:
+            return []
 
-        for item in results:
-            self._insert_item(root_path, items, item)
+        tree = Treeify(brains, root_path, self.node_updater)
+        return tree(self.context)
 
-        # Insert parents and add missing brains if necessary
-        paths = items.keys()
-        paths.reverse()
-        for path in paths:
-            if path == root_path:
-                continue
-
-            parent_path = '/'.join(path.split('/')[:-1])
-            node = items[path]
-
-            if node.get('item', None) is None:
-                item = catalog.unrestrictedSearchResults(
-                    {'path': {'query': path, 'depth': 0}})[0]
-
-                node['item'] = item
-
-            if parent_path in items:
-                items[parent_path]['children'].append(node)
-            else:
-                items[parent_path] = {'children': [node]}
-
-            if parent_path == root_path:
-                continue
-
-        return items[root_path]
-
-    def _insert_item(self, root_path, items, item):
-        item_path = item.getPath()
-        itemPhysicalPath = item_path.split('/')
-        parent_path = '/'.join(itemPhysicalPath[:-1])
-
-        if item_path in items:
-            return
-        new_node = {'item': item,
-                    'children': [],
-                    'user_roles': self.get_user_roles(item),
-                    'group_roles': self.get_group_roles(item)}
-
-        if items.get(parent_path):
-            items[parent_path]['children'].append(new_node)
-        else:
-            items[parent_path] = {'children': [new_node]}
-
-            while True:
-                parent_path = '/'.join(parent_path.split('/')[:-1])
-                if parent_path == root_path:
-                    break
-                items[parent_path] = {'children': []}
+    def node_updater(self, brain, node):
+        node['item'] = brain
+        node['user_roles'] = self.get_user_roles(brain)
+        node['group_roles'] = self.get_group_roles(brain)
 
     def get_user_roles(self, brain):
         local_roles = brain.get_local_roles
