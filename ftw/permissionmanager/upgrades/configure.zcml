@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
     i18n_domain="ftw.permissionmanager">
 
@@ -12,6 +13,16 @@
         source="1.0"
         destination="2300"
         directory="profiles/2300"
+        />
+
+    <!-- 2300 -> 2301 -->
+    <genericsetup:upgradeStep
+        title="Install new principal_with_local_roles index"
+        description=""
+        source="2300"
+        destination="2301"
+        handler="ftw.permissionmanager.upgrades.to2301.InstallNewIndex"
+        profile="ftw.permissionmanager:default"
         />
 
 
