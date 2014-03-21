@@ -1,3 +1,4 @@
+from ftw.permissionmanager import permission_manager_factory as _
 from ftw.permissionmanager.treeifier import Treeify
 from plone.app.workflow.interfaces import ISharingPageRole
 from Products.CMFCore.utils import getToolByName
@@ -113,7 +114,9 @@ class BuildPrincipalRoleTree(BrowserView):
 
         tree = self.build_tree()
         if not tree:
-            return ''
+            return translate(_(u'text_no_result', default=u'No result found'),
+                             context=self.request)
+
         else:
             return self.render_tree(tree['children'])
 

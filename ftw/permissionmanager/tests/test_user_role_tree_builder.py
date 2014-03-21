@@ -275,7 +275,7 @@ class TestBuildPrincipalRoleTree(TestCase):
                               data=data,
                               view='build_principal_role_tree')
 
-        self.assertFalse(len(browser.contents), 'Expect no result')
+        self.assertEquals(u'No result found', browser.contents)
 
     def test_get_friendly_role_name_translates_if_utility_is_registered(self):
         self.assertEquals(
