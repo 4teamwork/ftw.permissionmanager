@@ -7,7 +7,7 @@ from ftw.permissionmanager import permission_manager_factory as _
 
 class RemoveUserPermissionsView(SharingView):
 
-    template = ViewPageTemplateFile('remove_user_permissions.pt')
+    template = ViewPageTemplateFile('templates/remove_user_permissions.pt')
 
     def __init__(self, *args, **kwargs):
         super(RemoveUserPermissionsView, self).__init__(*args, **kwargs)

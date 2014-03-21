@@ -83,7 +83,7 @@ class SearchPrincipals(BrowserView):
 
 class BuildPrincipalRoleTree(BrowserView):
 
-    item_template = ViewPageTemplateFile('item_template.pt')
+    item_template = ViewPageTemplateFile('templates/item_template.pt')
 
     def __init__(self, context, request):
         super(BuildPrincipalRoleTree, self).__init__(context, request)

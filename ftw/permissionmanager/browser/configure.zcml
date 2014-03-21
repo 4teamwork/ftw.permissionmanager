@@ -39,7 +39,7 @@
             for="*"
             class=".permissionmanager.PermissionManager"
             permission="zope2.View"
-            template="permission_manager.pt"
+            template="templates/permission_manager.pt"
             />
 
 
@@ -48,7 +48,7 @@
             for="*"
             class=".import_export_permissions.ImportExportPermissionsView"
             permission="plone.DelegateRoles"
-            template="import_export_permissions.pt"
+            template="templates/import_export_permissions.pt"
             />
 
     <browser:page
@@ -63,7 +63,7 @@
             for="*"
             class=".copy_permissions.CopyUserPermissionsView"
             permission="plone.DelegateRoles"
-            template="copy_user_permissions.pt"
+            template="templates/copy_user_permissions.pt"
             />
 
     <browser:page
@@ -71,7 +71,7 @@
             for="*"
             class=".principal_role_tree.PrincipalRoleTree"
             permission="plone.DelegateRoles"
-            template="principal_role_tree.pt"
+            template="templates/principal_role_tree.pt"
             />
 
     <browser:page
