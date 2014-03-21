@@ -8,7 +8,7 @@
         <div metal:fill-slot="style_slot" tal:omit-tag="">
             <link href="++resource++permissionmanager.select2/select2.css" rel="stylesheet"/>
 
-            <style>
+            <style tal:content="string:
                 #content ul.select2-choices {
                     margin-left:0;
                 }
@@ -17,6 +17,23 @@
                     border-top: 1px solid red;
                 }
 
+                .UserRoles {
+                    font-weight:bold;
+                    background-repeat: no-repeat;
+                    background-image: url(${here/portal_url}/user.png);
+                    padding-left: 16px;
+                    margin-left:10px;
+                }
+
+                .GroupRoles {
+                    font-weight:bold;
+                    background-repeat: no-repeat;
+                    background-image: url(${here/portal_url}/group.png);
+                    padding-left: 16px;
+                    margin-left:10px;
+                }
+            ">
+                Styles
             </style>
 
         </div>

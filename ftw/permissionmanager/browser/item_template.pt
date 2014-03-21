@@ -9,11 +9,10 @@
 
   <span class="UserRoles" tal:condition="node/user_roles | nothing"
         tal:content="node/user_roles"></span>
-  <span class="GroupRoles" tal:condition="node/group_roles | nothing">
-    <tal:loop repeat="group_role node/group_roles">
+  <span class="GroupRoles" tal:condition="node/group_roles | nothing"
+        tal:repeat="group_role node/group_roles">
         <span tal:replace="group_role/title">Group Title</span>:
         <span tal:replace="group_role/roles">Group Roles</span>
-    </tal:loop>
   </span>
 
 </div>
