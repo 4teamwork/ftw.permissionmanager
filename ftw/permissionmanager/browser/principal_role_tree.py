@@ -34,7 +34,7 @@ class SearchPrincipals(BrowserView):
         self.search_term = None
 
     def __call__(self):
-        self.search_term = self.request.get('search_term', None)
+        self.search_term = self.request.get('search_term', '').decode('utf-8')
 
         if not self.search_term:
             raise BadRequest('No search_term found.')
@@ -72,8 +72,13 @@ class SearchPrincipals(BrowserView):
                     member = mtool.getMemberById(userid)
                     fullname = member and member.getProperty(
                         'fullname', userid) or userid
-                data = {'id': userid, 'text': '{0} ({1})'.format(fullname,
-                                                                 userid)}
+
+                # It depends on the mood of plone whether the fullname is utf8
+                # encoded or not.
+                if not isinstance(fullname, unicode):
+                    fullname = fullname.decode('utf-8')
+                data = {u'id': userid, 'text': u'{0} ({1})'.format(fullname,
+                                                                   userid)}
                 formatted.append(data)
                 ids.append(userid)
 

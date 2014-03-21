@@ -64,3 +64,18 @@ class TestPrincipalRoleTreeUserSearch(TestCase):
              {u'id': john2.getId(), u'text': text2}],
             json.loads(view()),
             'Expect to find two users in json parsable format.')
+
+    def test_search_term_with_umlauts(self):
+        john = create(Builder('user').named('J\xc3\xb6hn', 'Doe2'))
+
+        self.portal.REQUEST.set('search_term', 'J\xc3\xb6hn')
+        view = queryMultiAdapter((self.portal, self.portal.REQUEST),
+                                 name='principal_role_tree_search')
+
+        text1 = u'{0} ({1})'.format(
+            john.getProperty('fullname').decode('utf-8'),
+            john.getId())
+        self.assertEquals(
+            [{u'id': john.getId(), u'text': text1}],
+            json.loads(view()),
+            'Expect to find one user with umlauts')
