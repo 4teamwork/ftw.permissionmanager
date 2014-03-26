@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-21 10:26+0000\n"
+"POT-Creation-Date: 2014-03-26 08:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -288,7 +288,7 @@ msgstr ""
 msgid "label_user"
 msgstr ""
 
-#. Default: "User roles Tree"
+#. Default: "User roles tree"
 #: ./ftw/permissionmanager/browser/templates/permission_manager.pt:25
 msgid "label_user_role_tree"
 msgstr ""
@@ -323,7 +323,7 @@ msgstr ""
 msgid "text_confirm_remove"
 msgstr ""
 
-#. Default: "No result found"
+#. Default: "No results found"
 #: ./ftw/permissionmanager/browser/principal_role_tree.py:117
 msgid "text_no_result"
 msgstr ""
@@ -339,7 +339,7 @@ msgstr ""
 msgid "text_remove_permissions"
 msgstr ""
 
-#. Default: "You can do the following actions for the selected user."
+#. Default: "These actions can be done for the selected user:"
 #: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:73
 msgid "text_user_actions"
 msgstr ""
@@ -364,7 +364,7 @@ msgstr ""
 msgid "title_new_permissions"
 msgstr ""
 
-#. Default: "The chosen Principal has the following roles..."
+#. Default: "The chosen principal has these roles:"
 #: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:65
 msgid "title_roles_for_principal"
 msgstr ""

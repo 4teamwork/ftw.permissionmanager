@@ -23,7 +23,7 @@
         <dl>
             <dt>
                 <a href="" i18n:translate="label_user_role_tree"
-                        tal:attributes="href string:${here/absolute_url}/@@prinicpal_role_tree">User roles Tree</a>
+                        tal:attributes="href string:${here/absolute_url}/@@prinicpal_role_tree">User roles tree</a>
             </dt>
             <dd i18n:translate="help_user_role_tree">
                 This view helps you to find local roles of a user on the site.

@@ -114,7 +114,7 @@ class BuildPrincipalRoleTree(BrowserView):
 
         tree = self.build_tree()
         if not tree:
-            return translate(_(u'text_no_result', default=u'No result found'),
+            return translate(_(u'text_no_result', default=u'No results found'),
                              context=self.request)
 
         else:

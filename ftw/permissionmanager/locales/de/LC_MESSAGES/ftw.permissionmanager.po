@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-21 10:26+0000\n"
+"POT-Creation-Date: 2014-03-26 08:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,7 +90,7 @@ msgstr "Benutzer suchen, an welche die Berechtigungen Übertragen werden sollen"
 #. Default: "This view helps you to find local roles of a user on the site."
 #: ./ftw/permissionmanager/browser/templates/permission_manager.pt:28
 msgid "help_user_role_tree"
-msgstr "Mit dieser Ansicht können Sie alle lokale Rollen von einem Benutzer auflisten."
+msgstr "Mit dieser Ansicht können Sie alle lokalen Rollen von einem Benutzer auflisten."
 
 #. Default: "Back to security"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:16
@@ -285,10 +285,10 @@ msgstr "Typ"
 msgid "label_user"
 msgstr "Benutzer"
 
-#. Default: "User roles Tree"
+#. Default: "User roles tree"
 #: ./ftw/permissionmanager/browser/templates/permission_manager.pt:25
 msgid "label_user_role_tree"
-msgstr "Benutzer Rolen anzeigen (Baumstruktur)"
+msgstr "Benutzer Rollen anzeigen (Baumstruktur)"
 
 #. Default: "Yes, assing"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:191
@@ -320,10 +320,10 @@ msgstr "Sind Sie sicher, dass Sie die Berechtigungen vom Benutzer <div style=\"p
 msgid "text_confirm_remove"
 msgstr "Sind Sie sicher, dass Sie alle Berechtigungen vom Benutzer ${title} (${name}) auf dem Objekt \"${object_title}\" und allen Unterobjekten entfernen wollen?"
 
-#. Default: "No result found"
+#. Default: "No results found"
 #: ./ftw/permissionmanager/browser/principal_role_tree.py:117
 msgid "text_no_result"
-msgstr "Der Benutzer hat in diesem Bereich keine lokale Rollen."
+msgstr "Der Benutzer hat in diesem Bereich keine lokalen Rollen."
 
 #. Default: "Nothing found"
 #: ./ftw/permissionmanager/browser/templates/sharing.pt:161
@@ -336,10 +336,10 @@ msgstr "Kein Treffer"
 msgid "text_remove_permissions"
 msgstr "Sie können die Berechtigungen eines Benutzers rekursiv entfernen."
 
-#. Default: "You can do the following actions for the selected user."
+#. Default: "These actions can be done for the selected user:"
 #: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:73
 msgid "text_user_actions"
-msgstr "Sie können für den ausgwählten Benutzer die folgenden Aktionen ausführen."
+msgstr "Sie können für den ausgewählten Benutzer die folgenden Aktionen ausführen:"
 
 #. Default: "Actions"
 #: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:72
@@ -361,10 +361,10 @@ msgstr "Aktuelle Freigaben"
 msgid "title_new_permissions"
 msgstr "Neue Freigaben"
 
-#. Default: "The chosen Principal has the following roles..."
+#. Default: "The chosen principal has these roles:"
 #: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:65
 msgid "title_roles_for_principal"
-msgstr "Der ausgwählte Benutzer hat die folgenden Rollen..."
+msgstr "Der ausgewählte Benutzer hat die folgenden Rollen:"
 
 #. Default: "Search result"
 #: ./ftw/permissionmanager/browser/templates/sharing.pt:129
@@ -374,6 +374,6 @@ msgstr "Suchresultat"
 #. Default: "Show roles of a principal in a tree"
 #: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:53
 msgid "title_search_user_for_role_tree"
-msgstr "Erweiterte Darstellung (Baumstruktur) der Rollen von einem Benutzer"
+msgstr "Erweiterte Darstellung (Baumstruktur) der Rollen eines Benutzers"
 
 
