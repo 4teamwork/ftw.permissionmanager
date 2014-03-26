@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-05-08 12:40+0000\n"
+"POT-Creation-Date: 2014-03-26 08:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,24 +12,21 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: ftw.permissionmanager\n"
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:64
-msgid "Abord"
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:79
+msgid "Abort"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/remove_permissions.py:22
+#: ./ftw/permissionmanager/browser/remove_permissions.py:30
 msgid "Die Berechtigungen wurden erfolgreich entfernt."
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/copy_permissions.py:75
+#: ./ftw/permissionmanager/browser/copy_permissions.py:91
 msgid "Die Berechtigungen wurden kopiert"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:106
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:123
 msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgstr ""
 
@@ -37,380 +34,349 @@ msgstr ""
 msgid "Manage permissions"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:118
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:135
 msgid "Objekt konnte nicht gefunden werden: ${path}"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:116
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:37
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:116
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:37
 msgid "Search for user or group"
 msgstr ""
 
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:17
-msgid "Security table"
-msgstr ""
-
 #. Default: "Search"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:48
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:46
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:48
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:46
 msgid "box_search"
 msgstr ""
 
 #. Default: "Search for user or group"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:39
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:39
 msgid "form_search_user_group"
 msgstr ""
 
-#. Default: "The advanced sharing lists all security settings recursively. This may take a long time"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:24
-#: ./ftw/permissionmanager/browser/permission_manager.pt:28
-msgid "help_advanced_sharing"
-msgstr ""
-
 #. Default: "Copy all permissions of a user in this area"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:22
-#: ./ftw/permissionmanager/browser/permission_manager.pt:43
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:22
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:43
 msgid "help_copy_permissions"
 msgstr ""
 
 #. Default: "This section allows you to export and import security settings"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:21
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:21
 msgid "help_export_import_part1"
 msgstr ""
 
 #. Default: "To remove all permission on a specific object, to user should remain in CSV, but should no have any roles specified"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:24
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:24
 msgid "help_export_import_part2"
 msgstr ""
 
 #. Default: "Export permissions as CSV file, edit with Excel or OpenOffice and import the new permissions"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:51
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:51
 msgid "help_import_export_permissions"
 msgstr ""
 
 #. Default: "Some useful tools to show and mange the security of the current area"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:19
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:19
 msgid "help_permission_manager"
 msgstr ""
 
 #. Default: "Search user to assign the permissions"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:105
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:105
 msgid "help_search_destination"
 msgstr ""
 
 #. Default: "Search user, to copy his permissions"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:29
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:29
 msgid "help_search_user"
 msgstr ""
 
-#. Default: "Security table"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:25
-msgid "label_access_table"
+#. Default: "This view helps you to find local roles of a user on the site."
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:28
+msgid "help_user_role_tree"
 msgstr ""
 
 #. Default: "Back to security"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:18
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:16
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:15
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:16
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:15
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:15
 msgid "label_back_to_overview"
 msgstr ""
 
 #. Default: "Back to the regular view"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:14
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:14
 msgid "label_back_to_view"
 msgstr ""
 
 #. Default: "choose all"
-#: ./ftw/permissionmanager/browser/sharing.pt:110
+#: ./ftw/permissionmanager/browser/templates/sharing.pt:148
 msgid "label_choose_all"
 msgstr ""
 
 #. Default: "2. Choose source user"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:59
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:59
 msgid "label_choose_source"
 msgstr ""
 
 #. Default: "2. Choose user"
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:56
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:56
 msgid "label_choose_user"
 msgstr ""
 
 #. Default: "Chossen user"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:95
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:95
 msgid "label_choosen_user"
 msgstr ""
 
 #. Default: "4. Choose target user"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:136
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:136
 msgid "label_chopse_destiantion"
 msgstr ""
 
 #. Default: "5. Confirm"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:176
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:176
 msgid "label_confirm"
 msgstr ""
 
 #. Default: "3. Confirm"
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:84
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:84
 msgid "label_confirmation"
 msgstr ""
 
 #. Default: "Copy permissions"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:101
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:82
 msgid "label_copy_permission"
 msgstr ""
 
 #. Default: "Berechtigungen kopieren"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:40
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:40
 msgid "label_copy_permissions"
 msgstr ""
 
 #. Default: "Permissions (CSV-File)"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:54
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:61
 msgid "label_csv_file"
 msgstr ""
 
 #. Default: "Export"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:46
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:53
 msgid "label_export"
 msgstr ""
 
 #. Default: "Export/Import permissions"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:14
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:14
 msgid "label_export_import_permissions"
 msgstr ""
 
 #. Default: "Export permissions"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:28
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:28
 msgid "label_export_permission"
 msgstr ""
 
 #. Default: "Export permissions recursively"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:33
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:33
 msgid "label_export_recursiv"
 msgstr ""
 
 #. Default: "With relative path"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:38
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:38
 msgid "label_export_relative"
 msgstr ""
 
 #. Default: "Nur Struktur exportieren"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:43
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:43
 msgid "label_export_structure_only"
 msgstr ""
 
-#. Default: "Filter"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:95
-msgid "label_filter"
-msgstr ""
-
 #. Default: "Group"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:79
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:76
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:79
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:76
 msgid "label_group"
 msgstr ""
 
 #. Default: "ID"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:64
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:62
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:64
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:62
 msgid "label_id"
 msgstr ""
 
 #. Default: "Import"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:58
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:73
 msgid "label_import"
 msgstr ""
 
 #. Default: "Import / Export von Berechtigungen"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:48
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:48
 msgid "label_import_export_permissions"
 msgstr ""
 
 #. Default: "Import permissions"
-#: ./ftw/permissionmanager/browser/import_export_permissions.pt:50
+#: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:57
 msgid "label_import_permissions"
 msgstr ""
 
-#. Default: "Inheritance of permissions"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:35
-msgid "label_inheritance"
-msgstr ""
-
 #. Default: "Security tools"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:13
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:13
 msgid "label_manage_permission"
 msgstr ""
 
-#. Default: "Name / Title"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:83
-msgid "label_name_title"
-msgstr ""
-
 #. Default: "No, abord"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:193
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:97
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:193
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:97
 msgid "label_no"
 msgstr ""
 
 #. Default: "Nothing found"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:87
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:87
 msgid "label_not_record_found"
 msgstr ""
 
 #. Default: "Nothing found"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:161
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:161
 msgid "label_nothing_found"
 msgstr ""
 
-#. Default: "Object"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:47
-msgid "label_object"
-msgstr ""
-
 #. Default: "Remove permissions"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:99
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:78
 msgid "label_remove_permission"
 msgstr ""
 
 #. Default: "Remove permissions"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:32
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:32
 msgid "label_remove_permissions"
 msgstr ""
 
 #. Default: "Remove user permissions"
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:14
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:14
 msgid "label_remove_permissions_heading"
 msgstr ""
 
 #. Default: "3. Search target user"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:103
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:103
 msgid "label_search_destination"
 msgstr ""
 
 #. Default: "1. Search source user"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:27
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:27
 msgid "label_search_user"
 msgstr ""
 
 #. Default: "<i>Choosen user:</i> ${target_user_title} (${target_user_name})"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:171
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:171
 msgid "label_shoosen_user"
 msgstr ""
 
-#. Default: "Show all"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:33
-msgid "label_show_all"
-msgstr ""
-
-#. Default: "Struktur aufklappen"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:40
-msgid "label_show_structure"
-msgstr ""
-
 #. Default: "Title"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:65
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:63
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:65
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:63
 msgid "label_title"
 msgstr ""
 
 #. Default: "Typ"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:66
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:64
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:66
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:64
 msgid "label_typ"
 msgstr ""
 
 #. Default: "Type"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:84
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:143
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:143
 msgid "label_type"
 msgstr ""
 
 #. Default: "User"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:75
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:78
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:75
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:78
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:75
 msgid "label_user"
 msgstr ""
 
-#. Default: "User filter"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:29
-msgid "label_user_filter"
-msgstr ""
-
-#. Default: "Username"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:82
-msgid "label_username"
+#. Default: "User roles tree"
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:25
+msgid "label_user_role_tree"
 msgstr ""
 
 #. Default: "Yes, assing"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:191
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:191
 msgid "label_yes"
 msgstr ""
 
 #. Default: "Yes, delete"
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:95
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:95
 msgid "label_yes_delete"
 msgstr ""
 
 #. Default: "1. Search user"
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:27
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:27
 msgid "lable_search_user"
 msgstr ""
 
+#. Default: "Search principals"
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:58
+msgid "placeholder_search"
+msgstr ""
+
 #. Default: "Are you sure top copy the permissions of user <div style=\"padding-left:1em;\"> ${source_user_title} (${source_user_name}) </div> on object \"${object_title}\" and all sub objects, to <div style=\"padding-left:1em;\"> ${target_user_title} (${target_user_name}) </div>"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:186
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:186
 msgid "text_confirm"
 msgstr ""
 
 #. Default: "Are you sure to remove all permissions of ${title} (${name}) on object \"${object_title}\" and all sub objects?"
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:91
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:91
 msgid "text_confirm_remove"
 msgstr ""
 
-#. Default: "A red border means the permissions will no be inherited."
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:36
-msgid "text_inheritance"
+#. Default: "No results found"
+#: ./ftw/permissionmanager/browser/principal_role_tree.py:117
+msgid "text_no_result"
 msgstr ""
 
 #. Default: "Nothing found"
-#: ./ftw/permissionmanager/browser/sharing.pt:123
+#: ./ftw/permissionmanager/browser/templates/sharing.pt:161
 msgid "text_nothing_found"
 msgstr ""
 
 #. Default: "You can remove the permissions of a user recursively"
-#: ./ftw/permissionmanager/browser/permission_manager.pt:35
-#: ./ftw/permissionmanager/browser/remove_user_permissions.pt:21
+#: ./ftw/permissionmanager/browser/templates/permission_manager.pt:35
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:21
 msgid "text_remove_permissions"
 msgstr ""
 
-#. Default: "Show only permissions of the following user ${user}"
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:31
-msgid "text_selected_user"
+#. Default: "These actions can be done for the selected user:"
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:73
+msgid "text_user_actions"
 msgstr ""
 
-#. Default: "Lists all user, which appears in the table above."
-#: ./ftw/permissionmanager/browser/advanced_sharing.pt:76
-msgid "text_user"
+#. Default: "Actions"
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:72
+msgid "title_actions"
 msgstr ""
 
 #. Default: "Copy permissions"
-#: ./ftw/permissionmanager/browser/copy_user_permissions.pt:14
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:14
 msgid "title_copy_permissions"
 msgstr ""
 
 #. Default: "Current permissions"
-#: ./ftw/permissionmanager/browser/sharing.pt:184
+#: ./ftw/permissionmanager/browser/templates/sharing.pt:223
 msgid "title_current_permissions"
 msgstr ""
 
 #. Default: "New"
-#: ./ftw/permissionmanager/browser/sharing.pt:65
+#: ./ftw/permissionmanager/browser/templates/sharing.pt:103
 msgid "title_new_permissions"
 msgstr ""
 
+#. Default: "The chosen principal has these roles:"
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:65
+msgid "title_roles_for_principal"
+msgstr ""
+
 #. Default: "Search result"
-#: ./ftw/permissionmanager/browser/sharing.pt:91
+#: ./ftw/permissionmanager/browser/templates/sharing.pt:129
 msgid "title_search_results"
 msgstr ""
+
+#. Default: "Show roles of a principal in a tree"
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:53
+msgid "title_search_user_for_role_tree"
+msgstr ""
+
 

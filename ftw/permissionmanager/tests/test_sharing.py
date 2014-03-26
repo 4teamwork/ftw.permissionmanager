@@ -1,4 +1,4 @@
-from ftw.permissionmanager.testing import FTW_PERMISSIONMANAGER_INTEGRATION_TESTING, TEST_USER_ID_2
+from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_INTEGRATION_TESTING, TEST_USER_ID_2
 import unittest2 as unittest
 from plone.app.testing import TEST_USER_NAME, TEST_USER_ID, login, logout
 from ftw.permissionmanager.browser.sharing import SharingView
@@ -7,7 +7,7 @@ from ftw.permissionmanager.browser.sharing import SharingView
 class TestRemovePermissions(unittest.TestCase):
     """Sharing is well tested by Plone, so just our customized methods"""
 
-    layer = FTW_PERMISSIONMANAGER_INTEGRATION_TESTING
+    layer = FTW_PERMISSIONMGR_INTEGRATION_TESTING
 
 
     def setUp(self):

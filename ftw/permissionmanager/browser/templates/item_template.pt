@@ -1,0 +1,18 @@
+<div tal:define="node            options/node;
+                 item_url        node/item/getURL"
+      tal:attributes="class python: node['item'].isLocalRoleAcquired and 'acquired' or 'not-acquired'">
+
+  <a tal:attributes="href item_url;
+                     title node/item/Description">
+    <span tal:content="node/item/Title">Title</span>
+  </a>
+
+  <span class="UserRoles" tal:condition="node/user_roles | nothing"
+        tal:content="node/user_roles"></span>
+  <span class="GroupRoles" tal:condition="node/group_roles | nothing"
+        tal:repeat="group_role node/group_roles">
+        <span tal:replace="group_role/title">Group Title</span>:
+        <span tal:replace="group_role/roles">Group Roles</span>
+  </span>
+
+</div>

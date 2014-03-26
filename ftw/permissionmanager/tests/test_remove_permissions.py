@@ -1,4 +1,4 @@
-from ftw.permissionmanager.testing import FTW_PERMISSIONMANAGER_INTEGRATION_TESTING
+from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
 from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD, TEST_USER_ID
 from plone.testing.z2 import Browser
 from zope.component import getMultiAdapter
@@ -8,7 +8,7 @@ import unittest2 as unittest
 
 class TestRemovePermissions(unittest.TestCase):
 
-    layer = FTW_PERMISSIONMANAGER_INTEGRATION_TESTING
+    layer = FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
 
 
     def test_remove_permission_view(self):

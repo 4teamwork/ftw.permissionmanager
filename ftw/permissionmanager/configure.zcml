@@ -15,6 +15,7 @@
   <i18n:registerTranslations directory="locales" />
 
   <include package=".browser" />
+  <include package=".upgrades" />
 
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
@@ -25,7 +26,16 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:importStep
+      name="ftw.permissionmanager"
+      title="ftw.permissionmanager special import handlers"
+      description=""
+      handler="ftw.permissionmanager.setuphandlers.import_various"
+      />
+
+
       <adapter name="get_local_roles" factory=".indexer.global_get_local_roles" />
+      <adapter name="principal_with_local_roles" factory=".indexer.principal_with_local_roles" />
       <adapter name="isLocalRoleAcquired" factory=".indexer.isLocalRoleAcquired" />
 
     <!-- Patches, using monkeypatcher -->
@@ -33,8 +43,7 @@
         description="Also Update metadata on security reindex"
         class="Products.Archetypes.CatalogMultiplex.CatalogMultiplex"
         original="reindexObjectSecurity"
-        replacement=".patches.egov_reindexObjectSecurity"
+        replacement=".patches.permissionmanager_reindexObjectSecurity"
         />
-    
 
 </configure>

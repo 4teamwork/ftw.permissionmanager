@@ -1,11 +1,14 @@
-from plone.app.testing import PloneSandboxLayer
+from ftw.builder.testing import BUILDER_LAYER
+from ftw.builder.testing import functional_session_factory
+from ftw.builder.testing import set_builder_session_factory
 from plone.app.testing import applyProfile
-from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import setRoles, TEST_USER_ID, TEST_USER_NAME, login
 from plone.testing import z2
 from zope.configuration import xmlconfig
-from plone.app.testing import setRoles, TEST_USER_ID, TEST_USER_NAME, login
-import ftw.permissionmanager
 
 
 TEST_USER_ID_2 = '_test_user_2_'
@@ -16,14 +19,15 @@ TEST_GROUP_ID_2 = 'test_group_2'
 
 class FtwPermissionmanagerLayer(PloneSandboxLayer):
 
-    defaultBases = (PLONE_FIXTURE, )
+    defaultBases = (PLONE_FIXTURE, BUILDER_LAYER)
 
     def setUpZope(self, app, configurationContext):
         # Load ZCML
 
+        import ftw.permissionmanager
         xmlconfig.file('configure.zcml',
-            ftw.permissionmanager,
-            context=configurationContext)
+                       ftw.permissionmanager,
+                       context=configurationContext)
 
         # installProduct() is *only* necessary for packages outside
         # the Products.* namespace which are also declared as Zope 2 products,
@@ -45,6 +49,12 @@ class FtwPermissionmanagerLayer(PloneSandboxLayer):
 
 
 FTW_PERMISSIONMANAGER_FIXTURE = FtwPermissionmanagerLayer()
-FTW_PERMISSIONMANAGER_INTEGRATION_TESTING = IntegrationTesting(
+FTW_PERMISSIONMGR_INTEGRATION_TESTING = IntegrationTesting(
     bases=(FTW_PERMISSIONMANAGER_FIXTURE, ),
     name="ftw.permissionmanager:Integration")
+
+
+FTW_PERMISSIONMGR_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(FTW_PERMISSIONMANAGER_FIXTURE,
+           set_builder_session_factory(functional_session_factory)),
+    name="ftw.permissionmanager:Functional")

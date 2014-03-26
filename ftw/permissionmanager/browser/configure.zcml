@@ -7,10 +7,14 @@
 
     <include package="Products.CMFPlone" />
 
-    <!-- Resource directory -->
     <browser:resourceDirectory
         name="permissionmanager.resources"
         directory="resources"
+        />
+
+    <browser:resourceDirectory
+        name="permissionmanager.select2"
+        directory="select2-3.4.5"
         />
 
     <browser:page
@@ -35,15 +39,7 @@
             for="*"
             class=".permissionmanager.PermissionManager"
             permission="zope2.View"
-            template="permission_manager.pt"
-            />
-
-    <browser:page
-            name="advanced-sharing"
-            for="*"
-            class=".advanced_sharing.AdvancedSharingView"
-            permission="zope2.View"
-            template="advanced_sharing.pt"
+            template="templates/permission_manager.pt"
             />
 
 
@@ -52,7 +48,7 @@
             for="*"
             class=".import_export_permissions.ImportExportPermissionsView"
             permission="plone.DelegateRoles"
-            template="import_export_permissions.pt"
+            template="templates/import_export_permissions.pt"
             />
 
     <browser:page
@@ -67,7 +63,29 @@
             for="*"
             class=".copy_permissions.CopyUserPermissionsView"
             permission="plone.DelegateRoles"
-            template="copy_user_permissions.pt"
+            template="templates/copy_user_permissions.pt"
+            />
+
+    <browser:page
+            name="prinicpal_role_tree"
+            for="*"
+            class=".principal_role_tree.PrincipalRoleTree"
+            permission="plone.DelegateRoles"
+            template="templates/principal_role_tree.pt"
+            />
+
+    <browser:page
+            name="principal_role_tree_search"
+            for="*"
+            class=".principal_role_tree.SearchPrincipals"
+            permission="plone.DelegateRoles"
+            />
+
+    <browser:page
+            name="build_principal_role_tree"
+            for="*"
+            class=".principal_role_tree.BuildPrincipalRoleTree"
+            permission="plone.DelegateRoles"
             />
 
 

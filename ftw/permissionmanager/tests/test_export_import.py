@@ -1,6 +1,6 @@
 from zope.component import getMultiAdapter
 from ftw.permissionmanager.testing import (
-    FTW_PERMISSIONMANAGER_INTEGRATION_TESTING,
+    FTW_PERMISSIONMGR_INTEGRATION_TESTING,
     TEST_USER_ID_2)
 from plone.app.testing import TEST_USER_ID
 import unittest2 as unittest
@@ -11,7 +11,7 @@ import StringIO
 
 class TestCopyPermissions(unittest.TestCase):
 
-    layer = FTW_PERMISSIONMANAGER_INTEGRATION_TESTING
+    layer = FTW_PERMISSIONMGR_INTEGRATION_TESTING
 
     def setUp(self):
         portal = self.layer['portal']

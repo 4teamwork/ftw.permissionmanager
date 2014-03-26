@@ -1,0 +1,92 @@
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="ftw.permissionmanager">
+
+    <head>
+        <div metal:fill-slot="style_slot" tal:omit-tag="">
+            <link href="++resource++permissionmanager.select2/select2.css" rel="stylesheet"/>
+
+            <style tal:content="string:
+                #content ul.select2-choices {
+                    margin-left:0;
+                }
+
+                #content div.not-acquired {
+                    border-top: 1px solid red;
+                }
+
+                .UserRoles {
+                    font-weight:bold;
+                    background-repeat: no-repeat;
+                    background-image: url(${here/portal_url}/user.png);
+                    padding-left: 16px;
+                    margin-left:10px;
+                }
+
+                .GroupRoles {
+                    font-weight:bold;
+                    background-repeat: no-repeat;
+                    background-image: url(${here/portal_url}/group.png);
+                    padding-left: 16px;
+                    margin-left:10px;
+                }
+            ">
+                Styles
+            </style>
+
+        </div>
+
+        <div metal:fill-slot="javascript_head_slot" tal:omit-tag="">
+
+            <script src="++resource++permissionmanager.select2/select2.js"
+                    type="text/javascript" language="javascript"></script>
+            <script src="++resource++permissionmanager.resources/userroletree.js"
+                    type="text/javascript" language="javascript"></script>
+
+        </div>
+    </head>
+
+     <div metal:fill-slot="main">
+
+            <h1 i18n:translate="title_search_user_for_role_tree">
+                Show roles of a principal in a tree
+            </h1>
+
+            <form class="search_principals">
+                <input type="text" name="principals" id="principals" multiple="multiple"
+                        i18n:attributes="data-placeholder placeholder_search"
+                        data-placeholder="Search principals" />
+
+            </form>
+
+            <div>
+                <h2 i18n:translate="title_roles_for_principal">
+                    The chosen principal has these roles:
+                </h2>
+                <ul class="level0 principals_tree">
+                </ul>
+
+                <div class="UserActions">
+                    <h2 i18n:translate="title_actions">Actions</h2>
+                    <p i18n:translate="text_user_actions">
+                        These actions can be done for the selected user:
+                    </p>
+                    <ul>
+                        <li>
+                            <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user="
+                               i18n:translate="label_remove_permission">Remove permissions</a>
+                        </li>
+                        <li>
+                            <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user="
+                               i18n:translate="label_copy_permission">Copy permissions</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+    </div>
+
+</html>

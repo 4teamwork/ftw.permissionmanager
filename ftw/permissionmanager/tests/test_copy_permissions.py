@@ -1,6 +1,6 @@
 from zope.component import getMultiAdapter
 from ftw.permissionmanager.testing import (
-    FTW_PERMISSIONMANAGER_INTEGRATION_TESTING,
+    FTW_PERMISSIONMGR_FUNCTIONAL_TESTING,
     TEST_USER_ID_2, TEST_GROUP_ID, TEST_GROUP_ID_2)
 import unittest2 as unittest
 from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD, TEST_USER_ID
@@ -10,7 +10,7 @@ import transaction
 
 class TestCopyPermissions(unittest.TestCase):
 
-    layer = FTW_PERMISSIONMANAGER_INTEGRATION_TESTING
+    layer = FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
 
     def setUp(self):
         self.browser = Browser(self.layer['app'])

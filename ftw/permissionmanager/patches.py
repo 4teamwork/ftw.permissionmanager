@@ -1,13 +1,13 @@
-from Products.Archetypes.utils import isFactoryContained
-from Products.CMFCore.utils import getToolByName
-from Products.Archetypes.config import TOOL_NAME
-from Products.CMFCore.interfaces import ICatalogTool
-from Products.Archetypes.log import log
-from logging import WARNING
 from Acquisition import aq_base
+from logging import WARNING
+from Products.Archetypes.config import TOOL_NAME
+from Products.Archetypes.log import log
+from Products.Archetypes.utils import isFactoryContained
+from Products.CMFCore.interfaces import ICatalogTool
+from Products.CMFCore.utils import getToolByName
 
 
-def egov_reindexObjectSecurity(self, skip_self=False):
+def permissionmanager_reindexObjectSecurity(self, skip_self=False):
     if isFactoryContained(self):
         return
     at = getToolByName(self, TOOL_NAME, None)
@@ -15,7 +15,7 @@ def egov_reindexObjectSecurity(self, skip_self=False):
         return
 
     catalogs = [c for c in at.getCatalogsByType(self.meta_type)
-                           if ICatalogTool.providedBy(c)]
+                if ICatalogTool.providedBy(c)]
     path = '/'.join(self.getPhysicalPath())
 
     for catalog in catalogs:
@@ -37,10 +37,12 @@ def egov_reindexObjectSecurity(self, skip_self=False):
                 log("reindexObjectSecurity: Cannot get %s from catalog" %
                     brain_path, level=WARNING)
                 continue
-            # Also append our new index
+            # PATCH: Append principal_with_local_roles index to security
+            # relevant indexes.
             indexes = list(self._cmf_security_indexes)
-            indexes.append('get_local_roles')
-            indexes.append('isLocalRoleAcquired')
+            indexes.append('principal_with_local_roles')
             # Recatalog with the same catalog uid.
+            # PATCH: update_metadata=1, origin ist update_metadata=0.
+            # We add get_local_roles and isLocalRoleAcquired to the metadata
             catalog.reindexObject(ob, idxs=tuple(indexes),
-                                    update_metadata=1, uid=brain_path)
+                                  update_metadata=1, uid=brain_path)
