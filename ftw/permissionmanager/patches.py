@@ -37,9 +37,12 @@ def permissionmanager_reindexObjectSecurity(self, skip_self=False):
                 log("reindexObjectSecurity: Cannot get %s from catalog" %
                     brain_path, level=WARNING)
                 continue
-            # Also append our new index
+            # PATCH: Append principal_with_local_roles index to security
+            # relevant indexes.
             indexes = list(self._cmf_security_indexes)
             indexes.append('principal_with_local_roles')
             # Recatalog with the same catalog uid.
+            # PATCH: update_metadata=1, origin ist update_metadata=0.
+            # We add get_local_roles and isLocalRoleAcquired to the metadata
             catalog.reindexObject(ob, idxs=tuple(indexes),
                                   update_metadata=1, uid=brain_path)
