@@ -5,6 +5,9 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
+- Fix opening author view in a overlay.
+  [mathias.leimgruber]
+
 - Prevent from display a user twice in remove user permission search_result.
   [mathias.leimgruber]
 

@@ -19,7 +19,7 @@
                 $this = $(this);
                 $this.prepOverlay({
                     subtype:'ajax',
-                    urlmatch:'$',urlreplace:' .authorsInformation > *'
+                    urlmatch:'$',urlreplace:' #content > *'
                 });
                 //trigger click event
                $this.trigger('click');
