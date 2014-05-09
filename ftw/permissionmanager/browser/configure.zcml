@@ -70,7 +70,7 @@
             name="prinicpal_role_tree"
             for="*"
             class=".principal_role_tree.PrincipalRoleTree"
-            permission="plone.DelegateRoles"
+            permission="zope2.View"
             template="templates/principal_role_tree.pt"
             />
 
@@ -78,14 +78,14 @@
             name="principal_role_tree_search"
             for="*"
             class=".principal_role_tree.SearchPrincipals"
-            permission="plone.DelegateRoles"
+            permission="zope2.View"
             />
 
     <browser:page
             name="build_principal_role_tree"
             for="*"
             class=".principal_role_tree.BuildPrincipalRoleTree"
-            permission="plone.DelegateRoles"
+            permission="zope2.View"
             />
 
 
