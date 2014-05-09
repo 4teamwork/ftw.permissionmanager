@@ -35,7 +35,7 @@ class SearchPrincipals(BrowserView):
         self.search_term = None
 
     def __call__(self):
-        self.search_term = self.request.get('search_term', '').decode('utf-8')
+        self.search_term = self.request.get('search_term', '')
 
         if not self.search_term:
             raise BadRequest('No search_term found.')
