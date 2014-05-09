@@ -5,6 +5,9 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
+- Fix redirect to @@prinicpal_role_tree view if user has only view permission.
+  [mathias.leimgruber]
+
 - Fix opening author view in a overlay.
   [mathias.leimgruber]
 
