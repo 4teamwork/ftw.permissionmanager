@@ -281,13 +281,13 @@ class TestBuildPrincipalRoleTree(TestCase):
         self.assertEquals(
             'Can add, Can edit',
             principal_role_tree.get_friendly_role_name(
-                ['Contributor', 'Editor'], self.portal.REQUEST))
+                ['Contributor', 'Editor'], '', self.portal.REQUEST))
 
     def test_get_friendly_role_name_does_not_translate(self):
         self.assertEquals(
             'Foo, Baar',
             principal_role_tree.get_friendly_role_name(
-                ['Foo', 'Baar'], self.portal.REQUEST))
+                ['Foo', 'Baar'], '', self.portal.REQUEST))
 
     @browsing
     def test_translated_roles_are_displayed_in_tree(self, browser):
