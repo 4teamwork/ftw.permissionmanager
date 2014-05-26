@@ -2,4 +2,5 @@
 <object name="portal_catalog" meta_type="Plone Catalog Tool">
     <column value="get_local_roles"/>
     <column value="isLocalRoleAcquired"/>
+    <column value="workflow_id"/>
 </object>

@@ -5,6 +5,9 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
+- Add "workflow_id" metadata to catalog.
+  [jone]
+
 - Fix redirect to @@prinicpal_role_tree view if user has only view permission.
   [mathias.leimgruber]
 
