@@ -25,5 +25,24 @@
         profile="ftw.permissionmanager:default"
         />
 
+    <!-- 2301 -> 2302 -->
+    <genericsetup:upgradeStep
+        title="Install workflow_id catalog metadata."
+        description=""
+        source="2301"
+        destination="2302"
+        handler="ftw.permissionmanager.upgrades.to2302.InstallMetadata"
+        profile="ftw.permissionmanager:default"
+        />
+
+    <genericsetup:registerProfile
+        name="2302"
+        title="ftw.permissionmanager: 2302"
+        description=""
+        directory="profiles/2302"
+        for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
 
 </configure>

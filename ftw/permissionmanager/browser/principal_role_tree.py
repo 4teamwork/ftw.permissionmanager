@@ -1,19 +1,39 @@
-from ftw.permissionmanager import permission_manager_factory as _
-from ftw.permissionmanager.treeifier import Treeify
-from plone.app.workflow.interfaces import ISharingPageRole
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from ftw.permissionmanager import permission_manager_factory as _
+from ftw.permissionmanager.treeifier import Treeify
+from plone.app.workflow.interfaces import ISharingPageRole
 from zExceptions import BadRequest
 from zope.component import queryUtility
 from zope.i18n import translate
+from zope.i18nmessageid import Message
 import json
+import pkg_resources
 
 
-def get_friendly_role_name(names, request):
+try:
+    pkg_resources.get_distribution('ftw.lawgiver')
+except pkg_resources.DistributionNotFound:
+    LAWGIVER_INSTALLED = False
+else:
+    LAWGIVER_INSTALLED = True
+    from ftw.lawgiver.utils import translate_role_for_workflow
+
+
+def get_friendly_role_name(names, workflow_id, request):
     friendly_names = []
 
     for name in names:
+        if LAWGIVER_INSTALLED:
+            title = translate(
+                translate_role_for_workflow(workflow_id, name),
+                context=request)
+            if isinstance(title, Message):
+                title = translate(title, context=request)
+            friendly_names.append(title)
+            continue
+
         utility = queryUtility(ISharingPageRole, name=name)
         if utility is None:
             friendly_names.append(name)
@@ -162,7 +182,9 @@ class BuildPrincipalRoleTree(BrowserView):
         local_roles = brain.get_local_roles
         for principal, roles in local_roles:
             if principal == self.principalid:
-                return get_friendly_role_name(roles, self.request)
+                return get_friendly_role_name(roles,
+                                              brain.workflow_id,
+                                              self.request)
         return ''
 
     def get_group_roles(self, brain):
@@ -179,5 +201,6 @@ class BuildPrincipalRoleTree(BrowserView):
                     group_roles.append({'title': gtitle,
                                         'roles': get_friendly_role_name(
                                             roles,
+                                            brain.workflow_id,
                                             self.request)})
         return group_roles
