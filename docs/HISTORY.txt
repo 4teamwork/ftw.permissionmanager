@@ -5,7 +5,10 @@ Changelog
 2.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- No longer allow users with view permission to access the advanced
+  security features. Since it's possible to search for all users, which
+  exposes all usernames and email addresses to anyone with view permission.
+  [mathias.leimgruber]
 
 
 2.2.1 (2014-06-04)

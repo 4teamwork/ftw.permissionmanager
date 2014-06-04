@@ -44,5 +44,13 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <!-- 2302 -> 2303 -->
+    <upgrade-step:importProfile
+        title="Protect permissionmanager view with 'Delegate roles' instead of 'View'"
+        profile="ftw.permissionmanager:default"
+        source="2302"
+        destination="2303"
+        directory="profiles/2303"
+        />
 
 </configure>
