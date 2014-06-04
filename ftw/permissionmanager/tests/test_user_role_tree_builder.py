@@ -359,3 +359,17 @@ class TestBuildPrincipalRoleTree(TestCase):
                           browser.css('.level1 .UserRoles').first.text)
         self.assertEquals('Can view',
                           browser.css('.level3 .UserRoles').first.text)
+
+    def test_item_template(self):
+        self._create_structure()
+        john = create(Builder('user').with_roles('Reader', on=self.b11))
+        self.b11.reindexObject()
+
+        self.portal.REQUEST.set('principalid', john.getId())
+        view = queryMultiAdapter((self.portal, self.portal.REQUEST),
+                                 name='build_principal_role_tree')
+        view()
+        tree = view.build_tree()['children']
+
+        level1 = tree[0]
+        self.assertEquals('folder', level1['normalized_portaltype'])

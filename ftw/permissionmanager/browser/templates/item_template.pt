@@ -3,7 +3,8 @@
       tal:attributes="class python: node['item'].isLocalRoleAcquired and 'acquired' or 'not-acquired'">
 
   <a tal:attributes="href item_url;
-                     title node/item/Description">
+                     title node/item/Description;
+                     class string: contenttype-${node/normalized_portaltype}">
     <span tal:content="node/item/Title">Title</span>
   </a>
 
