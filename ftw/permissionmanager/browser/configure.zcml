@@ -38,7 +38,7 @@
             name="permission_manager"
             for="*"
             class=".permissionmanager.PermissionManager"
-            permission="zope2.View"
+            permission="plone.DelegateRoles"
             template="templates/permission_manager.pt"
             />
 
@@ -70,7 +70,7 @@
             name="prinicpal_role_tree"
             for="*"
             class=".principal_role_tree.PrincipalRoleTree"
-            permission="zope2.View"
+            permission="plone.DelegateRoles"
             template="templates/principal_role_tree.pt"
             />
 
@@ -78,14 +78,14 @@
             name="principal_role_tree_search"
             for="*"
             class=".principal_role_tree.SearchPrincipals"
-            permission="zope2.View"
+            permission="plone.DelegateRoles"
             />
 
     <browser:page
             name="build_principal_role_tree"
             for="*"
             class=".principal_role_tree.BuildPrincipalRoleTree"
-            permission="zope2.View"
+            permission="plone.DelegateRoles"
             />
 
 
