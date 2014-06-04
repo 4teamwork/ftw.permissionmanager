@@ -5,7 +5,8 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add contenttype css klass on items in role map tree.
+  [mathias.leimgruber]
 
 
 2.2.0 (2014-06-02)

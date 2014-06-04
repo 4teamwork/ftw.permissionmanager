@@ -1,9 +1,10 @@
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.permissionmanager import permission_manager_factory as _
 from ftw.permissionmanager.treeifier import Treeify
 from plone.app.workflow.interfaces import ISharingPageRole
+from plone.i18n.normalizer.interfaces import IIDNormalizer
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zExceptions import BadRequest
 from zope.component import queryUtility
 from zope.i18n import translate
@@ -174,9 +175,11 @@ class BuildPrincipalRoleTree(BrowserView):
         return tree(self.context)
 
     def node_updater(self, brain, node):
+        normalizer = queryUtility(IIDNormalizer)
         node['item'] = brain
         node['user_roles'] = self.get_user_roles(brain)
         node['group_roles'] = self.get_group_roles(brain)
+        node['normalized_portaltype'] = normalizer.normalize(brain.portal_type)
 
     def get_user_roles(self, brain):
         local_roles = brain.get_local_roles
