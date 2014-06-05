@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.2.2 (unreleased)
+2.2.2 (2014-06-05)
 ------------------
 
 - No longer allow users with view permission to access the advanced
