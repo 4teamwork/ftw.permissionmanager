@@ -40,6 +40,7 @@ def get_friendly_role_name(names, workflow_id, request):
             friendly_names.append(name)
         else:
             friendly_names.append(translate(utility.title, context=request))
+    friendly_names.sort()
     return ', '.join(friendly_names)
 
 

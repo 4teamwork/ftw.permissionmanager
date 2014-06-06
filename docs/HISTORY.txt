@@ -5,7 +5,11 @@ Changelog
 2.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Sort roles always by translates title.
+  [mathias.leimgruber]
+
+- Add language support for select2 widget.
+  [mathias.leimgruber]
 
 
 2.2.2 (2014-06-05)

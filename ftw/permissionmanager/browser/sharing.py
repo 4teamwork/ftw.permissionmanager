@@ -146,29 +146,3 @@ class SharingView(base):
                 safe_unicode(y["title"], encoding).lower()))
 
         return current_settings
-
-    # Basically the same implementation as in p.a.workflow but we sort roles
-    # by id instead of the translated title to have the same order for all
-    # languages.
-    @memoize
-    def roles(self):
-        """Get a list of roles that can be managed.
-
-        Returns a list of dicts with keys:
-
-            - id
-            - title
-        """
-        context = self.context
-        portal_membership = getToolByName(context, 'portal_membership')
-
-        pairs = []
-
-        for name, utility in getUtilitiesFor(ISharingPageRole):
-            permission = utility.required_permission
-            if permission is None or portal_membership.checkPermission(
-              permission, context):
-                pairs.append(dict(id=name, title=utility.title))
-
-        pairs.sort(key=lambda x: x["id"])
-        return pairs

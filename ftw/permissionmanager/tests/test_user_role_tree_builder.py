@@ -285,7 +285,7 @@ class TestBuildPrincipalRoleTree(TestCase):
 
     def test_get_friendly_role_name_does_not_translate(self):
         self.assertEquals(
-            'Foo, Baar',
+            'Baar, Foo',
             principal_role_tree.get_friendly_role_name(
                 ['Foo', 'Baar'], '', self.portal.REQUEST))
 

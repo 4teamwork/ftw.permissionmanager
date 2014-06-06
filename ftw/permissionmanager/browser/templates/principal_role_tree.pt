@@ -42,6 +42,12 @@
 
             <script src="++resource++permissionmanager.select2/select2.js"
                     type="text/javascript" language="javascript"></script>
+            <script
+                tal:define="lang context/portal_languages/getPreferredLanguage;
+                            lang python: lang.split('-')[0]"
+                tal:condition="python: lang != 'en'"
+                tal:attributes="src string:++resource++permissionmanager.select2/select2_locale_${lang}.js"
+                type="text/javascript" language="javascript"></script>
             <script src="++resource++permissionmanager.resources/userroletree.js"
                     type="text/javascript" language="javascript"></script>
 
