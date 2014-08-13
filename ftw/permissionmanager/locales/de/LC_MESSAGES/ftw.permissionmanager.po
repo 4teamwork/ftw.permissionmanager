@@ -80,12 +80,12 @@ msgstr "Hier finden Sie verschiedene Werkzeuge zum Verwalten von Berechtigungen.
 #. Default: "Search user to assign the permissions"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:105
 msgid "help_search_destination"
-msgstr "Benutzer suchen, an welche die Berechtigungen Übertragen werden sollen"
+msgstr "Benutzer suchen, an welche die Berechtigungen übertragen werden sollen"
 
 #. Default: "Search user, to copy his permissions"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:29
 msgid "help_search_user"
-msgstr "Benutzer suchen, an welche die Berechtigungen Übertragen werden sollen"
+msgstr "Benutzer suchen, von welchen die Berechtigungen kopiert werden sollen."
 
 #. Default: "This view helps you to find local roles of a user on the site."
 #: ./ftw/permissionmanager/browser/templates/permission_manager.pt:28
