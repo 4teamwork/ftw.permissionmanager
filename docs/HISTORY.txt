@@ -5,7 +5,8 @@ Changelog
 2.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed german copy permission translation.
+  [lknoepfel]
 
 
 2.2.3 (2014-06-10)
