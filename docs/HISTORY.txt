@@ -5,6 +5,9 @@ Changelog
 2.2.4 (unreleased)
 ------------------
 
+- Use ftw.profilehook instead of custom import steps (setuphandlers).
+  [jone]
+
 - Fixed german copy permission translation.
   [lknoepfel]
 

@@ -42,6 +42,7 @@ setup(name='ftw.permissionmanager',
         'collective.monkeypatcher',
         'Products.CMFPlone >= 4.3b',
         'ftw.upgrade',
+        'ftw.profilehook',
         # -*- Extra requirements: -*-
         ],
       tests_require=tests_require,

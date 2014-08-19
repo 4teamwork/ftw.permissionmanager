@@ -3,6 +3,7 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:profilehook="http://namespaces.zope.org/profilehook"
     xmlns:monkey="http://namespaces.plone.org/monkey"
     i18n_domain="ftw.permissionmanager">
 
@@ -10,6 +11,7 @@
   <include package="z3c.autoinclude" file="meta.zcml" />
   <includeDependencies package="." />
 
+  <include package="ftw.profilehook" />
 
   <five:registerPackage package="." initialize=".initialize" />
   <i18n:registerTranslations directory="locales" />
@@ -26,13 +28,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-  <genericsetup:importStep
-      name="ftw.permissionmanager"
-      title="ftw.permissionmanager special import handlers"
-      description=""
-      handler="ftw.permissionmanager.setuphandlers.import_various"
+  <profilehook:hook
+      profile="ftw.permissionmanager:default"
+      handler=".hooks.installed"
       />
-
 
       <adapter name="get_local_roles" factory=".indexer.global_get_local_roles" />
       <adapter name="principal_with_local_roles" factory=".indexer.principal_with_local_roles" />

@@ -6,6 +6,10 @@ PROFILE_ID = 'profile-ftw.permissionmanager:default'
 INDEXES = (('principal_with_local_roles', 'KeywordIndex'), )
 
 
+def installed(site):
+    add_catalog_indexes(site)
+
+
 def add_catalog_indexes(context, logger=None):
     """Method to add our wanted indexes to the portal_catalog.
 
@@ -42,14 +46,3 @@ def add_catalog_indexes(context, logger=None):
     if len(indexables) > 0:
         logger.info("Indexing new indexes %s.", ', '.join(indexables))
         catalog.manage_reindexIndex(ids=indexables)
-
-
-def import_various(context):
-    """Import step for configuration that is not handled in xml files.
-    """
-    # Only run step if a flag file is present
-    if context.readDataFile('ftw.permissionmanager.setuphandlers.txt') is None:
-        return
-    logger = context.getLogger('ftw.permissionmanager')
-    site = context.getSite()
-    add_catalog_indexes(site, logger)
