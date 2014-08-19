@@ -1,0 +1,3 @@
+<registry>
+  <record name="ftw.permissionmanager.manage_types" remove="True" />
+</registry>

@@ -19,7 +19,6 @@
   <include package=".browser" />
   <include package=".upgrades" />
 
-  <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"
       title="ftw.permissionmanager"
@@ -31,6 +30,19 @@
   <profilehook:hook
       profile="ftw.permissionmanager:default"
       handler=".hooks.installed"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="ftw.permissionmanager"
+      directory="profiles/uninstall"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      />
+
+  <profilehook:hook
+      profile="ftw.permissionmanager:uninstall"
+      handler=".hooks.uninstalled"
       />
 
       <adapter name="get_local_roles" factory=".indexer.global_get_local_roles" />

@@ -10,6 +10,10 @@ def installed(site):
     add_catalog_indexes(site)
 
 
+def uninstalled(site):
+    remove_catalog_indexes(site)
+
+
 def add_catalog_indexes(context, logger=None):
     """Method to add our wanted indexes to the portal_catalog.
 
@@ -46,3 +50,12 @@ def add_catalog_indexes(context, logger=None):
     if len(indexables) > 0:
         logger.info("Indexing new indexes %s.", ', '.join(indexables))
         catalog.manage_reindexIndex(ids=indexables)
+
+
+def remove_catalog_indexes(context):
+    catalog = getToolByName(context, 'portal_catalog')
+    indexes = catalog.indexes()
+
+    for name, meta_type in INDEXES:
+        if name in indexes:
+            catalog.delIndex(name)

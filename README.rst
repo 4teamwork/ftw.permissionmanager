@@ -49,6 +49,12 @@ Usage
 
 
 
+Uninstall
+=========
+
+This package provides an Generic Setup uninstall profile.
+
+
 Links
 =====
 
