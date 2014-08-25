@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.2.4 (unreleased)
+2.3.0 (2014-08-25)
 ------------------
 
 - Implement uninstall profile.
