@@ -7,6 +7,7 @@ maintainer = 'Mathias Leimgruber'
 tests_require = [
     'plone.app.testing',
     'ftw.testbrowser',
+    'ftw.testing',
     'ftw.builder']
 
 setup(name='ftw.permissionmanager',
@@ -42,6 +43,7 @@ setup(name='ftw.permissionmanager',
         'collective.monkeypatcher',
         'Products.CMFPlone >= 4.3b',
         'ftw.upgrade',
+        'ftw.profilehook',
         # -*- Extra requirements: -*-
         ],
       tests_require=tests_require,
