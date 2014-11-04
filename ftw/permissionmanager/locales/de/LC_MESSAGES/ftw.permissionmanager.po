@@ -55,7 +55,7 @@ msgstr "Nach Benutzer/Gruppen suchen"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:22
 #: ./ftw/permissionmanager/browser/templates/permission_manager.pt:43
 msgid "help_copy_permissions"
-msgstr "Berechtigungen eines Benutzers im ganzen Bereich auf einen anderen Benutzer Übertragen."
+msgstr "Berechtigungen eines Benutzers im ganzen Bereich auf einen anderen Benutzer übertragen."
 
 #. Default: "This section allows you to export and import security settings"
 #: ./ftw/permissionmanager/browser/templates/import_export_permissions.pt:21
