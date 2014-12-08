@@ -132,7 +132,7 @@ msgstr "4. Zielbenutzer auswählen"
 #. Default: "5. Confirm"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:176
 msgid "label_confirm"
-msgstr "5. Bestäigen"
+msgstr "5. Bestätigen"
 
 #. Default: "3. Confirm"
 #: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:84

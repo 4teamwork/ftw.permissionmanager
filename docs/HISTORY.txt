@@ -5,7 +5,8 @@ Changelog
 2.3.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed typo in german translation.
+  [mbaechtold]
 
 
 2.3.1 (2014-11-05)
