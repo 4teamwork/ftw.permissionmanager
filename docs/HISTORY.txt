@@ -8,6 +8,10 @@ Changelog
 - Fixed typo in german translation.
   [mbaechtold]
 
+- Clear the search form and hide the search results when the sharing form is
+  submitted.
+  [mbaechtold]
+
 
 2.3.1 (2014-11-05)
 ------------------

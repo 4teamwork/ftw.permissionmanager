@@ -19,6 +19,13 @@ class SharingView(base):
     # template: Backward compatibility Plone < 4.3.2
     index = template = ViewPageTemplateFile('templates/sharing.pt')
 
+    def handle_form(self):
+        if self.request.form.get('form.button.Save', None):
+            # Clear the search form and hide the search results when the
+            # sharing form is submitted.
+            self.request.form.pop('search_term', None)
+        return super(SharingView, self).handle_form()
+
     def has_manage_portal(self):
         return self.context.portal_membership.checkPermission(
             'ManagePortal',
