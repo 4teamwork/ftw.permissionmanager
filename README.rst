@@ -58,9 +58,9 @@ This package provides an Generic Setup uninstall profile.
 Links
 =====
 
-- Main github project repository: https://github.com/4teamwork/ftw.permissionmanager
-- Issue tracker: https://github.com/4teamwork/ftw.permissionmanager/issues
-- Package on pypi: http://pypi.python.org/pypi/ftw.permissionmanager
+- Github: https://github.com/4teamwork/ftw.permissionmanager
+- Issues: https://github.com/4teamwork/ftw.permissionmanager/issues
+- Pypi: http://pypi.python.org/pypi/ftw.permissionmanager
 - Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.permissionmanager
 
 Copyright
