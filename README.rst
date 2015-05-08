@@ -69,7 +69,3 @@ Copyright
 This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
 
 ``ftw.permissionmanager`` is licensed under GNU General Public License, version 2.
-
-.. image:: https://cruel-carlota.pagodabox.com/0aedf121b182f20d668ecc65c6741f4d
-   :alt: githalytics.com
-   :target: http://githalytics.com/4teamwork/ftw.permissionmanager
