@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.3.3 (unreleased)
+2.3.3 (2015-06-05)
 ------------------
 
 - CSV export: insert the users fullname in the "Name" column.
