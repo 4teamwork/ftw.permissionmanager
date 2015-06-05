@@ -1,11 +1,12 @@
-import StringIO
-import csv
-from Products.Five import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
 from ftw.permissionmanager import permission_manager_factory as _
 from plone.app.workflow.interfaces import ISharingPageRole
-from zope.component import getUtilitiesFor
 from plone.memoize.instance import memoize
+from Products.CMFCore.utils import getToolByName
+from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from zope.component import getUtilitiesFor
+import csv
+import StringIO
 
 DEFAULT_ROLES = ['Owner', ]
 
@@ -20,6 +21,7 @@ class ImportExportPermissionsView(BrowserView):
         self.recursive = None
         self.relative_paths = None
         self.structure_only = None
+        self.portal_membership = getToolByName(self.context, 'portal_membership')
 
     def __call__(self, *args, **kwargs):
         self.request.set('disable_border', True)
@@ -92,8 +94,10 @@ class ImportExportPermissionsView(BrowserView):
             contextPath = '/'.join(self.context.getPhysicalPath())
             path = '...%s' % path[len(contextPath):]
         for user, roles in obj.get_local_roles():
+            member = self.portal_membership.getMemberById(user)
+            fullname = member and member.getProperty('fullname', user) or user
             row = {
-                'Name': user.encode(self.encoding),
+                'Name': fullname.decode('utf-8').encode(self.encoding),
                 'Userid': user.encode(self.encoding),
                 'Title': obj.Title().decode('utf-8').encode(self.encoding),
                 'Path': path,

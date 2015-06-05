@@ -25,6 +25,8 @@ class TestCopyPermissions(unittest.TestCase):
             member_ids=[TEST_USER_ID_2],
             member_role="Reader",
             reindex=True)
+        member2 = portal.portal_membership.getMemberById(TEST_USER_ID_2)
+        member2.setMemberProperties({'fullname': 'Test \xc3\x9cser 2'})
 
         portal.portal_membership.setLocalRoles(
             obj=portal.folder1.folder2.document1,
@@ -111,6 +113,8 @@ class TestCopyPermissions(unittest.TestCase):
                 index = head.index('Reader')
                 self.assertEqual(
                     record[index], 'X')
+                self.assertEqual(['Test \xc3\x9cser 2', TEST_USER_ID_2],
+                                 record[:2])
             elif record[1] == TEST_USER_ID_2 and record[-1] == '/plone/folder1/folder2/document1':
                 index = head.index('Editor')
                 self.assertEqual(
