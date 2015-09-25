@@ -5,6 +5,9 @@ Changelog
 2.3.4 (unreleased)
 ------------------
 
+- Fix typo: prinicpal => principal
+  [elioschmutz]
+
 - Add dexterity support for indexers
   [elioschmutz]
 
