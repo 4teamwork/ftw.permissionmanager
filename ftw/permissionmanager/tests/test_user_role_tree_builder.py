@@ -4,9 +4,13 @@ from ftw.permissionmanager.browser import principal_role_tree
 from ftw.permissionmanager.indexer import principal_with_local_roles
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
 from ftw.testbrowser import browsing
+from plone.dexterity.content import Item
+from plone.dexterity.fti import DexterityFTI
+from plone.dexterity.fti import register
 from Products.CMFCore.utils import getToolByName
 from unittest2 import TestCase
 from zope.component import queryMultiAdapter
+from zope.interface import Interface
 import transaction
 
 
@@ -373,3 +377,31 @@ class TestBuildPrincipalRoleTree(TestCase):
 
         level1 = tree[0]
         self.assertEquals('folder', level1['normalized_portaltype'])
+
+    def test_dexterity_item(self):
+        # prepare a fti
+        portal_type = 'testtype'
+        fti = DexterityFTI(portal_type)
+        fti.klass = 'plone.dexterity.content.Item'
+        fti.schema = Interface.__identifier__
+        self.portal.portal_types._setObject(portal_type, fti)
+        register(fti)
+
+        # prepare an item
+        item = Item('testitem')
+        item.portal_type = portal_type
+        self.portal._setObject(item.id, item)
+        item = self.portal[item.id]
+
+        john = create(Builder('user').with_roles('Reader', on=item))
+
+        item.reindexObject()
+
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        result = catalog(principal_with_local_roles=[john.getId()])
+
+        self.assertEquals(1,
+                          len(result),
+                          'Expect one entry')
+        self.assertEquals(result[0].getPath(),
+                          '/'.join(item.getPhysicalPath()))
