@@ -5,7 +5,8 @@ Changelog
 2.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add dexterity support for indexers
+  [elioschmutz]
 
 
 2.3.3 (2015-06-05)
