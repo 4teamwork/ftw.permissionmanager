@@ -4,11 +4,14 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:profilehook="http://namespaces.zope.org/profilehook"
+    xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
     xmlns:monkey="http://namespaces.plone.org/monkey"
     i18n_domain="ftw.permissionmanager">
 
   <!-- include dependencies -->
   <include package="z3c.autoinclude" file="meta.zcml" />
+  <include package="ftw.upgrade" file="meta.zcml" />
+
   <includeDependencies package="." />
 
   <include package="ftw.profilehook" />
@@ -30,6 +33,11 @@
   <profilehook:hook
       profile="ftw.permissionmanager:default"
       handler=".hooks.installed"
+      />
+
+  <upgrade-step:directory
+      profile="ftw.permissionmanager:default"
+      directory="./upgrades"
       />
 
   <genericsetup:registerProfile
