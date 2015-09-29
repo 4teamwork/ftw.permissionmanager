@@ -67,7 +67,7 @@
             />
 
     <browser:page
-            name="prinicpal_role_tree"
+            name="principal_role_tree"
             for="*"
             class=".principal_role_tree.PrincipalRoleTree"
             permission="plone.DelegateRoles"
