@@ -39,6 +39,7 @@ setup(name='ftw.permissionmanager',
       zip_safe=False,
 
       install_requires=[
+        'Plone',
         'setuptools',
         'collective.monkeypatcher',
         'Products.CMFPlone >= 4.3b',
