@@ -1,3 +1,4 @@
 <registry>
   <record name="ftw.permissionmanager.manage_types" remove="True" />
+  <record name="ftw.permissionmanager.fields_to_search" remove="True" />
 </registry>
