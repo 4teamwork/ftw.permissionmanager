@@ -6,6 +6,10 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode, getSiteEncoding
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getUtilitiesFor
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+from plone.app.workflow.browser.sharing import merge_search_results
+from itertools import chain
 
 
 class SharingView(base):
@@ -41,6 +45,30 @@ class SharingView(base):
                 return True
         return False
 
+
+    def user_search_results(self):
+        """Return search results for a query to add new users.
+
+        Returns a list of dicts, as per role_settings().
+        """
+
+        def search_for_principal(hunter, search_term):
+            registry = getUtility(IRegistry)
+            fields = registry["ftw.permissionmanager.fields_to_search"]
+            return merge_search_results(chain(*[hunter.searchUsers(**{field: search_term})
+                for field in fields]), 'userid')
+
+        def get_principal_by_id(user_id):
+            acl_users = getToolByName(self.context, 'acl_users')
+            return acl_users.getUserById(user_id)
+
+        def get_principal_title(user, default_title):
+            return user.getProperty('fullname') or user.getId() or default_title
+
+        return self._principal_search_results(search_for_principal,
+            get_principal_by_id, get_principal_title, 'user', 'userid')
+
+
     def role_settings(self):
         """Only return current settings"""
         results = self.existing_role_settings()
@@ -74,7 +102,6 @@ class SharingView(base):
 
         mtool = getToolByName(self.context, 'portal_membership')
         gtool = getToolByName(self.context, 'portal_groups')
-
         user_results = self.user_search_results()
         group_results = self.group_search_results()
         current_settings = user_results + group_results
@@ -111,7 +138,6 @@ class SharingView(base):
                 # It allows you to do multible search queries and you will not
                 # lose allready selected roles for user/groups
                 if roles and not self.request.get('form.button.Save', None):
-
                     # get group title or user fullname
                     if entry['type'] == 'user':
                         member = mtool.getMemberById(entry['id'])

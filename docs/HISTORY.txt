@@ -5,6 +5,9 @@ Changelog
 2.3.4 (unreleased)
 ------------------
 
+- Allow to customize fields.
+  [tschanzt]
+
 - Fix typo: prinicpal => principal
   [elioschmutz]
 
