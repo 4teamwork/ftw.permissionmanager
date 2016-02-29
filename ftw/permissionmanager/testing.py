@@ -22,16 +22,14 @@ class FtwPermissionmanagerLayer(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE, BUILDER_LAYER)
 
     def setUpZope(self, app, configurationContext):
-        # Load ZCML
+        xmlconfig.string(
+            '<configure xmlns="http://namespaces.zope.org/zope">'
+            '  <include package="z3c.autoinclude" file="meta.zcml" />'
+            '  <includePlugins package="plone" />'
+            '  <includePluginsOverrides package="plone" />'
+            '</configure>',
+            context=configurationContext)
 
-        import ftw.permissionmanager
-        xmlconfig.file('configure.zcml',
-                       ftw.permissionmanager,
-                       context=configurationContext)
-
-        # installProduct() is *only* necessary for packages outside
-        # the Products.* namespace which are also declared as Zope 2 products,
-        # using <five:registerPackage /> in ZCML.
         z2.installProduct(app, 'ftw.permissionmanager')
 
     def setUpPloneSite(self, portal):

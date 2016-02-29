@@ -6,6 +6,7 @@
     xmlns:profilehook="http://namespaces.zope.org/profilehook"
     xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
     xmlns:monkey="http://namespaces.plone.org/monkey"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ftw.permissionmanager">
 
   <include package="collective.monkeypatcher" />
@@ -55,11 +56,14 @@
       <adapter name="workflow_id" factory=".indexer.workflow_id" />
 
     <!-- Patches, using monkeypatcher -->
+    <!-- Let ftw.solr's reindexObjectSecurity be loaded first -->
+    <include zcml:condition="installed ftw.solr" package="ftw.solr" />
     <monkey:patch
         description="Also Update metadata on security reindex"
         class="Products.Archetypes.CatalogMultiplex.CatalogMultiplex"
         original="reindexObjectSecurity"
         replacement=".patches.permissionmanager_reindexObjectSecurity"
+        preserveOriginal="True"
         />
 
 </configure>
