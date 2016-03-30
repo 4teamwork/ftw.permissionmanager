@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.4.1 (unreleased)
+2.4.1 (2016-03-30)
 ------------------
 
 - Refactor reindexObjectSecurity patch to be less invasive. [jone]
