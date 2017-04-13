@@ -23,6 +23,13 @@ class SharingView(base):
     # template: Backward compatibility Plone < 4.3.2
     index = template = ViewPageTemplateFile('templates/sharing.pt')
 
+    def __call__(self, *args, **kwargs):
+        self.disable_right_column()
+        return super(SharingView, self).__call__(*args, **kwargs)
+
+    def disable_right_column(self):
+        self.request.set('disable_plone.rightcolumn', 1)
+
     def handle_form(self):
         if self.request.form.get('form.button.Save', None):
             # Clear the search form and hide the search results when the
