@@ -50,7 +50,7 @@ class ImportExportPermissionsView(BrowserView):
 
     @memoize
     def get_fieldnames(self):
-        return ['Name', 'Userid', 'Title'] + self.get_roles() + ['Path']
+        return ['Name', 'Userid', 'Email', 'Title'] + self.get_roles() + ['Path']
 
     def export(self):
         query = {}
@@ -99,6 +99,7 @@ class ImportExportPermissionsView(BrowserView):
             row = {
                 'Name': fullname.decode('utf-8').encode(self.encoding),
                 'Userid': user.encode(self.encoding),
+                'Email': member.getProperty('email', '').encode(self.encoding),
                 'Title': obj.Title().decode('utf-8').encode(self.encoding),
                 'Path': path,
             }

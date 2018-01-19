@@ -70,7 +70,8 @@ class TestCopyPermissions(unittest.TestCase):
         head = data.split('\r\n')[0].split(';')
         self.assertEqual(head[0], 'Name (RO)')
         self.assertEqual(head[1], 'Userid')
-        self.assertEqual(head[2], 'Title (RO)')
+        self.assertEqual(head[2], 'Email')
+        self.assertEqual(head[3], 'Title (RO)')
         self.assertEqual(head[-1], 'Path')
         for role in roles:
             self.assertTrue(role in head)
