@@ -1,3 +1,4 @@
+from ftw.builder.content import register_dx_content_builders
 from ftw.builder.testing import BUILDER_LAYER
 from ftw.builder.testing import functional_session_factory
 from ftw.builder.testing import set_builder_session_factory
@@ -31,10 +32,13 @@ class FtwPermissionmanagerLayer(PloneSandboxLayer):
             context=configurationContext)
 
         z2.installProduct(app, 'ftw.permissionmanager')
+        z2.installProduct(app, 'Products.DateRecurringIndex')
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
         applyProfile(portal, 'ftw.permissionmanager:default')
+        applyProfile(portal, 'plone.app.contenttypes:default')
+        register_dx_content_builders(force=True)
 
         setRoles(portal, TEST_USER_ID, ['Manager'])
         login(portal, TEST_USER_NAME)

@@ -1,7 +1,8 @@
-from zope.component import getMultiAdapter
+from ftw.permissionmanager import permission_manager_factory as _
+from ftw.permissionmanager.utils import update_security_of_objects
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
-from ftw.permissionmanager import permission_manager_factory as _
+from zope.component import getMultiAdapter
 
 
 class CopyUserPermissionsView(BrowserView):
@@ -82,14 +83,22 @@ class CopyUserPermissionsView(BrowserView):
     def copy_permissions(self):
         brains = self.context.portal_catalog(
             path='/'.join(self.context.getPhysicalPath()))
+
+        changed_objects = []
         for brain in brains:
-            for user, roles in dict(brain.get_local_roles).items():
-                obj = brain.getObject()
-                if user == self.source_user:
-                    obj.manage_setLocalRoles(self.target_user, roles)
+            if self.source_user not in dict(brain.get_local_roles):
+                continue
+
+            obj = brain.getObject()
+            local_roles = dict(obj.get_local_roles())
+            existing_roles = local_roles.get(self.target_user, ())
+            new_roles = tuple(set(existing_roles + local_roles.get(self.source_user, ())))
+            if new_roles != existing_roles:
+                changed_objects.append(obj)
+                obj.manage_setLocalRoles(self.target_user, new_roles)
+
         IStatusMessage(self.request).addStatusMessage(
             _(u'Die Berechtigungen wurden kopiert'), type='info')
 
-        #self.context.restrictedTraverse('@@update_security')()
-        self.context.reindexObjectSecurity()
+        update_security_of_objects(changed_objects)
         return self.request.RESPONSE.redirect('@@copy_user_permissions')

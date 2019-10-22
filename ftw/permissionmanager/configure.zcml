@@ -60,7 +60,7 @@
     <include zcml:condition="installed ftw.solr" package="ftw.solr" />
     <monkey:patch
         description="Also Update metadata on security reindex"
-        class="Products.Archetypes.CatalogMultiplex.CatalogMultiplex"
+        class="Products.CMFCore.CMFCatalogAware.CatalogAware"
         original="reindexObjectSecurity"
         replacement=".patches.permissionmanager_reindexObjectSecurity"
         preserveOriginal="True"

@@ -1,9 +1,3 @@
-from Products.Archetypes.config import TOOL_NAME
-from Products.Archetypes.utils import isFactoryContained
-from Products.CMFCore.interfaces import ICatalogTool
-from Products.CMFCore.utils import getToolByName
-
-
 def permissionmanager_reindexObjectSecurity(self, skip_self=False):
     # Execute standard object reindexing.
     self._old_reindexObjectSecurity(skip_self=skip_self)
@@ -16,14 +10,11 @@ def permissionmanager_reindexObjectSecurity(self, skip_self=False):
     # current context, so that we can use `update_metadata=True`.
     # We do not do that recursive because the metadata values
     # are non-recursive.
-    if isFactoryContained(self):
-        return
-    at = getToolByName(self, TOOL_NAME, None)
-    if at is None:
-        return
 
-    catalogs = [catalog for catalog in at.getCatalogsByType(self.meta_type)
-                if ICatalogTool.providedBy(catalog)]
+    catalog = self._getCatalogTool()
+    if catalog is None:
+        return
+    path = '/'.join(self.getPhysicalPath())
 
-    for catalog in catalogs:
-        catalog.reindexObject(self, idxs=['getId'], update_metadata=True)
+    for brain in catalog.unrestrictedSearchResults(path=path):
+        brain.getObject().reindexObject(idxs=['getId'])  # updates metadata

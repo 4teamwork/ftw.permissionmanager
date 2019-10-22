@@ -92,7 +92,7 @@
         </tal:source_user_results>
         <tal:selected_source_user tal:condition="view/source_user">
             <div>
-                <i i18n:translate="label_choosen_user">Chossen user</i>
+                <i i18n:translate="label_chosen_user">Chosen user</i>
                 <tal:userid content="view/source_user_title" />
                 (<tal:userid content="view/source_user" />)
             </div>
@@ -175,8 +175,8 @@
         <br />
         <p><b i18n:translate="label_confirm">5. Confirm</b></p>
         <tal:confirm tal:condition="python:view.source_user and view.target_user">
-            <div style="padding-left:1em;" i18n:translate="text_confirm">
-                Are you sure top copy the permissions of user
+            <div class="text-confirm-copy" style="padding-left:1em;" i18n:translate="text_confirm">
+                Are you sure to copy the permissions of user
                 <div style="padding-left:1em;">
                     <i i18n:name="source_user_title" tal:content="view/source_user_title"></i> (<tal:id i18n:name="source_user_name" replace="view/source_user" />)
                 </div>
@@ -187,12 +187,13 @@
                 </div>
             </div>
             <br />
-            <p>
-                <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions?source_user=${view/source_user}&amp;target_user=${view/target_user}&amp;confirm=1"
-                    class="context" i18n:translate="label_yes">Yes, assing</a>
-                <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions"
-                    class="standalone" i18n:translate="label_no">No, abord</a>
-            </p>
+            <form tal:attributes="action string:${here/absolute_url}/@@copy_user_permissions">
+              <input type="hidden" name="source_user" tal:attributes="value view/source_user" />
+              <input type="hidden" name="target_user" tal:attributes="value view/target_user" />
+              <span tal:replace="structure context/@@authenticator/authenticator"/>
+              <button type="submit" class="context" name="confirm" value="1" i18n:translate="label_yes">Yes, assign</button>
+              <a tal:attributes="href string:${here/absolute_url}/@@copy_user_permissions" class="standalone" i18n:translate="label_no">No, abort</a>
+            </form>
         </tal:confirm>
     </div>
 

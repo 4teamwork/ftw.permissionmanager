@@ -49,6 +49,10 @@ class PrincipalRoleTree(BrowserView):
     def __call__(self):
         return self.index()
 
+    def get_preferred_language(self):
+        ltool = getToolByName(self.context, 'portal_languages')
+        return ltool.getPreferredLanguage().split('-')[0]
+
 
 class SearchPrincipals(BrowserView):
 
@@ -69,9 +73,7 @@ class SearchPrincipals(BrowserView):
         return json.dumps(self._format_result(principals))
 
     def search_principals(self):
-        principals = self.search_principals_by_fullname()
-        principals = principals + self.search_principals_by_userid()
-        return principals
+        return self.search_principals_by_fullname() + self.search_principals_by_userid()
 
     def search_principals_by_fullname(self):
         users = getToolByName(self.context, "acl_users")

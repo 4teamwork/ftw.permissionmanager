@@ -5,7 +5,9 @@ Changelog
 2.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Plone 5.1 support [tinagerber]
+- Drop archetypes support [tinagerber]
+- @@copy_permissions no longer overwrites existing permissions [tinagerber]
 
 
 2.4.2 (2017-05-09)

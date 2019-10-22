@@ -3,6 +3,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.workflow.browser.sharing import SharingView
 from Products.statusmessages.interfaces import IStatusMessage
 from ftw.permissionmanager import permission_manager_factory as _
+from ftw.permissionmanager.utils import update_security_of_objects
 
 
 class RemoveUserPermissionsView(SharingView):
@@ -21,9 +22,9 @@ class RemoveUserPermissionsView(SharingView):
         self.request.set('disable_border', True)
         form = self.request.form
         self.search = form.get('search_user', False)
-        self.user_selected = form.get('user', False) and True
+        self.user_selected = 'user' in form
         self.user = form.get('user', False)
-        self.confirmed = form.get('confirmed', False) and True
+        self.confirmed = 'confirmed' in form
         if self.confirmed:
             self.removePermissions()
             IStatusMessage(self.request).addStatusMessage(
@@ -76,9 +77,11 @@ class RemoveUserPermissionsView(SharingView):
     def removePermissions(self):
         brains = self.context.portal_catalog(
             path='/'.join(self.context.getPhysicalPath()))
+        changed_objects = []
         for brain in brains:
-            if self.user in dict(brain.get_local_roles).keys():
+            if self.user in dict(brain.get_local_roles):
                 obj = brain.getObject()
                 obj.manage_delLocalRoles((self.user, ))
-        self.context.reindexObjectSecurity()
-        #self.context.restrictedTraverse('@@update_security')()
+                changed_objects.append(obj)
+
+        update_security_of_objects(changed_objects)
