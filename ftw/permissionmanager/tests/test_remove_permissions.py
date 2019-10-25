@@ -1,165 +1,117 @@
+from ftw.builder import Builder
+from ftw.builder import create
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
-from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD, TEST_USER_ID
-from plone.testing.z2 import Browser
-from zope.component import getMultiAdapter
-from zope.component import queryMultiAdapter
+from ftw.testbrowser import browsing
 import transaction
 import unittest2 as unittest
+
 
 class TestRemovePermissions(unittest.TestCase):
 
     layer = FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
 
+    def setUp(self):
+        self.portal = self.layer['portal']
 
-    def test_remove_permission_view(self):
-        portal = self.layer['portal']
-        view = getMultiAdapter(
-            (portal.folder1, portal.folder1.REQUEST),
-            name="remove_user_permissions")
-        self.assertTrue(view.__class__.__name__ == 'RemoveUserPermissionsView')
+    @browsing
+    def test_remove_permission_form_user(self, browser):
+        folder1 = create(Builder('folder').titled(u'folder1'))
+        folder2 = create(Builder('folder').titled(u'folder2').within(folder1))
 
+        create(Builder('user').named('Hugo', 'Boss'))
+        folder1.manage_addLocalRoles('hugo.boss', ['Editor'])
+        folder2.manage_addLocalRoles('hugo.boss', ['Contributor'])
+        folder1.reindexObjectSecurity()
 
-    def test_remove_permission_form_user(self):
-        portal = self.layer['portal']
-        portal_url = portal.absolute_url()
+        # Approve if user has local roles on folder1 and folder2
+        self.assertIn('hugo.boss', dict(folder1.get_local_roles()))
+        self.assertIn('hugo.boss', dict(folder2.get_local_roles()))
 
-        portal.portal_membership.setLocalRoles(
-            obj=portal.folder1,
-            member_ids=[TEST_USER_ID],
-            member_role="Contributor",
-            reindex=True)
-
-        portal.portal_membership.setLocalRoles(
-            obj=portal.folder1.folder2,
-            member_ids=[TEST_USER_ID],
-            member_role="Editor",
-            reindex=True)
-
-        browser = Browser(self.layer['app'])
-
-        # Login as test user
-        browser.open(portal_url + '/login_form')
-        browser.getControl(name='__ac_name').value = TEST_USER_NAME
-        browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
-        browser.getControl(name='submit').click()
-
-        browser.open(portal_url + '/folder1/remove_user_permissions')
-        # Look for the right form
-        self.assertIn(
-            '<form method="post" action="http://nohost/plone/folder1/@@remove_user_permissions">',
-            browser.contents
-        )
-
-
-        # Search for a user, there should be the test user
-        browser.getControl(name="search_term").value = TEST_USER_ID
-        browser.getControl(name="form.button.Search").click()
-        self.assertIn(
-            '<a href="http://nohost/plone/folder1/@@remove_user_permissions?user=test_user_1_">test_user_1_</a>',
-            browser.contents
-        )
+        # Search user
+        browser.login().visit(self.portal, view='remove_user_permissions')
+        browser.fill({'search_term': 'hugo.boss'}).submit()
 
         # Choose user
-        browser.open('http://nohost/plone/folder1/@@remove_user_permissions?user=test_user_1_')
-        # Confirm link
-        self.assertIn(
-            '<a class="context" href="http://nohost/plone/folder1/@@remove_user_permissions?user=test_user_1_&amp;confirmed=1">',
-            browser.contents
-        )
-        # Abort link
-        self.assertIn(
-            '<a class="standalone" href="http://nohost/plone/folder1/@@remove_user_permissions">',
-            browser.contents
-        )
+        browser.find('Boss Hugo').click()
 
-        # Confirm removal of roles for the test user
-        browser.open('http://nohost/plone/folder1/@@remove_user_permissions?user=test_user_1_&amp;confirmed=1')
+        # test confirm text
+        expected_text = ['Are you sure to remove all permissions of Boss Hugo (hugo.boss) '
+                         'on object "Plone site" and all sub objects?']
+        actual_text = browser.css('.text-confirm-remove').normalized_text()
+        self.assertEquals(expected_text, actual_text)
+
+        # Confirm removal of roles
+        browser.css('button.context').first.click()
+
         # After removal, redirect to permission manager overview
-        self.assertIn(
-            'class="template-permission_manager',
-            browser.contents)
+        expected_url = 'http://nohost/plone/@@permission_manager'
+        self.assertEquals(expected_url, browser.url)
 
         # Approve if user has no local roles on folder1 and folder2
-        self.assertFalse(
-            TEST_USER_ID in dict(portal.folder1.get_local_roles()))
-        self.assertFalse(
-            TEST_USER_ID in dict(portal.folder1.folder2.get_local_roles()))
+        self.assertNotIn('hugo.boss', dict(folder1.get_local_roles()))
+        self.assertNotIn('hugo.boss', dict(folder2.get_local_roles()))
 
-    def test_remove_permission_form_group(self):
-        portal = self.layer['portal']
-        portal_url = portal.absolute_url()
-        browser = Browser(self.layer['app'])
-        TEST_GROUP_ID = 'test_group'
+    @browsing
+    def test_remove_permission_form_group(self, browser):
+        self.portal = self.layer['portal']
 
-        # Set up a group - commit change for test browser
-        portal.portal_groups.addGroup(TEST_GROUP_ID)
+        folder1 = create(Builder('folder').titled(u'folder1'))
+        folder2 = create(Builder('folder').titled(u'folder2').within(folder1))
+
+        create(Builder('group').titled('Group Oldies'))
+        folder1.manage_addLocalRoles('group-oldies', ['Editor'])
+        folder2.manage_addLocalRoles('group-oldies', ['Contributor'])
+        folder1.reindexObjectSecurity()
+
+        # Search user
+        browser.login().visit(self.portal, view='remove_user_permissions')
+        browser.fill({'search_term': 'group-oldies'}).submit()
+
+        # Choose user
+        browser.find('Group Oldies').click()
+
+        # test confirm text
+        expected_text = ['Are you sure to remove all permissions of Group Oldies (group-oldies) '
+                         'on object "Plone site" and all sub objects?']
+        actual_text = browser.css('.text-confirm-remove').normalized_text()
+        self.assertEquals(expected_text, actual_text)
+
+        # Confirm removal of roles
+        browser.css('button.context').first.click()
+
+        # After removal, redirect to permission manager overview
+        expected_url = 'http://nohost/plone/@@permission_manager'
+        self.assertEquals(expected_url, browser.url)
+
+        # Approve if user has no local roles on folder1 and folder2
+        self.assertNotIn('group-oldies', dict(folder1.get_local_roles()))
+        self.assertNotIn('group-oldies', dict(folder2.get_local_roles()))
+
+    @browsing
+    def test_abort_deletion_of_permissions(self, browser):
+        folder1 = create(Builder('folder').titled(u'folder1'))
+        folder2 = create(Builder('folder').titled(u'folder2').within(folder1))
+
+        create(Builder('group').titled('Group Oldies'))
+        folder1.manage_addLocalRoles('group-oldies', ['Editor'])
+        folder2.manage_addLocalRoles('group-oldies', ['Contributor'])
+        folder1.reindexObjectSecurity()
         transaction.commit()
-        # Add locale roles to a group
-        portal.folder1.manage_addLocalRoles(TEST_GROUP_ID, ['Contributor',])
-        portal.folder1.folder2.manage_addLocalRoles(TEST_GROUP_ID, ['Editor',])
 
-        # Login as test user
-        browser.open(portal_url + '/login_form')
-        browser.getControl(name='__ac_name').value = TEST_USER_NAME
-        browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
-        browser.getControl(name='submit').click()
+        # Search user
+        browser.login().visit(self.portal, view='remove_user_permissions')
+        browser.fill({'search_term': 'group-oldies'}).submit()
 
-        browser.open(portal_url + '/folder1/remove_user_permissions')
-        # Look for the right form
-        self.assertIn(
-            '<form method="post" action="http://nohost/plone/folder1/@@remove_user_permissions">',
-            browser.contents
-        )
+        # Choose user
+        browser.find('Group Oldies').click()
 
-        # Search for for the test goup
-        browser.getControl(name="search_term").value = TEST_GROUP_ID
-        browser.getControl(name="form.button.Search").click()
-        self.assertIn(
-            '<a href="http://nohost/plone/folder1/@@remove_user_permissions?user=test_group">test_group</a>',
-            browser.contents
-        )
+        # Abort removal of roles
+        browser.find('No, abort').click()
 
-        # Choose group
-        browser.open('http://nohost/plone/folder1/@@remove_user_permissions?user=test_group')
-        # Confirm link
-        self.assertIn(
-            '<a class="context" href="http://nohost/plone/folder1/@@remove_user_permissions?user=test_group&amp;confirmed=1">',
-            browser.contents
-        )
-        # Abort link
-        self.assertIn(
-            '<a class="standalone" href="http://nohost/plone/folder1/@@remove_user_permissions">',
-            browser.contents
-        )
-
-        # Confirm removal of roles for the test group
-        browser.open('http://nohost/plone/folder1/@@remove_user_permissions?user=test_group&amp;confirmed=1')
-        # After removal, redirect to permission manager overview
-        self.assertIn(
-            'class="template-permission_manager',
-            browser.contents)
+        # After abort, redirect to permission manager overview
+        expected_url = 'http://nohost/plone/@@remove_user_permissions'
+        self.assertEquals(expected_url, browser.url)
 
         # Approve if user has no local roles on folder1 and folder2
-        self.assertFalse(
-            TEST_GROUP_ID in [entry[0] for entry in portal.folder1.get_local_roles()])
-        self.assertFalse(
-            TEST_GROUP_ID in [entry[0] for entry in portal.folder1.folder2.get_local_roles()])
-
-    def test_user_is_not_twice_in_result_set(self):
-        portal = self.layer['portal']
-        portal.portal_registration.addMember(
-            'John.Doe',
-            'secret',
-            properties={'username': 'John.Doe',
-                        'fullname': 'John Doe',
-                        'email': 'john@doe.com'})
-
-        folder = portal['folder1']
-        folder.REQUEST.form['search_term'] = 'John'
-
-        view = queryMultiAdapter((folder, folder.REQUEST),
-                                 name='remove_user_permissions')
-
-        self.assertEquals(1,
-                          len(view.search_results()),
-                          'Expect to find only one user')
+        self.assertIn('group-oldies', dict(folder1.get_local_roles()))
+        self.assertIn('group-oldies', dict(folder2.get_local_roles()))

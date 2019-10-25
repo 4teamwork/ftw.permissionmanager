@@ -49,11 +49,11 @@ class TestBuildPrincipalRoleTree(TestCase):
 
     def _create_structure(self):
         self.folder = create(Builder('folder'))
-        self.a = create(Builder('folder').titled('a').within(self.folder))
-        self.a1 = create(Builder('folder').titled('a1').within(self.a))
-        self.b = create(Builder('folder').titled('b').within(self.folder))
-        self.b1 = create(Builder('folder').titled('b1').within(self.b))
-        self.b11 = create(Builder('folder').titled('b11').within(self.b1))
+        self.a = create(Builder('folder').titled(u'a').within(self.folder))
+        self.a1 = create(Builder('folder').titled(u'a1').within(self.a))
+        self.b = create(Builder('folder').titled(u'b').within(self.folder))
+        self.b1 = create(Builder('folder').titled(u'b1').within(self.b))
+        self.b11 = create(Builder('folder').titled(u'b11').within(self.b1))
 
     def test_build_only_branches_with_local_roles(self):
         self._create_structure()
@@ -167,7 +167,7 @@ class TestBuildPrincipalRoleTree(TestCase):
         self._create_structure()
         john = create(Builder('user'))
         group = create(Builder('group')
-                       .titled('Group')
+                       .titled(u'Group')
                        .with_members(john))
 
         self.a1.manage_setLocalRoles(group.getId(), ['Contributor'])
@@ -328,7 +328,7 @@ class TestBuildPrincipalRoleTree(TestCase):
         folder = create(Builder('folder'))
         john = create(Builder('user'))
         group = create(Builder('group')
-                       .titled('Group')
+                       .titled(u'Group')
                        .with_members(john))
         folder.manage_setLocalRoles(group.getId(), ['Contributor'])
         folder.reindexObject()

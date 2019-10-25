@@ -1,4 +1,3 @@
-from Products.Archetypes import CatalogMultiplex
 from Products.CMFCore import CMFCatalogAware
 from zope.i18nmessageid import MessageFactory
 import csv
@@ -20,12 +19,11 @@ def initialize(context):
 
 def register_local_roles_index():
     name = 'principal_with_local_roles'
-    for klass in (CMFCatalogAware.CMFCatalogAware,
-                  CatalogMultiplex.CatalogMultiplex):
+    klass = CMFCatalogAware.CMFCatalogAware
 
-        if name in klass._cmf_security_indexes:
-            continue
+    if name in klass._cmf_security_indexes:
+        return
 
-        indexes = list(klass._cmf_security_indexes)
-        indexes.append(name)
-        klass._cmf_security_indexes = tuple(indexes)
+    indexes = list(klass._cmf_security_indexes)
+    indexes.append(name)
+    klass._cmf_security_indexes = tuple(indexes)

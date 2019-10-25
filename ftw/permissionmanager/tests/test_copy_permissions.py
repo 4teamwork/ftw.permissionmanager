@@ -1,11 +1,9 @@
-from zope.component import getMultiAdapter
-from ftw.permissionmanager.testing import (
-    FTW_PERMISSIONMGR_FUNCTIONAL_TESTING,
-    TEST_USER_ID_2, TEST_GROUP_ID, TEST_GROUP_ID_2)
-import unittest2 as unittest
-from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD, TEST_USER_ID
-from plone.testing.z2 import Browser
+from ftw.builder import Builder
+from ftw.builder import create
+from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
+from ftw.testbrowser import browsing
 import transaction
+import unittest2 as unittest
 
 
 class TestCopyPermissions(unittest.TestCase):
@@ -13,205 +11,181 @@ class TestCopyPermissions(unittest.TestCase):
     layer = FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
 
     def setUp(self):
-        self.browser = Browser(self.layer['app'])
-        self.browser.handleErrors = False
+        self.portal = self.layer['portal']
 
-    def test_copy_permission_view(self):
-        portal = self.layer['portal']
-        view = getMultiAdapter(
-            (portal.folder1, portal.folder1.REQUEST),
-            name="copy_user_permissions")
-        self.assertTrue(view.__name__ == 'copy_user_permissions')
+    def _get_brain(self, obj):
+        path = '/'.join(obj.getPhysicalPath())
+        return self.portal.portal_catalog({'path': {'query': path, 'depth': 0}})[0]
 
-    def test_copy_permission_form_user(self):
-        portal = self.layer['portal']
-        portal_url = portal.absolute_url()
+    @browsing
+    def test_copy_permissions_from_user_to_user(self, browser):
+        folder1 = create(Builder('folder').titled(u'folder1'))
+        folder2 = create(Builder('folder').titled(u'folder2').within(folder1))
 
-        # Set local roles for test user
-        portal.portal_membership.setLocalRoles(
-            obj=portal.folder1,
-            member_ids=[TEST_USER_ID],
-            member_role="Contributor",
-            reindex=True)
-        portal.folder1.reindexObjectSecurity()
+        create(Builder('user').named('Hugo', 'Boss'))
+        folder1.manage_addLocalRoles('hugo.boss', ['Editor'])
+        folder2.manage_addLocalRoles('hugo.boss', ['Contributor'])
+        folder1.reindexObjectSecurity()
 
-        portal.portal_membership.setLocalRoles(
-            obj=portal.folder1.folder2,
-            member_ids=[TEST_USER_ID],
-            member_role="Editor",
-            reindex=True)
-        portal.folder1.folder2.reindexObjectSecurity()
+        create(Builder('user').named('Marie', 'Maroon'))
 
-        transaction.commit()  # for test self.browser
+        # search source user
+        browser.login().visit(self.portal, view='copy_user_permissions')
+        browser.fill({'search_source_user': 'hugo.boss'}).submit()
 
-        # Login as test user
-        self.browser.open(portal_url + '/login_form')
-        self.browser.getControl(name='__ac_name').value = TEST_USER_NAME
-        self.browser.getControl(
-            name='__ac_password').value = TEST_USER_PASSWORD
-        self.browser.getControl(name='submit').click()
+        # choose source user
+        browser.find('Boss Hugo').click()
 
-        self.browser.open(portal_url + '/folder1/copy_user_permissions')
+        # search target user
+        browser.fill({'search_target_user': 'marie.maroon'}).submit()
 
-        # Look for the right form
-        self.assertIn(
-            '<form method="post" action="http://nohost/plone/folder1/'
-            '@@copy_user_permissions">',
-            self.browser.contents)
+        # choose target user
+        browser.find('Maroon Marie').click()
 
-        # Search for the test user
-        self.browser.getControl(name="search_source_user").value = TEST_USER_ID
-        self.browser.getControl(name="submit").click()
-        self.assertIn(
-            '<a href="http://nohost/plone/folder1/@@copy_user_permissions?'
-            'source_user=test_user_1_">test_user_1_</a>',
-            self.browser.contents)
+        # test confirm text
+        expected_text = ['Are you sure to copy the permissions of user Boss Hugo (hugo.boss) on '
+                         'object "Plone site" and all sub objects, to Maroon Marie (marie.maroon)']
+        actual_text = browser.css('.text-confirm-copy').normalized_text()
+        self.assertEquals(expected_text, actual_text)
 
-        # Choose user
-        self.browser.open('http://nohost/plone/folder1/@@copy_user_'
-                          'permissions?source_user=test_user_1_')
-        self.assertIn(
-            '<input type="hidden" name="source_user" value="test_user_1_" />',
-            self.browser.contents
-        )
+        # confirm to copy permissions
+        browser.css('button.context').first.click()
 
-        # Choose target user
-        self.browser.getControl(
-            name="search_target_user").value = TEST_USER_ID_2
-        self.browser.getControl(name="submit").click()
-        self.assertIn(
-            '<a href="http://nohost/plone/folder1/@@copy_user_permissions?'
-            'target_user=_test_user_2_&amp;source_user=test_user_1_">'
-            '_test_user_2_</a>',
-            self.browser.contents
-        )
+        # test redirection
+        expected_url = 'http://nohost/plone/@@copy_user_permissions'
+        self.assertEquals(expected_url, browser.url)
 
-        self.browser.open('http://nohost/plone/folder1/@@copy_user_'
-                          'permissions?target_user=_test_user_2_&amp;'
-                          'source_user=test_user_1_')
+        # test status message
+        self.assertIn('Info Die Berechtigungen wurden kopiert',
+                      [node.normalized_text() for node in browser.css('.portalMessage.info')])
 
-        # Confirm link
-        self.assertIn(
-            '<a class="context" href="http://nohost/plone/folder1/@@copy_'
-            'user_permissions?source_user=test_user_1_&amp;target_user='
-            '_test_user_2_&amp;confirm=1">',
-            self.browser.contents)
+        # test copied permissions
+        self.assertIn(('marie.maroon', ('Editor',)), folder1.get_local_roles())
+        self.assertIn(('marie.maroon', ('Contributor',)), folder2.get_local_roles())
 
-        # Abort link
-        self.assertIn(
-            '<a class="standalone" href="http://nohost/plone/folder1/'
-            '@@copy_user_permissions">',
-            self.browser.contents)
+        self.assertEquals(folder1.get_local_roles(), self._get_brain(folder1).get_local_roles)
+        self.assertEquals(folder2.get_local_roles(), self._get_brain(folder2).get_local_roles)
 
-        self.browser.open('http://nohost/plone/folder1/@@copy_user_'
-                          'permissions?source_user=test_user_1_&amp;target_'
-                          'user=_test_user_2_&amp;confirm=1')
+    @browsing
+    def test_abort_copying_permissions(self, browser):
 
-        # After permission copy, redirect to copy permission view again
-        self.assertIn(
-            'class="template-copy_user_permissions',
-            self.browser.contents)
+        folder1 = create(Builder('folder').titled(u'folder1'))
+        folder2 = create(Builder('folder').titled(u'folder2').within(folder1))
 
-        # Approve if test user 2 has the same local roles
-        self.assertTrue(
-            portal.folder1.get_local_roles_for_userid(TEST_USER_ID_2) ==
-                ('Owner', 'Contributor'))
-        self.assertFalse(
-            portal.folder1.get_local_roles_for_userid(TEST_USER_ID_2) ==
-                ('Owner', 'Editor'))
+        create(Builder('user').named('Hugo', 'Boss'))
+        folder1.manage_addLocalRoles('hugo.boss', ['Editor'])
+        folder2.manage_addLocalRoles('hugo.boss', ['Contributor'])
+        folder1.reindexObjectSecurity()
 
-    def test_copy_permission_form_group(self):
-        portal = self.layer['portal']
-        portal_url = portal.absolute_url()
+        create(Builder('user').named('Marie', 'Maroon'))
 
-        # Set up two groups
-        portal.portal_groups.addGroup(TEST_GROUP_ID)
-        portal.portal_groups.addGroup(TEST_GROUP_ID_2)
-        # Add local roles
-        portal.folder1.manage_addLocalRoles(TEST_GROUP_ID, ['Contributor', ])
-        portal.folder1.reindexObjectSecurity()
-        portal.folder1.folder2.manage_addLocalRoles(TEST_GROUP_ID,
-                                                    ['Editor', ])
-        portal.folder1.folder2.reindexObjectSecurity()
+        # search source user
+        browser.login().visit(self.portal, view='copy_user_permissions')
+        browser.fill({'search_source_user': 'hugo.boss'}).submit()
 
-        transaction.commit()  # for test self.browser
+        # choose source user
+        browser.find('Boss Hugo').click()
 
-        # Login as test user
-        self.browser.open(portal_url + '/login_form')
-        self.browser.getControl(name='__ac_name').value = TEST_USER_NAME
-        self.browser.getControl(
-            name='__ac_password').value = TEST_USER_PASSWORD
-        self.browser.getControl(name='submit').click()
+        # search target user
+        browser.fill({'search_target_user': 'marie.maroon'}).submit()
 
-        self.browser.open(portal_url + '/folder1/copy_user_permissions')
+        # choose target user
+        browser.find('Maroon Marie').click()
 
-        # Look for the right form
-        self.assertIn(
-            '<form method="post" action="http://nohost/plone/folder1/'
-            '@@copy_user_permissions">',
-            self.browser.contents)
+        # abort copying permissions
+        browser.find('No, abort').click()
 
-        # Search for the test group
-        self.browser.getControl(
-            name="search_source_user").value = TEST_GROUP_ID
-        self.browser.getControl(name="submit").click()
-        self.assertIn(
-            '<a href="http://nohost/plone/folder1/@@copy_user_permissions?'
-            'source_user=test_group">test_group</a>',
-            self.browser.contents)
+        # test redirection
+        expected_url = 'http://nohost/plone/@@copy_user_permissions'
+        self.assertEquals(expected_url, browser.url)
 
-        # Choose group
-        self.browser.open('http://nohost/plone/folder1/@@copy_user_'
-                          'permissions?source_user=test_group')
-        self.assertIn(
-            '<input type="hidden" name="source_user" value="test_group" />',
-            self.browser.contents
-        )
+        # test status message
+        self.assertNotIn('Info Die Berechtigungen wurden kopiert',
+                         [node.normalized_text() for node in browser.css('.portalMessage.info')])
 
-        # Choose target user
-        self.browser.getControl(
-            name="search_target_user").value = TEST_GROUP_ID_2
-        self.browser.getControl(name="submit").click()
-        self.assertIn(
-            '<a href="http://nohost/plone/folder1/@@copy_user_permissions?'
-            'target_user=test_group_2&amp;source_user=test_group">'
-            'test_group_2</a>',
-            self.browser.contents
-        )
+        # test whether the permission have not been copied
+        self.assertNotIn(('marie.maroon', ('Editor',)), folder1.get_local_roles())
+        self.assertNotIn(('marie.maroon', ('Contributor',)), folder2.get_local_roles())
 
-        self.browser.open('http://nohost/plone/folder1/@@copy_user_'
-                          'permissions?target_user=test_group_2'
-                          '&amp;source_user=test_group')
+    @browsing
+    def test_copy_permissions_from_group_to_group(self, browser):
+        folder1 = create(Builder('folder').titled(u'folder1'))
+        folder2 = create(Builder('folder').titled(u'folder2').within(folder1))
 
-        # Confirm link
-        self.assertIn(
-            '<a class="context" href="http://nohost/plone/folder1/@@copy_'
-            'user_permissions?source_user=test_group&amp;target_user='
-            'test_group_2&amp;confirm=1">',
-            self.browser.contents)
+        create(Builder('group').titled('Group Oldies'))
 
-        # Abort link
-        self.assertIn(
-            '<a class="standalone" href="http://nohost/plone/folder1/'
-            '@@copy_user_permissions">',
-            self.browser.contents)
+        folder1.manage_addLocalRoles('group-oldies', ['Editor'])
+        folder2.manage_addLocalRoles('group-oldies', ['Contributor'])
+        folder1.reindexObjectSecurity()
 
-        self.browser.open('http://nohost/plone/folder1/@@copy_user_'
-            'permissions?source_user=test_group&amp;target_user='
-            'test_group_2&amp;confirm=1')
+        create(Builder('group').titled('Group Newbies'))
 
-        # After permission copy, redirect to copy permission view again
-        self.assertIn(
-            'class="template-copy_user_permissions',
-            self.browser.contents)
+        # search source group
+        browser.login().visit(self.portal, view='copy_user_permissions')
+        browser.fill({'search_source_user': 'group-oldies'}).submit()
 
-        for id_, roles in dict(portal.folder1.get_local_roles()).items():
-            if id_ == TEST_GROUP_ID_2:
-                break
-        self.assertIn('Contributor', roles)
-        results = dict(portal.folder1.folder2.get_local_roles()).items()
-        for id_, roles in results:
-            if id_ == TEST_GROUP_ID_2:
-                break
-        self.assertIn('Editor', roles)
+        # choose source group
+        browser.find('Group Oldies').click()
 
+        # search target group
+        browser.fill({'search_target_user': 'group-newbies'}).submit()
+
+        # choose target group
+        browser.find('Group Newbies').click()
+
+        # test confirm text
+        expected_text = ['Are you sure to copy the permissions of user (group-oldies) on object '
+                         '"Plone site" and all sub objects, to (group-newbies)']
+        actual_text = browser.css('.text-confirm-copy').normalized_text()
+        self.assertEquals(expected_text, actual_text)
+
+        # confirm to copy permissions
+        browser.css('button.context').first.click()
+
+        # test redirection
+        expected_url = 'http://nohost/plone/@@copy_user_permissions'
+        self.assertEquals(expected_url, browser.url)
+
+        # test status message
+        self.assertIn('Info Die Berechtigungen wurden kopiert',
+                      [node.normalized_text() for node in browser.css('.portalMessage.info')])
+
+        # test copied permissions
+        self.assertIn(('group-newbies', ('Editor',)), folder1.get_local_roles())
+        self.assertIn(('group-newbies', ('Contributor',)), folder2.get_local_roles())
+
+        self.assertEquals(folder1.get_local_roles(), self._get_brain(folder1).get_local_roles)
+        self.assertEquals(folder2.get_local_roles(), self._get_brain(folder2).get_local_roles)
+
+    @browsing
+    def test_do_not_overwrite_existing_permissions(self, browser):
+        folder1 = create(Builder('folder').titled(u'folder1'))
+        folder2 = create(Builder('folder').titled(u'folder2').within(folder1))
+
+        create(Builder('user').named('Hugo', 'Boss'))
+        create(Builder('user').named('Marie', 'Maroon').with_roles('Reviewer', on=folder1))
+
+        folder1.manage_addLocalRoles('hugo.boss', ['Editor'])
+        folder2.manage_addLocalRoles('hugo.boss', ['Contributor'])
+        folder1.reindexObjectSecurity()
+        transaction.commit()
+
+        # search source user
+        browser.login().visit(self.portal, view='copy_user_permissions')
+        browser.fill({'search_source_user': 'hugo.boss'}).submit()
+
+        # choose source user
+        browser.find('Boss Hugo').click()
+
+        # search target user
+        browser.fill({'search_target_user': 'marie.maroon'}).submit()
+
+        # choose target user
+        browser.find('Maroon Marie').click()
+
+        # confirm to copy permissions
+        browser.css('button.context').first.click()
+
+        # test copied permissions
+        self.assertIn(('marie.maroon', ('Reviewer', 'Editor')), folder1.get_local_roles())
+        self.assertIn(('marie.maroon', ('Contributor',)), folder2.get_local_roles())

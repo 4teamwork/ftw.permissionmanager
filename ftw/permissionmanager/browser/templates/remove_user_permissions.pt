@@ -85,18 +85,18 @@
                 3. Confirm
             </div>
 
-            <p class="portalMessage error" i18n:translate="text_confirm_remove">
+            <p class="portalMessage error text-confirm-remove" i18n:translate="text_confirm_remove">
                 Are you sure to remove all permissions of
                 <i i18n:name="title" tal:content="view/getUserOrGroupTitle"></i>
                 (<tal:replace i18n:name="name" replace="view/user" />) on object &quot;<tal:replace i18n:name="object_title" replace="here/Title" />&quot;
                  and all sub objects?
             </p>
-            <p>
-                <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions?user=${view/user}&amp;confirmed=1"
-                    class="context" i18n:translate="label_yes_delete">Yes, delete</a>
-                <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions"
-                    class="standalone" i18n:translate="label_no">No, abord</a>
-            </p>
+            <form tal:attributes="action string:${here/absolute_url}/@@remove_user_permissions">
+              <input type="hidden" name="user" tal:attributes="value view/user" />
+              <span tal:replace="structure context/@@authenticator/authenticator"/>
+              <button type="submit" class="context" name="confirmed" value="1" i18n:translate="label_yes_delete">Yes, delete</button>
+              <a tal:attributes="href string:${here/absolute_url}/@@remove_user_permissions" class="standalone" i18n:translate="label_no">No, abort</a>
+            </form>
         </tal:user_selected>
 
     </div>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-12-08 07:29+0000\n"
+"POT-Creation-Date: 2019-10-18 11:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 msgid "Die Berechtigungen wurden erfolgreich entfernt."
 msgstr "Die Berechtigungen wurden erfolgreich entfernt."
 
-#: ./ftw/permissionmanager/browser/copy_permissions.py:91
+#: ./ftw/permissionmanager/browser/copy_permissions.py:92
 msgid "Die Berechtigungen wurden kopiert"
 msgstr "Die Berechtigungen wurden kopiert"
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:123
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:127
 msgid "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgstr "Es wurden ${rows_imported} Berechtigungen gesetzt."
 
@@ -31,9 +31,17 @@ msgstr "Es wurden ${rows_imported} Berechtigungen gesetzt."
 msgid "Manage permissions"
 msgstr "Sicherheit"
 
-#: ./ftw/permissionmanager/browser/import_export_permissions.py:135
+#: ./ftw/permissionmanager/browser/import_export_permissions.py:139
 msgid "Objekt konnte nicht gefunden werden: ${path}"
 msgstr "Objekt konnte nicht gefunden werden: ${path}"
+
+#: ./ftw/permissionmanager/upgrades/configure.zcml:54
+msgid "Protect permissionmanager view with 'Delegate roles' instead of 'View'"
+msgstr ""
+
+#: ./ftw/permissionmanager/upgrades/configure.zcml:16
+msgid "Remove jquery.treeTable.js/css (no longer in use)"
+msgstr ""
 
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:116
 #: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:37
@@ -46,10 +54,22 @@ msgstr "Nach Benutzer/Gruppen suchen"
 msgid "box_search"
 msgstr "Suchen"
 
+#: ./ftw/permissionmanager/configure.zcml:28
+msgid "easy to use user management"
+msgstr ""
+
 #. Default: "Search for user or group"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:39
 msgid "form_search_user_group"
 msgstr "Nach Benutzer/Gruppen suchen"
+
+#: ./ftw/permissionmanager/configure.zcml:28
+msgid "ftw.permissionmanager"
+msgstr ""
+
+#: ./ftw/permissionmanager/upgrades/configure.zcml:45
+msgid "ftw.permissionmanager: 2302"
+msgstr ""
 
 #. Default: "Copy all permissions of a user in this area"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:22
@@ -119,15 +139,15 @@ msgstr "2. Quellbenutzer auswählen"
 msgid "label_choose_user"
 msgstr "2. Benutzer auswählen"
 
-#. Default: "Chossen user"
-#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:95
-msgid "label_choosen_user"
-msgstr "Ausgewählter Benutzer:"
-
 #. Default: "4. Choose target user"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:136
 msgid "label_chopse_destiantion"
 msgstr "4. Zielbenutzer auswählen"
+
+#. Default: "Chosen user"
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:95
+msgid "label_chosen_user"
+msgstr "Ausgewählter Benutzer:"
 
 #. Default: "5. Confirm"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:176
@@ -140,7 +160,7 @@ msgid "label_confirmation"
 msgstr "3. Bestätigen"
 
 #. Default: "Copy permissions"
-#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:88
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:87
 msgid "label_copy_permission"
 msgstr "Berechtigungen kopieren"
 
@@ -216,9 +236,9 @@ msgstr "Berechtigungen Importieren"
 msgid "label_manage_permission"
 msgstr "Sicherheitswerkzeuge"
 
-#. Default: "No, abord"
-#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:193
-#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:97
+#. Default: "No, abort"
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:195
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:98
 msgid "label_no"
 msgstr "Nein, abbrechen"
 
@@ -233,7 +253,7 @@ msgid "label_nothing_found"
 msgstr "Nichts gefunden"
 
 #. Default: "Remove permissions"
-#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:84
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:83
 msgid "label_remove_permission"
 msgstr "Berechtigungen entfernen"
 
@@ -290,13 +310,13 @@ msgstr "Benutzer"
 msgid "label_user_role_tree"
 msgstr "Benutzer Rollen anzeigen (Baumstruktur)"
 
-#. Default: "Yes, assing"
-#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:191
+#. Default: "Yes, assign"
+#: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:194
 msgid "label_yes"
-msgstr "Ja, Übertragen"
+msgstr "Ja, übertragen"
 
 #. Default: "Yes, delete"
-#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:95
+#: ./ftw/permissionmanager/browser/templates/remove_user_permissions.pt:97
 msgid "label_yes_delete"
 msgstr "Ja, Berechtigungen löschen"
 
@@ -306,11 +326,11 @@ msgid "lable_search_user"
 msgstr "1. Benutzer suchen"
 
 #. Default: "Search principals"
-#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:64
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:63
 msgid "placeholder_search"
 msgstr "Nach Benutzer suchen"
 
-#. Default: "Are you sure top copy the permissions of user <div style=\"padding-left:1em;\"> ${source_user_title} (${source_user_name}) </div> on object \"${object_title}\" and all sub objects, to <div style=\"padding-left:1em;\"> ${target_user_title} (${target_user_name}) </div>"
+#. Default: "Are you sure to copy the permissions of user <div style=\"padding-left:1em;\"> ${source_user_title} (${source_user_name}) </div> on object \"${object_title}\" and all sub objects, to <div style=\"padding-left:1em;\"> ${target_user_title} (${target_user_name}) </div>"
 #: ./ftw/permissionmanager/browser/templates/copy_user_permissions.pt:186
 msgid "text_confirm"
 msgstr "Sind Sie sicher, dass Sie die Berechtigungen vom Benutzer <div style=\"padding-left:1em;\"> ${source_user_title} (${source_user_name}) </div> auf dem Objekt \"${object_title}\" und allen Unterobjekten auf den Benutzer <div style=\"padding-left:1em;\"> ${target_user_title} (${target_user_name}) </div> übertragen (kopieren) wollen?"
@@ -321,7 +341,7 @@ msgid "text_confirm_remove"
 msgstr "Sind Sie sicher, dass Sie alle Berechtigungen vom Benutzer ${title} (${name}) auf dem Objekt \"${object_title}\" und allen Unterobjekten entfernen wollen?"
 
 #. Default: "No results found"
-#: ./ftw/permissionmanager/browser/principal_role_tree.py:139
+#: ./ftw/permissionmanager/browser/principal_role_tree.py:141
 msgid "text_no_result"
 msgstr "Der Benutzer hat in diesem Bereich keine lokalen Rollen."
 
@@ -337,12 +357,12 @@ msgid "text_remove_permissions"
 msgstr "Sie können die Berechtigungen eines Benutzers rekursiv entfernen."
 
 #. Default: "These actions can be done for the selected user:"
-#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:79
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:78
 msgid "text_user_actions"
 msgstr "Sie können für den ausgewählten Benutzer die folgenden Aktionen ausführen:"
 
 #. Default: "Actions"
-#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:78
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:77
 msgid "title_actions"
 msgstr "Aktionen"
 
@@ -362,7 +382,7 @@ msgid "title_new_permissions"
 msgstr "Neue Freigaben"
 
 #. Default: "The chosen principal has these roles:"
-#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:71
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:70
 msgid "title_roles_for_principal"
 msgstr "Der ausgewählte Benutzer hat die folgenden Rollen:"
 
@@ -372,8 +392,7 @@ msgid "title_search_results"
 msgstr "Suchresultat"
 
 #. Default: "Show roles of a principal in a tree"
-#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:59
+#: ./ftw/permissionmanager/browser/templates/principal_role_tree.pt:58
 msgid "title_search_user_for_role_tree"
 msgstr "Erweiterte Darstellung (Baumstruktur) der Rollen eines Benutzers"
-
 
