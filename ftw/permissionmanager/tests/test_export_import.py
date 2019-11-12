@@ -3,7 +3,7 @@ from ftw.permissionmanager.testing import (
     FTW_PERMISSIONMGR_INTEGRATION_TESTING,
     TEST_USER_ID_2)
 from plone.app.testing import TEST_USER_ID
-import unittest2 as unittest
+import unittest as unittest
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 import StringIO

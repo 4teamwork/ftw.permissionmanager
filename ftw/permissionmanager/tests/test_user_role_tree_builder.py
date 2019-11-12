@@ -8,7 +8,7 @@ from plone.dexterity.content import Item
 from plone.dexterity.fti import DexterityFTI
 from plone.dexterity.fti import register
 from Products.CMFCore.utils import getToolByName
-from unittest2 import TestCase
+from unittest import TestCase
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 import transaction

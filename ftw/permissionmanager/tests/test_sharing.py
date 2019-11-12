@@ -1,5 +1,5 @@
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_INTEGRATION_TESTING, TEST_USER_ID_2
-import unittest2 as unittest
+import unittest as unittest
 from plone.app.testing import TEST_USER_NAME, TEST_USER_ID, login, logout
 from ftw.permissionmanager.browser.sharing import SharingView
 

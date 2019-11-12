@@ -1,7 +1,7 @@
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_INTEGRATION_TESTING
-from unittest2 import TestCase
+from unittest import TestCase
 from zExceptions import BadRequest
 from zope.component import queryMultiAdapter
 import json
