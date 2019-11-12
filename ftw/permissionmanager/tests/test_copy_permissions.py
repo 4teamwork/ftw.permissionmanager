@@ -3,7 +3,7 @@ from ftw.builder import create
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
 from ftw.testbrowser import browsing
 import transaction
-import unittest2 as unittest
+import unittest as unittest
 
 
 class TestCopyPermissions(unittest.TestCase):

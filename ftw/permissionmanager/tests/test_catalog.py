@@ -2,7 +2,7 @@ from Products.CMFCore.utils import getToolByName
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_INTEGRATION_TESTING
-from unittest2 import TestCase
+from unittest import TestCase
 
 
 class TestCatalog(TestCase):

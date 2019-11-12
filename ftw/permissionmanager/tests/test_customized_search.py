@@ -1,5 +1,5 @@
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
-import unittest2 as unittest
+import unittest as unittest
 from ftw.testbrowser import browsing
 from ftw.builder import create
 from ftw.builder import Builder
