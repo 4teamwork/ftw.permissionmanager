@@ -3,7 +3,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.workflow.browser.sharing import SharingView
 from Products.statusmessages.interfaces import IStatusMessage
 from ftw.permissionmanager import permission_manager_factory as _
-from ftw.permissionmanager.utils import reindex_metadata
 from ftw.permissionmanager.utils import update_security_of_objects
 
 
@@ -83,7 +82,7 @@ class RemoveUserPermissionsView(SharingView):
             if self.user in dict(brain.get_local_roles):
                 obj = brain.getObject()
                 obj.manage_delLocalRoles((self.user, ))
-                reindex_metadata(obj)
+                obj.reindexObject(idxs=['getId'])
                 changed_objects.append(obj)
 
         update_security_of_objects(changed_objects)

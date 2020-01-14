@@ -5,11 +5,9 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:profilehook="http://namespaces.zope.org/profilehook"
     xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
-    xmlns:monkey="http://namespaces.plone.org/monkey"
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ftw.permissionmanager">
 
-  <include package="collective.monkeypatcher" />
   <include package="ftw.profilehook" />
   <include package="ftw.upgrade" file="meta.zcml" />
 
@@ -54,9 +52,5 @@
       <adapter name="principal_with_local_roles" factory=".indexer.principal_with_local_roles" />
       <adapter name="isLocalRoleAcquired" factory=".indexer.isLocalRoleAcquired" />
       <adapter name="workflow_id" factory=".indexer.workflow_id" />
-
-    <!-- Patches, using monkeypatcher -->
-    <!-- Let ftw.solr's reindexObjectSecurity be loaded first -->
-    <include zcml:condition="installed ftw.solr" package="ftw.solr" />
 
 </configure>
