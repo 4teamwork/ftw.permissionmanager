@@ -1,4 +1,5 @@
 from ftw.permissionmanager import permission_manager_factory as _
+from ftw.permissionmanager.utils import reindex_metadata
 from ftw.permissionmanager.utils import update_security_of_objects
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
@@ -96,6 +97,7 @@ class CopyUserPermissionsView(BrowserView):
             if new_roles != existing_roles:
                 changed_objects.append(obj)
                 obj.manage_setLocalRoles(self.target_user, new_roles)
+                reindex_metadata(obj)
 
         IStatusMessage(self.request).addStatusMessage(
             _(u'Die Berechtigungen wurden kopiert'), type='info')

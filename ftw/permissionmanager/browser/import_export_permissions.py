@@ -1,3 +1,4 @@
+from ftw.permissionmanager.utils import reindex_metadata
 from ftw.permissionmanager import permission_manager_factory as _
 from plone.app.workflow.interfaces import ISharingPageRole
 from plone.memoize.instance import memoize
@@ -149,8 +150,10 @@ class ImportExportPermissionsView(BrowserView):
                 roles.append(role)
         if len(roles)>0:
             obj.manage_setLocalRoles(user, roles)
+            reindex_metadata(obj)
         else:
             obj.manage_delLocalRoles((user, ))
+            reindex_metadata(obj)
         return True
 
     def getObjectByPath(self, row):
