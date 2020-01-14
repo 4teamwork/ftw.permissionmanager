@@ -3,6 +3,7 @@ from ftw.builder import create
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_INTEGRATION_TESTING
 from Products.CMFCore.utils import getToolByName
 from unittest import TestCase
+from ftw.permissionmanager.utils import reindex_metadata
 
 
 class TestReindexObjectSecurityPatch(TestCase):
@@ -19,6 +20,7 @@ class TestReindexObjectSecurityPatch(TestCase):
         folder = create(Builder('folder'))
         john = create(Builder('user').with_roles('Reader', on=folder))
         folder.reindexObjectSecurity()
+        reindex_metadata(folder)
 
         brain = self._get_brain(folder)
 

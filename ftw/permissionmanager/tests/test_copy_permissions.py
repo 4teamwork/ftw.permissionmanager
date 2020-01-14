@@ -1,6 +1,7 @@
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.permissionmanager.testing import FTW_PERMISSIONMGR_FUNCTIONAL_TESTING
+from ftw.permissionmanager.utils import reindex_metadata
 from ftw.testbrowser import browsing
 import transaction
 import unittest as unittest
@@ -26,6 +27,7 @@ class TestCopyPermissions(unittest.TestCase):
         folder1.manage_addLocalRoles('hugo.boss', ['Editor'])
         folder2.manage_addLocalRoles('hugo.boss', ['Contributor'])
         folder1.reindexObjectSecurity()
+        reindex_metadata(folder1)
 
         create(Builder('user').named('Marie', 'Maroon'))
 
@@ -117,6 +119,7 @@ class TestCopyPermissions(unittest.TestCase):
         folder1.manage_addLocalRoles('group-oldies', ['Editor'])
         folder2.manage_addLocalRoles('group-oldies', ['Contributor'])
         folder1.reindexObjectSecurity()
+        reindex_metadata(folder1)
 
         create(Builder('group').titled('Group Newbies'))
 
@@ -168,6 +171,7 @@ class TestCopyPermissions(unittest.TestCase):
         folder1.manage_addLocalRoles('hugo.boss', ['Editor'])
         folder2.manage_addLocalRoles('hugo.boss', ['Contributor'])
         folder1.reindexObjectSecurity()
+        reindex_metadata(folder1)
         transaction.commit()
 
         # search source user
