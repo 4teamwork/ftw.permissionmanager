@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.1 (unreleased)
+3.0.1 (2020-01-15)
 ------------------
 
 - Remove patch reindexing metadata and replace by selective locations. [busykoala]
