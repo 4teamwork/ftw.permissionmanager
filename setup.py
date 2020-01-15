@@ -44,7 +44,6 @@ setup(name='ftw.permissionmanager',
       install_requires=[
         'Plone',
         'setuptools',
-        'collective.monkeypatcher',
         'Products.CMFPlone >= 4.3b',
         'ftw.upgrade',
         'ftw.profilehook',

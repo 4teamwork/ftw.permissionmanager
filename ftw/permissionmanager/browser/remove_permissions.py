@@ -82,6 +82,7 @@ class RemoveUserPermissionsView(SharingView):
             if self.user in dict(brain.get_local_roles):
                 obj = brain.getObject()
                 obj.manage_delLocalRoles((self.user, ))
+                obj.reindexObject(idxs=['getId'])
                 changed_objects.append(obj)
 
         update_security_of_objects(changed_objects)

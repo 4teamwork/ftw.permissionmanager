@@ -19,6 +19,7 @@ class TestReindexObjectSecurityPatch(TestCase):
         folder = create(Builder('folder'))
         john = create(Builder('user').with_roles('Reader', on=folder))
         folder.reindexObjectSecurity()
+        folder.reindexObject(idxs=['getId'])
 
         brain = self._get_brain(folder)
 

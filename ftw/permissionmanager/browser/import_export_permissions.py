@@ -149,8 +149,10 @@ class ImportExportPermissionsView(BrowserView):
                 roles.append(role)
         if len(roles)>0:
             obj.manage_setLocalRoles(user, roles)
+            obj.reindexObject(idxs=['getId'])
         else:
             obj.manage_delLocalRoles((user, ))
+            obj.reindexObject(idxs=['getId'])
         return True
 
     def getObjectByPath(self, row):

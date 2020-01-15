@@ -96,6 +96,7 @@ class CopyUserPermissionsView(BrowserView):
             if new_roles != existing_roles:
                 changed_objects.append(obj)
                 obj.manage_setLocalRoles(self.target_user, new_roles)
+                obj.reindexObject(idxs=['getId'])
 
         IStatusMessage(self.request).addStatusMessage(
             _(u'Die Berechtigungen wurden kopiert'), type='info')

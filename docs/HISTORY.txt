@@ -5,7 +5,7 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove patch reindexing metadata and replace by selective locations. [busykoala]
 
 
 3.0.0 (2019-10-25)
