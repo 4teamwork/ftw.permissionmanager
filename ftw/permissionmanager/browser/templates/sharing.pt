@@ -13,8 +13,9 @@
 
         $(function(){
             // Use live binding for ajax loaded content
+            if ($.fn.prepOverlay === undefined) return;
             var $author_links = $('a.authorlink');
-            $author_links.live('click', function(e){
+            $author_links.on('click', function(e){
                 e.preventDefault();
                 $this = $(this);
                 $this.prepOverlay({
@@ -35,6 +36,13 @@
         $('.portalMessage').remove();
         $('#user-group-sharing').replaceWith(sharing);
         $('#content').prepend(messages);
+
+        // Apply modal pattern in case we are on Plone 5
+        if (typeof define === 'function' && define.amd) {
+          require(['jquery', 'pat-registry'], function($, Registry) {
+            Registry.scan($('.authorlink'));
+          })
+        }
     }
 
     // END copy of updateSharing method in kss-bbb.js
@@ -177,7 +185,7 @@
                                             <img tal:condition="not:is_group" tal:replace="structure context/user.png" />
                                             <a tal:attributes="href string:${context/portal_url}/author/${entry/id}"
                                                tal:content="entry/title"
-                                               class="authorlink"
+                                               class="authorlink pat-plone-modal"
                                                tal:omit-tag="is_group">
                                                 <!-- Member -->
                                             </a>
@@ -259,7 +267,7 @@
                                         <img tal:condition="not:is_group" tal:replace="structure context/user.png" />
                                         <a tal:attributes="href string:${portal_url}/author/${entry/id}"
                                            tal:content="entry/title"
-                                           class="authorlink"
+                                           class="authorlink pat-plone-modal"
                                            tal:omit-tag="is_group">
                                            <!-- Member -->
                                         </a>

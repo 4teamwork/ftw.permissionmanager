@@ -5,7 +5,7 @@ Changelog
 3.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix Plone 5 compatibility with search view (working modals) [Nachtalb]
 
 
 3.0.1 (2020-01-15)
