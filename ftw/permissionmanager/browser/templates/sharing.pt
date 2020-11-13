@@ -36,6 +36,13 @@
         $('.portalMessage').remove();
         $('#user-group-sharing').replaceWith(sharing);
         $('#content').prepend(messages);
+
+        // Apply modal pattern in case we are on Plone 5
+        if (typeof define === 'function' && define.amd) {
+          require(['jquery', 'pat-registry'], function($, Registry) {
+            Registry.scan($('.authorlink'));
+          })
+        }
     }
 
     // END copy of updateSharing method in kss-bbb.js
