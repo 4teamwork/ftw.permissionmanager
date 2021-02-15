@@ -1,12 +1,13 @@
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 from ftw.permissionmanager import permission_manager_factory as _
 from plone.app.workflow.interfaces import ISharingPageRole
 from plone.memoize.instance import memoize
-from Products.CMFCore.utils import getToolByName
-from Products.Five import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
 from zope.component import getUtilitiesFor
-import csv
 import StringIO
+import csv
 
 DEFAULT_ROLES = ['Owner', ]
 
@@ -97,9 +98,9 @@ class ImportExportPermissionsView(BrowserView):
             member = self.portal_membership.getMemberById(user)
             fullname = member and member.getProperty('fullname', user) or user
             row = {
-                'Name': fullname.decode('utf-8').encode(self.encoding),
+                'Name': safe_unicode(fullname).encode(self.encoding),
                 'Userid': user.encode(self.encoding),
-                'Title': obj.Title().decode('utf-8').encode(self.encoding),
+                'Title': safe_unicode(obj.Title()).encode(self.encoding),
                 'Path': path,
             }
             for role in roles:
