@@ -5,7 +5,7 @@ Changelog
 3.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix possible encoding issues while exporting the permission. [mathias.leimgruber]
 
 
 3.0.2 (2020-11-13)
