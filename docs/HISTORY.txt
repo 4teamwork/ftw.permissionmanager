@@ -5,7 +5,7 @@ Changelog
 2.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix possible encoding issues while exporting the permission. [mathias.leimgruber]
 
 
 2.4.2 (2017-05-09)
