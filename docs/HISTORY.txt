@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.4.3 (unreleased)
+2.4.3 (2021-02-15)
 ------------------
 
 - Fix possible encoding issues while exporting the permission. [mathias.leimgruber]
